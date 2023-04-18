@@ -1,8 +1,6 @@
-import { get } from "http";
-import { defineStore} from "pinia";
+import { defineStore } from "pinia";
 import { useGameStore } from "./Game";
 
-const Game = useGameStore();
 
 export const fighter = {
     "Lapin" : {
@@ -50,7 +48,7 @@ export const food = {
 
 export const useMonsterStore = defineStore({
     id: "monster",
-    this: () => ({
+    state: () => ({
         monsters: ["Lapin", "Loup", "Ours", "Troll"],
         name : "",
         PV : 0,
@@ -74,33 +72,20 @@ export const useMonsterStore = defineStore({
             return this.F;
         }   
     },
-    setters: {
-        setName: (name) => {
-            this.name = name;
-        },
-        setPV: (PV) => {
-            this.PV = PV;
-        },
-        setP: (P) => {
-            this.P = P;
-        },
-        setF: (F) => {
-            this.F = F;
-        }
-    },
     actions: {
         ChooseDifficulty(){
-            if(Game.getDifficulty() == "easy"){
+            const game = useGameStore();
+            if(game.difficulty == "easy"){
                 this.PV = 15;
                 this.P = 15;
                 this.F = 15;
             }
-            else if(Game.getDifficulty() == "medium"){
+            else if(game.difficulty == "medium"){
                 this.PV = 10;
                 this.P = 10;
                 this.F = 10;
             }
-            else if(Game.getDifficulty() == "hard"){
+            else if(game.difficulty == "hard"){
                 this.PV = 5;
                 this.P = 5;
                 this.F = 5;
@@ -120,9 +105,22 @@ export const useMonsterStore = defineStore({
             this.F += food.F;
         },
         work(){
-            lastDaySleep = Game.getNumberOfDaysLastTimeSleep();
+            const game = useGameStore();
+            lastDaySleep = game.getNumberOfDaysLastTimeSleep();
             this.PV += 1+lastDaySleep;
             this.P += 1+lastDaySleep;
+        },
+        setName(name){
+            this.name = name;
+        },
+        setPV (PV)  {
+            this.PV = PV;
+        },
+        setP (P) {
+            this.P = P;
+        },
+        setF (F) {
+            this.F = F;
         }
     }
 });

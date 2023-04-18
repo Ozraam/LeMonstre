@@ -9,7 +9,10 @@ const props = defineProps({
 
 <template>
     <h1>
-
         {{ props.title }}
     </h1>
 </template>
+
+<style scoped>
+
+</style>
