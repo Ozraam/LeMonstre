@@ -1,4 +1,6 @@
+
 import { defineStore } from "pinia";
+
 import { useGameStore } from "./Game";
 
 
@@ -50,10 +52,10 @@ export const useMonsterStore = defineStore({
     id: "monster",
     state: () => ({
         monsters: ["Lapin", "Loup", "Ours", "Troll"],
-        name : "",
-        PV : 0,
-        P :0,
-        F :0
+        name : "Anto",
+        PV : 150,
+        P :10,
+        F :10
         }),
     getters: {
         getMonsters: () => {
@@ -74,12 +76,14 @@ export const useMonsterStore = defineStore({
     },
     actions: {
         ChooseDifficulty(){
+
             const game = useGameStore();
             if(game.difficulty == "easy"){
                 this.PV = 15;
                 this.P = 15;
                 this.F = 15;
             }
+
             else if(game.difficulty == "medium"){
                 this.PV = 10;
                 this.P = 10;
@@ -107,6 +111,7 @@ export const useMonsterStore = defineStore({
         work(){
             const game = useGameStore();
             lastDaySleep = game.getNumberOfDaysLastTimeSleep();
+
             this.PV += 1+lastDaySleep;
             this.P += 1+lastDaySleep;
         },
