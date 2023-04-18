@@ -4,9 +4,9 @@
 
 
 <template>
-    <main class="wrapper">
+    <main class="container mt-5 d-flex justify-content-center align-items-center flex-column">
         <AccueilHeader title="Monster the game"  />
-        <AccueilMenu />
+        <AccueilMenu/>
     </main>
 </template>
 <style scoped>

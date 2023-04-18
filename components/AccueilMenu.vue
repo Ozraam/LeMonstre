@@ -16,29 +16,26 @@ function startGame(e) {
         game.setDifficulty(difficulty.value)
         monster.ChooseDifficulty()
         navigateTo('/game')
-    } else {
-        nameError.value.classList.remove('hidden')
     }
 }
 </script>
 
 
 <template>
-    <form class="menu" @submit="startGame">
+    <form class="menu form" @submit="startGame">
         <div>
-            <label for="name">Name :</label>
-            <input type="text" id="name" v-model="name" placeholder="Monster's name" required />
-            <span class="error hidden" ref="nameError">Name required</span>
+            <label for="name" class="form-label">Name :</label>
+            <input type="text" id="name" v-model="name" placeholder="Monster's name" class="form-control" required />
         </div>
         <div>
-            <label for="difficulty">Difficulty :</label>
-            <select name="difficulty" id="difficulty" v-model="difficulty">
+            <label for="difficulty" class="form-label">Difficulty :</label>
+            <select name="difficulty" id="difficulty" class="form-select" v-model="difficulty">
                 <option value="easy" selected>Easy</option>
                 <option value="medium">Medium</option>
                 <option value="hard">Hard</option>
             </select>
         </div>
-        <button>Start</button>
+        <button class="btn btn-outline-success">Start</button>
     </form>
 </template>
 
