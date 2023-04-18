@@ -2,13 +2,13 @@
 
 </script>
 
+
 <template>
     <main class="wrapper">
         <AccueilHeader title="Monster the game"  />
         <AccueilMenu />
     </main>
 </template>
-
 <style scoped>
 
 .wrapper {
@@ -17,4 +17,5 @@
     align-items: center;
     justify-content: center;
 }
+
 </style>
