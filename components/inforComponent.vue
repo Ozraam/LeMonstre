@@ -21,7 +21,7 @@ const  game  = useGameStore();
     </div>
 </template>
 
-<style>
+<style scoped>
     .nav_monsterInfo{
         display: flex;
         flex-direction: column;
