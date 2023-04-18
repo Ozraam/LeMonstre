@@ -8,7 +8,7 @@ const  game  = useGameStore();
 </script>
 
 <template>
-    <div class="nav_monsterInfo">
+    <div class="nav_monsterInfo card">
         <div class="nav_monsterInfo_name_title">
         <h3>{{ monster.name }}</h3>
         <h3>niv :{{ game.level }}</h3>
