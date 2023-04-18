@@ -7,8 +7,16 @@ import { useGameStore } from '~/stores/Game';
 
 <template>
     <div>
-        <h1>Game</h1>
-        <p>Difficulty : {{ useGameStore().difficulty }}</p>
-        <p>Monster's name : {{ useMonsterStore().name }}</p>
+        <InforComponent />
+        <MonsterComponent />
+        <ActionComponent class="action" />
     </div>
 </template>
+
+<style>
+.action {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+</style>
