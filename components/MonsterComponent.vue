@@ -9,8 +9,9 @@ const game = useGameStore();
 function click(item){
     monster.fight(item)
     game.lastAction = "fight"
-    game.numTurns++
+    game.numTurns += 1
     game.currentAction = null
+    console.log(game.numTurns)
 }
 </script>
 
