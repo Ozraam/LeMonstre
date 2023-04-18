@@ -90,6 +90,9 @@ export const useGameStore = defineStore({
         },
         getDifficulty() {
             return this.difficulty;
+        },
+        getObjectiveLevel(){
+            return levels[this.level].objective;
         }
     },
     actions: {
