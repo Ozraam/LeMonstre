@@ -17,7 +17,7 @@ function eatMonster(food) {
 
 <template>
     <div class="eatChoice row g-2">
-        <button class="btn btn-outline-secondary col-auto d-flex flex-column justify-content-between align-items-center" v-for="food in foods" @click="eatMonster(food)" :key="food.name">
+        <button class="btn btn-outline-secondary col d-flex flex-column justify-content-between align-items-center" v-for="food in foods" @click="eatMonster(food)" :key="food.name">
             <div>
                 {{ food.name }}
             </div>
