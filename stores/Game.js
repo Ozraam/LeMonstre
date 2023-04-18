@@ -82,7 +82,7 @@ export const useGameStore = defineStore({
             return this.objective;
         },
         getNumberOfDaysLastTimeSleep() {
-            const lastTimeSleep = this.history.find((history) => history.type === "sleep");
+            const lastTimeSleep = this.history.find((history) => history.action === "sleep");
             if (!lastTimeSleep) {
                 return 0;
             }

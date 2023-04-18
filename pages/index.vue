@@ -1,15 +1,20 @@
+<script>
+
+</script>
+
 <template>
-    <InforComponent class="infoComponent"/>
-    <ObjectifComponent class="infoComponent"/>
+    <div class="wrapper">
+        <AccueilHeader title="Monster the game"  />
+        <AccueilMenu />
+    </div>
 </template>
 
-<style>
-*{
-    padding: 0;
-    margin: 0;
-}
-.infoComponent{
-    width: 50%;
-    margin: auto auto;
+<style scoped>
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
 }
 </style>

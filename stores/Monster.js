@@ -1,4 +1,6 @@
-import { defineStore} from "pinia";
+
+import { defineStore } from "pinia";
+
 import { useGameStore } from "./Game";
 
 
@@ -72,33 +74,22 @@ export const useMonsterStore = defineStore({
             return this.F;
         }   
     },
-    setters: {
-        setName: (name) => {
-            this.name = name;
-        },
-        setPV: (PV) => {
-            this.PV = PV;
-        },
-        setP: (P) => {
-            this.P = P;
-        },
-        setF: (F) => {
-            this.F = F;
-        }
-    },
     actions: {
         ChooseDifficulty(){
-            if(storeGame.getDifficulty() == "easy"){
+
+            const game = useGameStore();
+            if(game.difficulty == "easy"){
                 this.PV = 15;
                 this.P = 15;
                 this.F = 15;
             }
-            else if(storeGame.getDifficulty() == "medium"){
+
+            else if(game.difficulty == "medium"){
                 this.PV = 10;
                 this.P = 10;
                 this.F = 10;
             }
-            else if(storeGame.getDifficulty() == "hard"){
+            else if(game.difficulty == "hard"){
                 this.PV = 5;
                 this.P = 5;
                 this.F = 5;
@@ -118,10 +109,23 @@ export const useMonsterStore = defineStore({
             this.F += food.F;
         },
         work(){
-            const gamestore = useGameStore();
-            lastDaySleep = gamestore.getNumberOfDaysLastTimeSleep;
+            const game = useGameStore();
+            lastDaySleep = game.getNumberOfDaysLastTimeSleep();
+
             this.PV += 1+lastDaySleep;
             this.P += 1+lastDaySleep;
+        },
+        setName(name){
+            this.name = name;
+        },
+        setPV (PV)  {
+            this.PV = PV;
+        },
+        setP (P) {
+            this.P = P;
+        },
+        setF (F) {
+            this.F = F;
         }
     }
 });
