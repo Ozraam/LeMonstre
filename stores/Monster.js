@@ -1,8 +1,6 @@
-import { get } from "http";
 import { defineStore} from "pinia";
 import { useGameStore } from "./Game";
 
-const Game = useGameStore();
 
 export const fighter = {
     "Lapin" : {
@@ -50,12 +48,12 @@ export const food = {
 
 export const useMonsterStore = defineStore({
     id: "monster",
-    this: () => ({
+    state: () => ({
         monsters: ["Lapin", "Loup", "Ours", "Troll"],
-        name : "",
-        PV : 0,
-        P :0,
-        F :0
+        name : "Anto",
+        PV : 150,
+        P :10,
+        F :10
         }),
     getters: {
         getMonsters: () => {
@@ -90,17 +88,17 @@ export const useMonsterStore = defineStore({
     },
     actions: {
         ChooseDifficulty(){
-            if(Game.getDifficulty() == "easy"){
+            if(storeGame.getDifficulty() == "easy"){
                 this.PV = 15;
                 this.P = 15;
                 this.F = 15;
             }
-            else if(Game.getDifficulty() == "medium"){
+            else if(storeGame.getDifficulty() == "medium"){
                 this.PV = 10;
                 this.P = 10;
                 this.F = 10;
             }
-            else if(Game.getDifficulty() == "hard"){
+            else if(storeGame.getDifficulty() == "hard"){
                 this.PV = 5;
                 this.P = 5;
                 this.F = 5;
@@ -120,7 +118,8 @@ export const useMonsterStore = defineStore({
             this.F += food.F;
         },
         work(){
-            lastDaySleep = Game.getNumberOfDaysLastTimeSleep();
+            const gamestore = useGameStore();
+            lastDaySleep = gamestore.getNumberOfDaysLastTimeSleep;
             this.PV += 1+lastDaySleep;
             this.P += 1+lastDaySleep;
         }
