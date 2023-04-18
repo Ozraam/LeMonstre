@@ -1,20 +1,44 @@
 <script setup>
 import { useMonsterStore } from '~/stores/Monster';
+import { useGameStore } from '~/stores/Game';
 
 const monster = useMonsterStore();
+const game = useGameStore();
 
+function clickOnSleep() {
+    monster.sleep()
+    game.lastAction = "sleep"
+    game.numTurns++
+    game.currentAction = null
+}
+
+function clickOnWork() {
+    monster.work()
+    game.lastAction = "work"
+    game.numTurns++
+    game.currentAction = null
+}
+
+function clickOnEat() {
+    game.currentAction = "eat"
+}
+function clickOnFight() {
+    game.currentAction = "fight"
+}
 </script>
 
 <template>
-    <div class="bottom_button">
-        <button>Combattre</button>
-        <button>Dormir</button>
-        <button>Manger</button>
-        <button>Travailler</button>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-around">
+            <button type="button" class="btn btn-danger btn-lg" @click="clickOnFight()" v-if="game.lastAction !== 'fight'">Combattre</button>
+            <button type="button" class="btn btn-dark btn-lg"  @click="clickOnSleep()" v-if="game.lastAction !== 'sleep'">Dormir</button>
+            <button type="button" class="btn btn-success btn-lg" @click="clickOnEat()" v-if="game.lastAction !== 'eat'">Manger</button>
+            <button type="button" class="btn btn-warning btn-lg"  @click="clickOnWork()" v-if="game.lastAction !== 'work'">Travailler</button>
+        </div>
     </div>
 </template>
 
-<style>
+<style scoped>
 .bottom_button {
     display: flex;
     justify-content: space-around;

@@ -2,32 +2,33 @@
 import { useGameStore } from '~/stores/Game';
 import { useMonsterStore, foods } from '~/stores/Monster';
 
+const monster = useMonsterStore()
+const game = useGameStore()
 
 function eatMonster(food) {
-    const monster = useMonsterStore()
-    const game = useGameStore()
     monster.eat(food)
-    game.updateProgress()
+    game.lastAction = "eat"
+    game.numTurns++
+    game.currentAction = null
 }
-
-
-
 </script>
 
 
 <template>
-    <div class="eatChoice row g-2">
-        <button class="btn btn-outline-secondary col d-flex flex-column justify-content-between align-items-center" v-for="food in foods" @click="eatMonster(food)" :key="food.name">
-            <div>
-                {{ food.name }}
-            </div>
-            <img :src="food.img" class="img-fluid" :alt="food.img_alt">
-            <div>
-                PV : +{{ food.PV }} /
-                Gold : {{ food.P }} /
-                Food: +{{ food.F }}
-            </div>
-        </button>
+    <div class="row">
+        <div class="col-12 col-sm" v-for="food in foods" :key="food.name">
+                    <button class="btn btn-outline-secondary w-100 shadow p-3 mb-5" @click="eatMonster(food)">
+                <div>
+                    {{ food.name }}
+                </div>
+                <img :src="food.img" class="img-fluid" :alt="food.img_alt">
+                <div>
+                    PV : +{{ food.PV }} /
+                    Gold : {{ food.P }} /
+                    Food: +{{ food.F }}
+                </div>
+            </button>
+        </div>
     </div>
 </template>
 
@@ -35,6 +36,4 @@ function eatMonster(food) {
     img {
         max-height: 5em;
     }
-
-    
 </style>
