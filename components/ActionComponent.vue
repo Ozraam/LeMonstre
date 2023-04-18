@@ -1,24 +1,20 @@
 <script setup>
 import { useMonsterStore } from '~/stores/Monster';
 import { useGameStore } from '~/stores/Game';
-
 const monster = useMonsterStore();
 const game = useGameStore();
-
 function clickOnSleep() {
     monster.sleep()
     game.lastAction = "sleep"
     game.numTurns++
     game.currentAction = null
 }
-
 function clickOnWork() {
     monster.work()
     game.lastAction = "work"
     game.numTurns++
     game.currentAction = null
 }
-
 function clickOnEat() {
     game.currentAction = "eat"
 }
@@ -44,7 +40,6 @@ function clickOnFight() {
     justify-content: space-around;
     margin-bottom: 1rem;
 }
-
 .action button{
     width: 200px;
     height: 50px;

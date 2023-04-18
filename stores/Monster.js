@@ -131,10 +131,8 @@ export const useMonsterStore = defineStore({
         },
         work(){
             const game = useGameStore();
-            lastDaySleep = game.getNumberOfDaysLastTimeSleep();
-
-            this.PV += 1+lastDaySleep;
-            this.P += 1+lastDaySleep;
+            this.PV += 1+game.getNumberOfDaysLastTimeSleep;
+            this.P += 1+game.getNumberOfDaysLastTimeSleep;
         },
         setName(name){
             this.name = name;
