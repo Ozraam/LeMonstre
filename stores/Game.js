@@ -59,6 +59,8 @@ export const useGameStore = defineStore({
         history: [],
         malus: null,
         difficulty: 0,
+        lastAction: null,
+        currentAction: null,
         objective: {
             type: "score",
             value: 1000,
