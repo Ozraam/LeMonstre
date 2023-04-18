@@ -5,14 +5,11 @@
         <InforComponent />
         <ObjectifComponent />
         <EatingChoice />
+        <Enemy />
+        <ActionComponent />
     </main>
 </template>
 
 <style>
-.action {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
 </style>
 
