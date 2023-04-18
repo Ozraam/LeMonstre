@@ -2,14 +2,15 @@
 
 </script>
 
-<template style="height:100vh;">
-    <div class="wrapper">
+
+<template>
+    <main class="wrapper">
         <AccueilHeader title="Monster the game"  />
         <AccueilMenu />
-    </div>
+    </main>
 </template>
-
 <style scoped>
+
 .wrapper {
     display: flex;
     flex-direction: column;

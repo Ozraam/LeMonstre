@@ -1,16 +1,11 @@
-<script setup>
-import { useMonsterStore } from '~/stores/Monster'
-import { useGameStore } from '~/stores/Game';
 
-
-</script>
 
 <template>
-    <div>
+    <main class="container-fluid">
         <InforComponent />
-        <MonsterComponent />
-        <ActionComponent class="action" />
-    </div>
+        <ObjectifComponent />
+        <EatingChoice />
+    </main>
 </template>
 
 <style>
@@ -20,3 +15,4 @@ import { useGameStore } from '~/stores/Game';
     width: 100%;
 }
 </style>
+
