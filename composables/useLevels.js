@@ -11,7 +11,11 @@ export function useLevels() {
                     progress: 0,
                     description: "Collecter 10 pieces d'or",
                 },
-                malus: null
+                malus:{
+                    type: malusTypes.food,
+                    value: 10,
+                    description: malusTypes.food.description,
+                }
             },
             {
                 objective: {
@@ -20,7 +24,11 @@ export function useLevels() {
                     progress: 0,
                     description: "Collecter 25 pieces d'or",
                 },
-                malus: null
+                malus:{
+                    type: malusTypes.work,
+                    value: 10,
+                    description: malusTypes.work.description,
+                }
             },
             {
                 objective: {
@@ -29,7 +37,11 @@ export function useLevels() {
                     progress: 0,
                     description: "Manger 25 fois",
                 },
-                malus: null
+                malus: {
+                    type: malusTypes.food,
+                    value: 10,
+                    description: malusTypes.food.description,
+                }
             },
             {
                 objective: {
@@ -41,6 +53,7 @@ export function useLevels() {
                 malus: {
                     type: malusTypes.food,
                     value: 10,
+                    description: malusTypes.food.description,
                 }
             },
             {
@@ -53,6 +66,7 @@ export function useLevels() {
                 malus: {
                     type: malusTypes.food,
                     value: 10,
+                    description: malusTypes.food.description,
                 }
             },
         ]

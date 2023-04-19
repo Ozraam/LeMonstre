@@ -1,9 +1,10 @@
 <script setup>
 
-import { useMonsterStore,fighter } from '~/stores/Monster';
+import { useMonsterStore} from '~/stores/Monster';
 import { useGameStore } from '~/stores/Game';
 const monster = useMonsterStore();
 const game = useGameStore();
+const fighter = useFighters().fighters;
 
 function click(item){
     monster.fight(item)
@@ -13,9 +14,9 @@ function click(item){
 </script>
 
 <template>
-    <div class="row">
-        <div class="col-12 col-sm" v-for="item in fighter" :key="fighter.alt">
-                    <button class="btn btn-outline-secondary w-100 shadow p-3 mb-5" @click="click(item)">
+    <div class="row mb-3">
+        <div class="col-6 col-md" v-for="item in fighter" :key="fighter.alt">
+                    <button class="btn btn-outline-secondary w-100 shadow p-3 mb-1" @click="click(item)">
                 <div>
                     {{ item.alt }}
                 </div>

@@ -26,36 +26,18 @@ console.log(game.getMalusLevel)
 </script>
 
 <template>
-    <div class="row">
-        <div class="col-12 d-flex justify-content-around">
-            <button type="button" class="btn btn-danger btn-lg" @click="clickOnFight()" :disabled="game.lastAction === 'fight' || game.getMalusLevel.type === 'fight' ">Combattre</button>
-            <button type="button" class="btn btn-dark btn-lg"  @click="clickOnSleep()" :disabled="game.lastAction === 'sleep' || game.getMalusLevel.type === 'sleep'">Dormir</button>
-            <button type="button" class="btn btn-success btn-lg" @click="clickOnEat()" :disabled="game.lastAction === 'eat' || game.getMalusLevel.type === 'eat'">Manger</button>
-            <button type="button" class="btn btn-warning btn-lg"  @click="clickOnWork()" :disabled="game.lastAction === 'work' || game.getMalusLevel.type === 'work'">Travailler</button>
+    <div class="row mb-3">
+        <div class="col-6 col-md">
+        <button type="button" class="d-block w-100 mb-1 btn btn-danger btn-lg" @click="clickOnFight()" :disabled="game.lastAction === 'fight' || game.getMalusLevel.type === useActions().actions.fight ">Combattre</button>
+        </div>
+        <div class="col-6 col-md">
+        <button type="button" class="d-block w-100 mb-1 btn btn-dark btn-lg"  @click="clickOnSleep()" :disabled="game.lastAction === 'sleep' || game.getMalusLevel.type === useActions().actions.sleep">Dormir</button>
+        </div>
+        <div class="col-6 col-md">
+        <button type="button" class="d-block w-100 mb-1  btn btn-success btn-lg"  @click="clickOnEat()" :disabled="game.lastAction === 'eat' || game.getMalusLevel.type === useActions().actions.eat">Manger</button>
+        </div>
+        <div class="col-6 col-md">
+            <button type="button" class="d-block w-100 mb-1 btn btn-warning btn-lg"  @click="clickOnWork()" :disabled="game.lastAction === 'work' || game.getMalusLevel.type === useActions().actions.work">Travailler</button>
         </div>
     </div>
 </template>
-
-<style scoped>
-.bottom_button {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 1rem;
-}
-.action button{
-    width: 200px;
-    height: 50px;
-    border-radius: 10px;
-    background-color: #F5F5F5;
-    border: none;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #000000;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-}
-.action button:hover{
-    background-color: #E0E0E0;
-    scale: 1.1;
-}
-</style>

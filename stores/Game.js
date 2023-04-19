@@ -29,19 +29,19 @@ export const useGameStore = defineStore({
             return this.objective;
         },
         getMalusLevel() {
-            return levels[this.level - 1].malus;
+            return useLevels().levels[this.level - 1].malus;
         },
 
     },
     actions: {
         incrementLevel() {
             this.level++;
-            if(this.level > levels.length) return
+            if(this.level > useLevels().levels.length) return
 
             this.numTurns = 0;
             this.history = [];
-            this.objective = levels[this.level - 1].objective;
-            this.setMalus(levels[this.level - 1].malus);
+            this.objective = useLevels().levels[this.level - 1].objective;
+            this.setMalus(useLevels().levels[this.level - 1].malus);
         },
         incrementNumTurns() {
             this.numTurns++;
