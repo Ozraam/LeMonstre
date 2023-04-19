@@ -19,9 +19,22 @@ const objectiveTypes = {
 }
 
 const malusTypes = {
-    sleep: "sleep",
-    food: "food",
-    gold: "gold",
+    sleep:{
+        type: "sleep",
+        description : "Vous ne pouvez pas dormir durant la durée de ce malus",
+    },
+    work: {
+        type: "work",
+        description : "Vous ne pouvez pas travailler durant la durée de ce malus",
+    },
+    food: {
+        type: "food",
+        description : "Vous ne pouvez pas manger durant la durée de ce malus",
+    },
+    work: {
+        type: "work",
+        description : "Vous ne pouvez pas travailler durant la durée de ce malus",
+    },
 }
 
 const levels = [
@@ -32,7 +45,11 @@ const levels = [
             progress: 0,
             description: "Collecter 10 pieces d'or",
         },
-        malus: null
+        malus: {
+            type: malusTypes.work.type,
+            value: 5,
+            description: malusTypes.work.description,
+        }
     },
     {
         objective: {
@@ -41,7 +58,11 @@ const levels = [
             progress: 0,
             description: "Collecter 25 pieces d'or",
         },
-        malus: null
+        malus: {
+            type: malusTypes.work.type,
+            value: 5,
+            description: malusTypes.work.description,
+        }
     },
     {
         objective: {
@@ -50,7 +71,11 @@ const levels = [
             progress: 0,
             description: "Manger 25 fois",
         },
-        malus: null
+        malus:{
+            type: malusTypes.sleep.type,
+            value: 6,
+            description: malusTypes.sleep.description,
+        }
     },
     {
         objective: {
@@ -72,8 +97,9 @@ const levels = [
             description: "Combattre 5 loups",
         },
         malus: {
-            type: malusTypes.food,
-            value: 10,
+            type: malusTypes.food.type,
+            value: 5,
+            description: malusTypes.food.description,
         }
     },
 ]
