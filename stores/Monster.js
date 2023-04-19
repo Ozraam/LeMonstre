@@ -137,7 +137,7 @@ export const useMonsterStore = defineStore({
         },
         work(){
             const game = useGameStore();
-            this.PV += 1+game.getNumberOfDaysLastTimeSleep;
+            this.PV -= 1+game.getNumberOfDaysLastTimeSleep;
             this.P += 1+game.getNumberOfDaysLastTimeSleep;
             game.incrementObjectiveProgress(1, "work");
             game.incrementObjectiveProgress(1+game.getNumberOfDaysLastTimeSleep, "gold");

@@ -12,10 +12,10 @@ const game = useGameStore();
             </div>
         </div>
         <div class="row activated">
-            <div class="col-4">
+            <div class="col-2">
                 <ObjectifComponent/>
             </div>
-            <div class="col">
+            <div class="col-8">
                 <PlayerComponent/>
             </div>
         </div>
