@@ -7,9 +7,22 @@ const objectiveTypes = {
 }
 
 const malusTypes = {
-    sleep: "sleep",
-    food: "food",
-    gold: "gold",
+    sleep:{
+        type: "sleep",
+        description : "Vous ne pouvez pas dormir durant la durée de ce malus",
+    },
+    work: {
+        type: "work",
+        description : "Vous ne pouvez pas travailler durant la durée de ce malus",
+    },
+    food: {
+        type: "food",
+        description : "Vous ne pouvez pas manger durant la durée de ce malus",
+    },
+    work: {
+        type: "work",
+        description : "Vous ne pouvez pas travailler durant la durée de ce malus",
+    },
 }
 
 const levels = [
@@ -19,23 +32,11 @@ const levels = [
             value: 10,
             progress: 0,
         },
-        malus: null
-    },
-    {
-        objective: {
-            type: objectiveTypes.gold,
-            value: 25,
-            progress: 0,
-        },
-        malus: null
-    },
-    {
-        objective: {
-            type: objectiveTypes.food,
-            value: 25,
-            progress: 0,
-        },
-        malus: null
+        malus: {
+            type: malusTypes.work.type,
+            value: 5,
+            description: malusTypes.work.description,
+        }
     },
     {
         objective: {
@@ -44,8 +45,33 @@ const levels = [
             progress: 0,
         },
         malus: {
-            type: malusTypes.food,
-            value: 10,
+            type: malusTypes.work.type,
+            value: 5,
+            description: malusTypes.work.description,
+        }
+    },
+    {
+        objective: {
+            type: objectiveTypes.food,
+            value: 25,
+            progress: 0,
+        },
+        malus:{
+            type: malusTypes.sleep.type,
+            value: 6,
+            description: malusTypes.sleep.description,
+        }
+    },
+    {
+        objective: {
+            type: objectiveTypes.gold,
+            value: 25,
+            progress: 0,
+        },
+        malus: {
+            type: malusTypes.food.type,
+            value: 5,
+            description: malusTypes.food.description,
         }
     },
 ]
