@@ -20,7 +20,7 @@ function startGame() {
 
 
 <template>
-    <div class="card w-25">
+    <div class="card ">
         <div class="card-body">
             <AccueilHeader title="Monster Game" />
             <form class="vstack form menu align-items-center" @submit.prevent="startGame">
