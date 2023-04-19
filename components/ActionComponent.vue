@@ -21,15 +21,17 @@ function clickOnEat() {
 function clickOnFight() {
     game.currentAction = "fight"
 }
+
+console.log(game.getMalusLevel)
 </script>
 
 <template>
     <div class="row">
         <div class="col-12 d-flex justify-content-around">
-            <button type="button" class="btn btn-danger btn-lg" @click="clickOnFight()" :disabled="game.lastAction === 'fight'">Combattre</button>
-            <button type="button" class="btn btn-dark btn-lg"  @click="clickOnSleep()" :disabled="game.lastAction === 'sleep'">Dormir</button>
-            <button type="button" class="btn btn-success btn-lg" @click="clickOnEat()" :disabled="game.lastAction === 'eat'">Manger</button>
-            <button type="button" class="btn btn-warning btn-lg"  @click="clickOnWork()" :disabled="game.lastAction === 'work'">Travailler</button>
+            <button type="button" class="btn btn-danger btn-lg" @click="clickOnFight()" :disabled="game.lastAction === 'fight' || game.getMalusLevel.type === 'fight' ">Combattre</button>
+            <button type="button" class="btn btn-dark btn-lg"  @click="clickOnSleep()" :disabled="game.lastAction === 'sleep' || game.getMalusLevel.type === 'sleep'">Dormir</button>
+            <button type="button" class="btn btn-success btn-lg" @click="clickOnEat()" :disabled="game.lastAction === 'eat' || game.getMalusLevel.type === 'eat'">Manger</button>
+            <button type="button" class="btn btn-warning btn-lg"  @click="clickOnWork()" :disabled="game.lastAction === 'work' || game.getMalusLevel.type === 'work'">Travailler</button>
         </div>
     </div>
 </template>

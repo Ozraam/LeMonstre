@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import { useMonsterStore } from "./Monster";
 
 
-
 export const useGameStore = defineStore({
     id: "game",
     state: () => ({
