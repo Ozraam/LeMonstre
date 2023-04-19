@@ -12,19 +12,19 @@ const game = useGameStore();
             </div>
         </div>
         <div class="row activated">
-            <div class="col-4">
+            <div class="col-2">
                 <ObjectifComponent/>
             </div>
-            <div class="col">
+            <div class="col-8">
                 <PlayerComponent/>
             </div>
         </div>
         <div class="row d-flex flex-column">
             <div class="col">
-                <MonsterComponent v-if="game.currentAction === 'fight'" class="activated"/>
+                <MonsterComponent v-if="game.currentAction === useActions().actions.fight" class="activated"/>
             </div>
             <div class="col">
-                <EatingChoice v-if="game.currentAction === 'eat'" class="activated"/>
+                <EatingChoice v-if="game.currentAction === useActions().actions.eat" class="activated"/>
             </div>
         </div>
         <ActionComponent class="test"/>

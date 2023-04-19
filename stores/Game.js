@@ -1,80 +1,5 @@
 import { defineStore } from "pinia";
-
-const objectiveTypes = {
-    turns: "turns",
-    food: "food",
-    gold: "gold",
-}
-
-const malusTypes = {
-    sleep:{
-        type: "sleep",
-        description : "Vous ne pouvez pas dormir durant la durée de ce malus",
-    },
-    work: {
-        type: "work",
-        description : "Vous ne pouvez pas travailler durant la durée de ce malus",
-    },
-    food: {
-        type: "food",
-        description : "Vous ne pouvez pas manger durant la durée de ce malus",
-    },
-    work: {
-        type: "work",
-        description : "Vous ne pouvez pas travailler durant la durée de ce malus",
-    },
-}
-
-const levels = [
-    {
-        objective: {
-            type: objectiveTypes.turns,
-            value: 10,
-            progress: 0,
-        },
-        malus: {
-            type: malusTypes.work.type,
-            value: 5,
-            description: malusTypes.work.description,
-        }
-    },
-    {
-        objective: {
-            type: objectiveTypes.gold,
-            value: 25,
-            progress: 0,
-        },
-        malus: {
-            type: malusTypes.work.type,
-            value: 5,
-            description: malusTypes.work.description,
-        }
-    },
-    {
-        objective: {
-            type: objectiveTypes.food,
-            value: 25,
-            progress: 0,
-        },
-        malus:{
-            type: malusTypes.sleep.type,
-            value: 6,
-            description: malusTypes.sleep.description,
-        }
-    },
-    {
-        objective: {
-            type: objectiveTypes.gold,
-            value: 25,
-            progress: 0,
-        },
-        malus: {
-            type: malusTypes.food.type,
-            value: 5,
-            description: malusTypes.food.description,
-        }
-    },
-]
+import { useMonsterStore } from "./Monster";
 
 
 export const useGameStore = defineStore({
@@ -85,29 +10,28 @@ export const useGameStore = defineStore({
         history: [],
         malus: null,
         difficulty: 0,
-        objective: {
-            type: "score",
-            value: 1000,
-            progress: 0,
-        }
+        objective: useLevels().levels[0].objective,
+        currentAction: null,
+        gameOver: false,
     }),
     getters: {
         getNumberOfDaysLastTimeSleep() {
-            const lastTimeSleep = this.history.find((history) => history.action === "sleep");
+            const lastTimeSleep = this.history.findLast((history) => history.action === useActions().actions.sleep);
             if (!lastTimeSleep) {
                 return this.numTurns;
             }
             return this.numTurns - lastTimeSleep.turn;
         },
         lastAction() {
-            return this.history[this.history.length - 1] ? this.history[this.history.length - 1].action : "";
+            return this.history[this.history.length - 1]?.action;
         },
         getObjectiveLevel() {
-            return levels[this.level - 1].objective;
+            return this.objective;
         },
         getMalusLevel() {
             return levels[this.level - 1].malus;
         },
+
     },
     actions: {
         incrementLevel() {
@@ -116,11 +40,13 @@ export const useGameStore = defineStore({
 
             this.numTurns = 0;
             this.history = [];
-            this.setObjective(levels[this.level - 1].objective);
+            this.objective = levels[this.level - 1].objective;
             this.setMalus(levels[this.level - 1].malus);
         },
         incrementNumTurns() {
             this.numTurns++;
+            this.currentAction = null;
+            useMonsterStore().newTurn();
         },
         addHistory(action) {
             this.history.push({action: action, turn: this.numTurns});
@@ -134,13 +60,18 @@ export const useGameStore = defineStore({
         setDifficulty(difficulty) {
             this.difficulty = difficulty;
         },
-        incrementObjectiveProgress(value) {
+        incrementObjectiveProgress(value, type) {
+            if(this.objective.type !== type) return false;
+
             this.objective.progress += value;
             if(this.objective.progress >= this.objective.value) {
                 this.incrementLevel();
                 return true;
             }
             return false;
+        },
+        setGameOver(value) {
+            this.gameOver = value;
         }
     }
 });

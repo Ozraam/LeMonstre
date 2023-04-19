@@ -8,8 +8,7 @@ const game = useGameStore();
 function click(item){
     monster.fight(item)
     game.addHistory("fight")
-    game.numTurns += 1
-    game.currentAction = null
+    game.incrementNumTurns()
 }
 </script>
 
