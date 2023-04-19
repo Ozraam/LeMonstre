@@ -8,10 +8,10 @@ const time = ref(500);
 function playerMoveArroundRandom() {
     const x = Math.floor(Math.random() * 20) - 10;
     positionX.value = positionX.value + x;
-    if (positionX.value > 100) {
-        positionX.value = 100;
-    } else if (positionX.value < 0) {
-        positionX.value = positionX.value + 0;
+    if (positionX.value > 99) {
+        positionX.value = 99;
+    } else if (positionX.value < 1) {
+        positionX.value = 1;
     }
 
     
