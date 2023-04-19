@@ -119,21 +119,28 @@ export const useMonsterStore = defineStore({
         fight(monster){
             this.PV += monster.PV;
             this.P += monster.P;
+            useGameStore().incrementObjectiveProgress(1, "fight");
+            useGameStore().incrementObjectiveProgress(1, "fight" + monster.alt);
+            useGameStore().incrementObjectiveProgress(monster.P, "gold");
         },
         sleep(){
             this.PV += 1;
             this.F += -1;
+            useGameStore().incrementObjectiveProgress(1, "sleep");
         },
         eat(food){
             this.PV += food.PV;
             this.P += food.P;
             this.F += food.F;
+            useGameStore().incrementObjectiveProgress(1, "food");
+            useGameStore().incrementObjectiveProgress(1, "food" + food.name);
         },
         work(){
             const game = useGameStore();
-            console.log(game.getNumberOfDaysLastTimeSleep);
             this.PV += 1+game.getNumberOfDaysLastTimeSleep;
             this.P += 1+game.getNumberOfDaysLastTimeSleep;
+            game.incrementObjectiveProgress(1, "work");
+            game.incrementObjectiveProgress(1+game.getNumberOfDaysLastTimeSleep, "gold");
         },
         setName(name){
             this.name = name;
@@ -146,6 +153,16 @@ export const useMonsterStore = defineStore({
         },
         setF (F) {
             this.F = F;
+        },
+        newTurn() {
+            this.F--;
+            if(this.F <= 0){
+                this.PV--;
+                if(this.PV <= 0){
+                    useGameStore().setGameOver(true);
+                }
+            }
+            useGameStore().incrementObjectiveProgress(1, "turn");
         }
     }
 });

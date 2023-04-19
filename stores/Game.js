@@ -1,9 +1,11 @@
 import { defineStore } from "pinia";
+import { useMonsterStore, fighter } from "./Monster";
 
 const objectiveTypes = {
-    turns: "turns",
     food: "food",
     gold: "gold",
+    fight: "fight",
+    fightRabbits: "fightLapin",
 }
 
 const malusTypes = {
@@ -15,9 +17,10 @@ const malusTypes = {
 const levels = [
     {
         objective: {
-            type: objectiveTypes.turns,
+            type: objectiveTypes.gold,
             value: 10,
             progress: 0,
+            description: "Collecter 10 pieces d'or",
         },
         malus: null
     },
@@ -26,6 +29,7 @@ const levels = [
             type: objectiveTypes.gold,
             value: 25,
             progress: 0,
+            description: "Collecter 25 pieces d'or",
         },
         malus: null
     },
@@ -34,14 +38,16 @@ const levels = [
             type: objectiveTypes.food,
             value: 25,
             progress: 0,
+            description: "Manger 25 fois",
         },
         malus: null
     },
     {
         objective: {
-            type: objectiveTypes.gold,
-            value: 25,
+            type: objectiveTypes.fightRabbits,
+            value: 5,
             progress: 0,
+            description: "Combattre 5 lapins",
         },
         malus: {
             type: malusTypes.food,
@@ -59,11 +65,9 @@ export const useGameStore = defineStore({
         history: [],
         malus: null,
         difficulty: 0,
-        objective: {
-            type: "score",
-            value: 1000,
-            progress: 0,
-        }
+        objective: levels[3].objective,
+        currentAction: null,
+        gameOver: false,
     }),
     getters: {
         getNumberOfDaysLastTimeSleep() {
@@ -75,7 +79,14 @@ export const useGameStore = defineStore({
         },
         lastAction() {
             return this.history[this.history.length - 1] ? this.history[this.history.length - 1].action : "";
-        }
+        },
+        getObjectiveLevel() {
+            return this.objective;
+        },
+        getMalusLevel() {
+            return levels[this.level - 1].malus;
+        },
+
     },
     actions: {
         incrementLevel() {
@@ -84,11 +95,13 @@ export const useGameStore = defineStore({
 
             this.numTurns = 0;
             this.history = [];
-            this.setObjective(levels[this.level - 1].objective);
+            this.objective = levels[this.level - 1].objective;
             this.setMalus(levels[this.level - 1].malus);
         },
         incrementNumTurns() {
             this.numTurns++;
+            this.currentAction = null;
+            useMonsterStore().newTurn();
         },
         addHistory(action) {
             this.history.push({action: action, turn: this.numTurns});
@@ -102,13 +115,18 @@ export const useGameStore = defineStore({
         setDifficulty(difficulty) {
             this.difficulty = difficulty;
         },
-        incrementObjectiveProgress(value) {
+        incrementObjectiveProgress(value, type) {
+            if(this.objective.type !== type) return false;
+
             this.objective.progress += value;
             if(this.objective.progress >= this.objective.value) {
                 this.incrementLevel();
                 return true;
             }
             return false;
+        },
+        setGameOver(value) {
+            this.gameOver = value;
         }
     }
 });

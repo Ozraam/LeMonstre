@@ -31,7 +31,7 @@ const game = useGameStore();
             <div class="card-body">
                 <h5 class="card-title">Objectif</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Objectif pour le niveau : {{game.level}}</h6>
-                <p class="card-text">type :{{ game.getObjectiveLevel.type}}</p>
+                <p class="card-text">{{ game.getObjectiveLevel.description}}</p>
                 <p class="card-text">value :{{ game.getObjectiveLevel.value}}</p>
                 <p class="card-text">progress :{{ game.getObjectiveLevel.progress }}</p>
             </div>
