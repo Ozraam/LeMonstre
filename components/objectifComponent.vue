@@ -11,6 +11,8 @@ const game = useGameStore();
 </script>
 
 
+
+
 <template>
 <!--    <div class="objectif">
         <div class="objectif_title">
