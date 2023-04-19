@@ -22,7 +22,6 @@ function clickOnFight() {
     game.currentAction = "fight"
 }
 
-console.log(game.getMalusLevel)
 </script>
 
 <template>
