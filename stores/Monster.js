@@ -73,8 +73,8 @@ export const useMonsterStore = defineStore({
     id: "monster",
     state: () => ({
         monsters: ["Lapin", "Loup", "Ours", "Troll"],
-        name : "Anto",
-        PV : 150,
+        name : "",
+        PV : 10,
         P :10,
         F :10
         }),
@@ -131,6 +131,7 @@ export const useMonsterStore = defineStore({
         },
         work(){
             const game = useGameStore();
+            console.log(game.getNumberOfDaysLastTimeSleep);
             this.PV += 1+game.getNumberOfDaysLastTimeSleep;
             this.P += 1+game.getNumberOfDaysLastTimeSleep;
         },

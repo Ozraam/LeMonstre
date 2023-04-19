@@ -5,13 +5,13 @@ const monster = useMonsterStore();
 const game = useGameStore();
 function clickOnSleep() {
     monster.sleep()
-    game.lastAction = "sleep"
+    game.addHistory("sleep")
     game.numTurns++
     game.currentAction = null
 }
 function clickOnWork() {
     monster.work()
-    game.lastAction = "work"
+    game.addHistory("work")
     game.numTurns++
     game.currentAction = null
 }

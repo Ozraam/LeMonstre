@@ -7,7 +7,7 @@ const game = useGameStore()
 
 function eatMonster(food) {
     monster.eat(food)
-    game.lastAction = "eat"
+    game.addHistory("eat")
     game.numTurns += 1
     game.currentAction = null
 }

@@ -59,7 +59,6 @@ export const useGameStore = defineStore({
         history: [],
         malus: null,
         difficulty: 0,
-        lastAction: null,
         objective: {
             type: "score",
             value: 1000,
@@ -67,33 +66,15 @@ export const useGameStore = defineStore({
         }
     }),
     getters: {
-        getLevel() {
-            return this.level;
-        },
-        getNumTurns() {
-            return this.numTurns;
-        },
-        getHistory() {
-            return this.history;
-        },
-        getMalus() {
-            return this.malus;
-        },
-        getObjective() {
-            return this.objective;
-        },
         getNumberOfDaysLastTimeSleep() {
             const lastTimeSleep = this.history.find((history) => history.action === "sleep");
             if (!lastTimeSleep) {
-                return 0;
+                return this.numTurns;
             }
             return this.numTurns - lastTimeSleep.turn;
         },
-        getDifficulty() {
-            return this.difficulty;
-        },
-        getObjectiveLevel(){
-            return levels[this.level].objective;
+        lastAction() {
+            return this.history[this.history.length - 1] ? this.history[this.history.length - 1].action : "";
         }
     },
     actions: {
@@ -109,8 +90,8 @@ export const useGameStore = defineStore({
         incrementNumTurns() {
             this.numTurns++;
         },
-        addHistory(history) {
-            this.history.push(history);
+        addHistory(action) {
+            this.history.push({action: action, turn: this.numTurns});
         },
         setMalus(malus) {
             this.malus = malus;
