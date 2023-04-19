@@ -11,11 +11,7 @@ export function useLevels() {
                     progress: 0,
                     description: "Collecter 10 pieces d'or",
                 },
-                malus:{
-                    type: malusTypes.food,
-                    value: 10,
-                    description: malusTypes.food.description,
-                }
+                malus : null,
             },
             {
                 objective: {

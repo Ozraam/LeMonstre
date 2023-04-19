@@ -5,29 +5,23 @@ const game = useGameStore();
 </script>
 
 <template>
-    <main class="container-fluid d-flex flex-column justify-content-between">
-        <div class="row ">
+    <main class="container-fluid justify-content-between">
+        <div class="row">
+            <InforComponent />
             <div class="col">
-                <InforComponent />
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <ObjectifComponent/>
+                    </div>
+                    <div class="col-12 col-md">
+                        <PlayerComponent/>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row activated">
-            <div class="col-2">
-                <ObjectifComponent/>
-            </div>
-            <div class="col-8">
-                <PlayerComponent/>
-            </div>
-        </div>
-        <div class="row d-flex flex-column">
-            <div class="col">
-                <MonsterComponent v-if="game.currentAction === useActions().actions.fight" class="activated"/>
-            </div>
-            <div class="col">
-                <EatingChoice v-if="game.currentAction === useActions().actions.eat" class="activated"/>
-            </div>
-        </div>
-        <ActionComponent class="test"/>
+        <MonsterComponent v-if="game.currentAction === useActions().actions.fight" class="activated"/>
+        <EatingChoice v-else-if="game.currentAction === useActions().actions.eat" class="activated"/>
+        <ActionComponent/>
     </main>
 </template>
 
