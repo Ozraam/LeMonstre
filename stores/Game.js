@@ -75,7 +75,13 @@ export const useGameStore = defineStore({
         },
         lastAction() {
             return this.history[this.history.length - 1] ? this.history[this.history.length - 1].action : "";
-        }
+        },
+        getObjectiveLevel() {
+            return levels[this.level - 1].objective;
+        },
+        getMalusLevel() {
+            return levels[this.level - 1].malus;
+        },
     },
     actions: {
         incrementLevel() {
