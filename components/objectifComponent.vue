@@ -1,6 +1,4 @@
 <script setup>
-import { dataToEsm } from '@rollup/pluginutils';
-import { resetTracking } from '@vue/reactivity';
 import { useGameStore } from '~/stores/Game';
 
 
@@ -14,9 +12,8 @@ const game = useGameStore();
 
 
 <template>
-<div class="row mt-5">
-    <div class="col-12 col-sm">
-        <div class="card">
+<div class="">
+        <div class="card mt-5">
             <div class="card-body">
                 <h5 class="card-title">Objectif</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Objectif pour le niveau : {{game.level}}</h6>
@@ -28,7 +25,6 @@ const game = useGameStore();
                         :aria-valuenow="game.getObjectiveLevel.progress/game.getObjectiveLevel.value*100" aria-valuemin="0" aria-valuemax="100">{{ game.getObjectiveLevel.progress + "/" + game.getObjectiveLevel.value }}</div>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 </template>

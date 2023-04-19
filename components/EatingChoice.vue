@@ -1,9 +1,10 @@
 <script setup>
 import { useGameStore } from '~/stores/Game';
-import { useMonsterStore, foods } from '~/stores/Monster';
+import { useMonsterStore} from '~/stores/Monster';
 
 const monster = useMonsterStore()
 const game = useGameStore()
+const foods = useFoods().foods
 
 function eatMonster(food) {
     monster.eat(food)

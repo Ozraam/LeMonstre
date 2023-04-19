@@ -1,9 +1,10 @@
 <script setup>
 
-import { useMonsterStore,fighter } from '~/stores/Monster';
+import { useMonsterStore} from '~/stores/Monster';
 import { useGameStore } from '~/stores/Game';
 const monster = useMonsterStore();
 const game = useGameStore();
+const fighter = useFighters().fighters;
 
 function click(item){
     monster.fight(item)

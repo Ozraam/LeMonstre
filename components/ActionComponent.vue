@@ -28,16 +28,16 @@ console.log(game.getMalusLevel)
 <template>
     <div class="row mb-3">
         <div class="col-6 col-md">
-        <button type="button" class="d-block w-100 mb-1 btn btn-danger btn-lg" @click="clickOnFight()" :disabled="game.lastAction === 'fight' || game.getMalusLevel.type === 'fight' ">Combattre</button>
+        <button type="button" class="d-block w-100 mb-1 btn btn-danger btn-lg" @click="clickOnFight()" :disabled="game.lastAction === 'fight' || game.getMalusLevel.type === useActions().actions.fight ">Combattre</button>
         </div>
         <div class="col-6 col-md">
-        <button type="button" class="d-block w-100 mb-1 btn btn-dark btn-lg"  @click="clickOnSleep()" :disabled="game.lastAction === 'sleep' || game.getMalusLevel.type === 'sleep'">Dormir</button>
+        <button type="button" class="d-block w-100 mb-1 btn btn-dark btn-lg"  @click="clickOnSleep()" :disabled="game.lastAction === 'sleep' || game.getMalusLevel.type === useActions().actions.sleep">Dormir</button>
         </div>
         <div class="col-6 col-md">
-        <button type="button" class="d-block w-100 mb-1  btn btn-success btn-lg"  @click="clickOnEat()" :disabled="game.lastAction === 'eat' || game.getMalusLevel.type === 'eat'">Manger</button>
+        <button type="button" class="d-block w-100 mb-1  btn btn-success btn-lg"  @click="clickOnEat()" :disabled="game.lastAction === 'eat' || game.getMalusLevel.type === useActions().actions.eat">Manger</button>
         </div>
         <div class="col-6 col-md">
-            <button type="button" class="d-block w-100 mb-1 btn btn-warning btn-lg"  @click="clickOnWork()" :disabled="game.lastAction === 'work' || game.getMalusLevel.type === 'work'">Travailler</button>
+            <button type="button" class="d-block w-100 mb-1 btn btn-warning btn-lg"  @click="clickOnWork()" :disabled="game.lastAction === 'work' || game.getMalusLevel.type === useActions().actions.work">Travailler</button>
         </div>
     </div>
 </template>
