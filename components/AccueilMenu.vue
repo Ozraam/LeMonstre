@@ -20,25 +20,30 @@ function startGame() {
 
 
 <template>
-    <form class="vstack form menu align-items-center" @submit.prevent="startGame">
-        <div>
-            <label for="name" class="form-label">Name :</label>
-            <input type="text" id="name" v-model="name" placeholder="Monster's name" class="form-control" required />
+    <div class="card w-25">
+        <div class="card-body">
+            <AccueilHeader title="Monster Game" />
+            <form class="vstack form menu align-items-center" @submit.prevent="startGame">
+                <div>
+                    <label for="name" class="form-labels">Name :</label>
+                    <input type="text" id="name" v-model="name" placeholder="Monster's name" class="form-control" required />
+                </div>
+                <div class="mb-2">
+                    <label for="difficulty" class="form-label">Difficulty :</label>
+                    <select name="difficulty" id="difficulty" class="form-select" v-model="difficulty">
+                        <option 
+                            v-for="option in useDifficulties().difficulties" 
+                            :key="option" 
+                            :value="option"
+                        >
+                            {{ option.charAt(0).toUpperCase() + option.slice(1) }}
+                        </option>
+                    </select>
+                </div>
+                <button class="btn btn-outline-success align-self-center">Start</button>
+            </form>
         </div>
-        <div class="mb-2">
-            <label for="difficulty" class="form-label">Difficulty :</label>
-            <select name="difficulty" id="difficulty" class="form-select" v-model="difficulty">
-                <option 
-                    v-for="option in useDifficulties().difficulties" 
-                    :key="option" 
-                    :value="option"
-                >
-                    {{ option.charAt(0).toUpperCase() + option.slice(1) }}
-                </option>
-            </select>
-        </div>
-        <button class="btn btn-outline-success align-self-center">Start</button>
-    </form>
+    </div>
 </template>
 
 <style scoped>

@@ -1,21 +1,22 @@
-<script>
+<script setup>
 
 </script>
 
 
 <template>
-    <main class="container mt-5 d-flex justify-content-center align-items-center flex-column">
-        <AccueilHeader title="Monster the game"  />
-        <AccueilMenu/>
-    </main>
+    <div class="container-fluid bg-image d-flex flex-column align-items-center justify-content-center">
+        <AccueilMenu />
+    </div>
 </template>
+
+
 <style scoped>
-
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.bg-image {
+    background-image: url("../public/images/background-start.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 100vh;
 }
-
 </style>
