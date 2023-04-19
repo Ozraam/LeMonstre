@@ -2,10 +2,20 @@ import { defineStore } from "pinia";
 import { useMonsterStore, fighter } from "./Monster";
 
 const objectiveTypes = {
+    sleep: "sleep",
+    turn: "turn",
     food: "food",
     gold: "gold",
     fight: "fight",
     fightRabbits: "fightLapin",
+    fightWolves: "fightloup",
+    fightBear: "fightOurs",
+    fightDragon: "fightDragon",
+    work: "work",
+    foodPomme: "foodPomme",
+    foodChampignon: "foodChampignon",
+    foodViande: "foodViande",
+    foodPoisson: "foodPoisson",
 }
 
 const malusTypes = {
@@ -48,6 +58,18 @@ const levels = [
             value: 5,
             progress: 0,
             description: "Combattre 5 lapins",
+        },
+        malus: {
+            type: malusTypes.food,
+            value: 10,
+        }
+    },
+    {
+        objective: {
+            type: objectiveTypes.fightWolves,
+            value: 5,
+            progress: 0,
+            description: "Combattre 5 loups",
         },
         malus: {
             type: malusTypes.food,
