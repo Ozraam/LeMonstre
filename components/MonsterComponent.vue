@@ -2,15 +2,15 @@
 
 import { useMonsterStore,fighter } from '~/stores/Monster';
 import { useGameStore } from '~/stores/Game';
-import Game from '~/pages/game.vue';
 const monster = useMonsterStore();
 const game = useGameStore();
 
 function click(item){
     monster.fight(item)
-    game.lastAction = "fight"
-    game.numTurns++
+    game.addHistory("fight")
+    game.numTurns += 1
     game.currentAction = null
+    console.log(game.numTurns)
 }
 </script>
 
