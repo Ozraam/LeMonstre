@@ -34,6 +34,7 @@ const game = useGameStore();
                 <p class="card-text">type :{{ game.getObjectiveLevel.type}}</p>
                 <p class="card-text">value :{{ game.getObjectiveLevel.value}}</p>
                 <p class="card-text">progress :{{ game.getObjectiveLevel.progress }}</p>
+                <MalusComponent/>
             </div>
         </div>
     </div>
