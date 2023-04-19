@@ -9,6 +9,7 @@
     const hurt = ref(null);
     const run = ref(null);
     const walk = ref(null);
+    const sleep = ref(null);
 
     const anims = computed(() => {return {
         idle: idle,
@@ -16,7 +17,8 @@
         death: death,
         hurt: hurt,
         run: run,
-        walk: walk
+        walk: walk,
+        sleep: sleep
     }});
 
     function changeAnim(anim) {
@@ -50,11 +52,18 @@
         <img src="~/assets/gif/player/hurt.gif" alt="player" class="d-none" ref="hurt">
         <img src="~/assets/gif/player/run.gif" alt="player" class="d-none" ref="run">
         <img src="~/assets/gif/player/walk.gif" alt="player" class="d-none" ref="walk">
+        <img src="~/assets/gif/player/Owlet_Monster.png" alt="player" class="d-none rotate-90" ref="sleep">
+
     </div>
 </template>
 
 <style scoped>
     .flip {
         transform: scaleX(-1);
+    }
+
+    .rotate-90 {
+        transform: rotate(-90deg) translateX(-50%);
+        
     }
 </style>
