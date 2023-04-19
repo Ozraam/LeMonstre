@@ -1,9 +1,21 @@
 import { defineStore } from "pinia";
+import { useMonsterStore, fighter } from "./Monster";
 
 const objectiveTypes = {
-    turns: "turns",
+    sleep: "sleep",
+    turn: "turn",
     food: "food",
     gold: "gold",
+    fight: "fight",
+    fightRabbits: "fightLapin",
+    fightWolves: "fightloup",
+    fightBear: "fightOurs",
+    fightDragon: "fightDragon",
+    work: "work",
+    foodPomme: "foodPomme",
+    foodChampignon: "foodChampignon",
+    foodViande: "foodViande",
+    foodPoisson: "foodPoisson",
 }
 
 const malusTypes = {
@@ -28,9 +40,10 @@ const malusTypes = {
 const levels = [
     {
         objective: {
-            type: objectiveTypes.turns,
+            type: objectiveTypes.gold,
             value: 10,
             progress: 0,
+            description: "Collecter 10 pieces d'or",
         },
         malus: {
             type: malusTypes.work.type,
@@ -43,6 +56,7 @@ const levels = [
             type: objectiveTypes.gold,
             value: 25,
             progress: 0,
+            description: "Collecter 25 pieces d'or",
         },
         malus: {
             type: malusTypes.work.type,
@@ -55,6 +69,7 @@ const levels = [
             type: objectiveTypes.food,
             value: 25,
             progress: 0,
+            description: "Manger 25 fois",
         },
         malus:{
             type: malusTypes.sleep.type,
@@ -64,9 +79,22 @@ const levels = [
     },
     {
         objective: {
-            type: objectiveTypes.gold,
-            value: 25,
+            type: objectiveTypes.fightRabbits,
+            value: 5,
             progress: 0,
+            description: "Combattre 5 lapins",
+        },
+        malus: {
+            type: malusTypes.food,
+            value: 10,
+        }
+    },
+    {
+        objective: {
+            type: objectiveTypes.fightWolves,
+            value: 5,
+            progress: 0,
+            description: "Combattre 5 loups",
         },
         malus: {
             type: malusTypes.food.type,
@@ -85,11 +113,9 @@ export const useGameStore = defineStore({
         history: [],
         malus: null,
         difficulty: 0,
-        objective: {
-            type: "score",
-            value: 1000,
-            progress: 0,
-        }
+        objective: levels[0].objective,
+        currentAction: null,
+        gameOver: false,
     }),
     getters: {
         getNumberOfDaysLastTimeSleep() {
@@ -103,11 +129,12 @@ export const useGameStore = defineStore({
             return this.history[this.history.length - 1] ? this.history[this.history.length - 1].action : "";
         },
         getObjectiveLevel() {
-            return levels[this.level - 1].objective;
+            return this.objective;
         },
         getMalusLevel() {
             return levels[this.level - 1].malus;
         },
+
     },
     actions: {
         incrementLevel() {
@@ -116,11 +143,13 @@ export const useGameStore = defineStore({
 
             this.numTurns = 0;
             this.history = [];
-            this.setObjective(levels[this.level - 1].objective);
+            this.objective = levels[this.level - 1].objective;
             this.setMalus(levels[this.level - 1].malus);
         },
         incrementNumTurns() {
             this.numTurns++;
+            this.currentAction = null;
+            useMonsterStore().newTurn();
         },
         addHistory(action) {
             this.history.push({action: action, turn: this.numTurns});
@@ -134,13 +163,18 @@ export const useGameStore = defineStore({
         setDifficulty(difficulty) {
             this.difficulty = difficulty;
         },
-        incrementObjectiveProgress(value) {
+        incrementObjectiveProgress(value, type) {
+            if(this.objective.type !== type) return false;
+
             this.objective.progress += value;
             if(this.objective.progress >= this.objective.value) {
                 this.incrementLevel();
                 return true;
             }
             return false;
+        },
+        setGameOver(value) {
+            this.gameOver = value;
         }
     }
 });

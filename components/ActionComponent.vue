@@ -6,13 +6,13 @@ const game = useGameStore();
 function clickOnSleep() {
     monster.sleep()
     game.addHistory("sleep")
-    game.numTurns++
+    game.incrementNumTurns()
     game.currentAction = null
 }
 function clickOnWork() {
     monster.work()
     game.addHistory("work")
-    game.numTurns++
+    game.incrementNumTurns()
     game.currentAction = null
 }
 function clickOnEat() {
