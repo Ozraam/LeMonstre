@@ -1,82 +1,6 @@
 import { defineStore } from "pinia";
-import { useMonsterStore, fighter } from "./Monster";
+import { useMonsterStore } from "./Monster";
 
-const objectiveTypes = {
-    sleep: "sleep",
-    turn: "turn",
-    food: "food",
-    gold: "gold",
-    fight: "fight",
-    fightRabbits: "fightLapin",
-    fightWolves: "fightloup",
-    fightBear: "fightOurs",
-    fightDragon: "fightDragon",
-    work: "work",
-    foodPomme: "foodPomme",
-    foodChampignon: "foodChampignon",
-    foodViande: "foodViande",
-    foodPoisson: "foodPoisson",
-}
-
-const malusTypes = {
-    sleep: "sleep",
-    food: "food",
-    gold: "gold",
-}
-
-const levels = [
-    {
-        objective: {
-            type: objectiveTypes.gold,
-            value: 10,
-            progress: 0,
-            description: "Collecter 10 pieces d'or",
-        },
-        malus: null
-    },
-    {
-        objective: {
-            type: objectiveTypes.gold,
-            value: 25,
-            progress: 0,
-            description: "Collecter 25 pieces d'or",
-        },
-        malus: null
-    },
-    {
-        objective: {
-            type: objectiveTypes.food,
-            value: 25,
-            progress: 0,
-            description: "Manger 25 fois",
-        },
-        malus: null
-    },
-    {
-        objective: {
-            type: objectiveTypes.fightRabbits,
-            value: 5,
-            progress: 0,
-            description: "Combattre 5 lapins",
-        },
-        malus: {
-            type: malusTypes.food,
-            value: 10,
-        }
-    },
-    {
-        objective: {
-            type: objectiveTypes.fightWolves,
-            value: 5,
-            progress: 0,
-            description: "Combattre 5 loups",
-        },
-        malus: {
-            type: malusTypes.food,
-            value: 10,
-        }
-    },
-]
 
 
 export const useGameStore = defineStore({
@@ -87,20 +11,20 @@ export const useGameStore = defineStore({
         history: [],
         malus: null,
         difficulty: 0,
-        objective: levels[0].objective,
+        objective: useLevels().levels[0].objective,
         currentAction: null,
         gameOver: false,
     }),
     getters: {
         getNumberOfDaysLastTimeSleep() {
-            const lastTimeSleep = this.history.find((history) => history.action === "sleep");
+            const lastTimeSleep = this.history.findLast((history) => history.action === useActions().actions.sleep);
             if (!lastTimeSleep) {
                 return this.numTurns;
             }
             return this.numTurns - lastTimeSleep.turn;
         },
         lastAction() {
-            return this.history[this.history.length - 1] ? this.history[this.history.length - 1].action : "";
+            return this.history[this.history.length - 1]?.action;
         },
         getObjectiveLevel() {
             return this.objective;
