@@ -12,7 +12,6 @@ function click(item){
     monster.fight(item)
     game.addHistory("fight")
     game.incrementNumTurns()
-    useAnimationStore().setAnimation(useAnimations().animations.fight, {monster: item})
 }
 </script>
 

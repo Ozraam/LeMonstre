@@ -4,7 +4,7 @@ export function useAnimations() {
             fight: "fight",
             sleep: "sleep",
             food: "food",
-            monster: "work",
+            work: "work",
         }
     }
 }
