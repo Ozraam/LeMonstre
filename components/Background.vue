@@ -1,58 +1,64 @@
 <script setup>
+import { useAnimationStore } from '~/stores/Animation';
 
 
+const moon = ref("null");
+const sun = ref("null");
+const sky = ref("null");
 
-    const moon = ref("null");
-    const sun = ref("null");
-    const sky = ref("null");
 
+function passNight() {
+    const animateTime = 5000;
 
-    function passNight() {
-        moon.value.animate([
-            { top: '100%' },
-            { top: '0%' },
-            { top: '0%' },
-            { top: '100%' }
-        ], {
-            duration: 10000,
-        })
-
-        sun.value.animate([
-            { top: '0%' },
-            { top: '100%' },
-            { top: '100%' },
-            { top: '0%' }
-        ], {
-            duration: 10000,
-            easing: 'ease-in-out'
-        })
-
-        sky.value.animate([
-            { 'filter': "grayscale(0)" },
-            { 'filter': "grayscale(1)" },
-            { 'filter': "grayscale(1)" },
-            { 'filter': "grayscale(0)" }
-        ], {
-            duration: 10000,
-            easing: 'ease-in-out'
-        })
-
-        document.querySelectorAll(".earth").forEach(e => {
-            e.animate([
-            { 'filter': "grayscale(0)" },
-            { 'filter': "grayscale(1)" },
-            { 'filter': "grayscale(1)" },
-            { 'filter': "grayscale(0)" }
-        ], {
-            duration: 10000,
-            easing: 'ease-in-out'
-        })
-        })
-    }
-
-    defineExpose({
-        passNight
+    const animeMoon = moon.value.animate([
+        { top: '100%' },
+        { top: '0%' },
+        { top: '0%' },
+        { top: '100%' }
+    ], {
+        duration: animateTime,
     })
+
+    sun.value.animate([
+        { top: '0%' },
+        { top: '100%' },
+        { top: '100%' },
+        { top: '0%' }
+    ], {
+        duration: animateTime,
+        easing: 'ease-in-out'
+    })
+
+    sky.value.animate([
+        { 'filter': "grayscale(0)" },
+        { 'filter': "grayscale(1)" },
+        { 'filter': "grayscale(1)" },
+        { 'filter': "grayscale(0)" }
+    ], {
+        duration: animateTime,
+        easing: 'ease-in-out'
+    })
+
+    document.querySelectorAll(".earth").forEach(e => {
+        e.animate([
+            { 'filter': "grayscale(0)" },
+            { 'filter': "grayscale(1)" },
+            { 'filter': "grayscale(1)" },
+            { 'filter': "grayscale(0)" }
+        ], {
+            duration: animateTime,
+            easing: 'ease-in-out'
+        })
+    })
+
+    animeMoon.onfinish = () => {
+        useAnimationStore().setAnimation(null);
+    }
+}
+
+defineExpose({
+    passNight
+})
 </script>
 
 
@@ -76,25 +82,25 @@
 
         <img src="~/assets/img/backgroud/layers/ground.png" class="earth img-fluid position-absolute w-100" alt="ground">
 
-        
 
-    </div>   
+
+    </div>
 </template>
 
 <style scoped>
-    .earth {
-        left: 0;
-    }
+.earth {
+    left: 0;
+}
 
-    .background {
-        overflow: hidden;
-    }
+.background {
+    overflow: hidden;
+}
 
-    .astre {
-        right: 0;
-    }
+.astre {
+    right: 0;
+}
 
-    .moon {
-        top: 100%;
-    }
+.moon {
+    top: 100%;
+}
 </style>

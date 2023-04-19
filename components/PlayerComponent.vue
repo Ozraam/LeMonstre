@@ -1,12 +1,17 @@
 <script setup>
-import Background from './Background.vue';
+import { storeToRefs } from 'pinia';
+import { useAnimationStore } from '~/stores/Animation';
 
+const background = ref(null);
 const positionX = ref(50);
 const player = ref(null);
 const time = ref(500);
+const animationStore = useAnimationStore();
 
 function playerMoveArroundRandom() {
-    const x = Math.floor(Math.random() * 20) - 10;
+    if(animationStore.isAnimating) return;
+
+    const x = Math.floor(Math.random() * 50) - 25;
     positionX.value = positionX.value + x;
     if (positionX.value > 99) {
         positionX.value = 99;
@@ -14,9 +19,15 @@ function playerMoveArroundRandom() {
         positionX.value = 1;
     }
 
-    
+    const run = Math.floor(Math.random() * 2);
 
-    player.value.changeAnim("walk");
+    if(x > 0) {
+        player.value.flip(false)
+    } else {
+        player.value.flip(true)
+    }
+
+    player.value.changeAnim(run ? "run" : "walk" );
 
     if(x > 0) {
         player.value.flip(false)
@@ -25,30 +36,51 @@ function playerMoveArroundRandom() {
     }
 
     time.value = Math.abs(x * 300);
+    run ? time.value = time.value / 3 : time.value = time.value;
     const randomTime = Math.floor(Math.random() * 1000) + 500 + time.value;
 
     setTimeout(playerMoveArroundRandom, randomTime);
     setTimeout(() => {
         player.value.changeAnim("idle");
     }, time.value);
+}
 
+
+
+function animateFight() {
 
 }
+
+
+
 
 onMounted(() => {
     playerMoveArroundRandom();
 })
 
+const { animation } = storeToRefs(animationStore);
 
+watch(animation, (value) => {
+    console.log(value);
+    if(value == useAnimations().animations.sleep) {
+        background.value.passNight();
+        player.value.changeAnim("sleep");
+    } else if(value == useAnimations().animations.fight) {
+        animateFight();
+    } else {
+        playerMoveArroundRandom();
+    }
+})
 </script>
 
 <template>
     <div class="position-relative">
-        <Background />
+        <Background ref="background" />
         <PlayerAnimation ref="player" class="position-absolute player" :style="{
             left: positionX + '%',
             transitionDuration: time + 'ms'
         }" />
+        <MonsterImage :monster="animationStore.options.monster" />
     </div>
 </template>
 

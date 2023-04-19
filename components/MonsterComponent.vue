@@ -2,6 +2,8 @@
 
 import { useMonsterStore} from '~/stores/Monster';
 import { useGameStore } from '~/stores/Game';
+import { useAnimationStore } from '~/stores/Animation';
+
 const monster = useMonsterStore();
 const game = useGameStore();
 const fighter = useFighters().fighters;
@@ -10,6 +12,7 @@ function click(item){
     monster.fight(item)
     game.addHistory("fight")
     game.incrementNumTurns()
+    useAnimationStore().setAnimation(useAnimations().animations.fight, {monster: item})
 }
 </script>
 
