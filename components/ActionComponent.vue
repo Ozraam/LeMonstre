@@ -12,7 +12,6 @@ function clickOnSleep() {
     game.addHistory("sleep")
     animation.setAnimation(useAnimations().animations.sleep)
 
-    console.log(animation.isAnimating)
     game.currentAction = null
 }
 function clickOnWork() {

@@ -11,6 +11,7 @@ const fighter = useFighters().fighters;
 function click(item){
     monster.fight(item)
     game.addHistory("fight")
+    useAnimationStore().setAnimation(useAnimations().animations.fight, {monster: item})
     game.incrementNumTurns()
 }
 </script>
