@@ -5,6 +5,18 @@ nuxtApp.vueApp.directive("bs-collapse", {
     },
 });
 }
+
+function defineModalDirective(nuxtApp) {
+nuxtApp.vueApp.directive("bs-modal", {
+    getSSRProps() {
+        return {};
+    },
+});
+}
+
+
+
 export default defineNuxtPlugin((nuxtApp) => {
     defineCollapseDirective(nuxtApp);
+    defineModalDirective(nuxtApp);
 });

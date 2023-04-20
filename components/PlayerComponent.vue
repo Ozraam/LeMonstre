@@ -66,6 +66,48 @@ function playerMoveArroundRandom() {
     }
 }
 
+function followCursor() {
+    if (animationStore.isAnimating) return;
+    const playerHtml = player.value.$el;
+    if (animationStore.isAnimating) return;
+    document.onmousemove = (e) => {
+        let x = e.clientX;
+        let newpositionX = x / window.innerWidth * 100;
+        if (newpositionX > 99) {
+            newpositionX = 99;
+        } else if (newpositionX < 1) {
+            newpositionX = 1;
+        }
+        if(newpositionX > positionX) {
+            player.value.flip(false)
+        } else if (!animationStore.isAnimating) {
+            player.value.flip(true)
+        }
+
+        if(positionX - newpositionX > 15 || positionX - newpositionX < -15) {
+            player.value.changeAnim("run");
+            console.log("run")
+        } else if(positionX - newpositionX > 5 || positionX - newpositionX < -5) {
+            player.value.changeAnim("walk");
+            console.log("walk")
+        } else {
+            player.value.changeAnim("idle");
+        }
+
+        time.value = Math.abs(x * 300);
+        time.value = run ? time.value / 3 : time.value;
+        const randomTime = Math.floor(Math.random() * 1000) + 500;
+
+        animationPlayerMove = playerHtml.animate([
+            { left: `${newpositionX}%`, offset: 1}
+        ])
+
+        animationPlayerMove.onfinish = () => {
+            if (!animationStore.isAnimating) player.value.changeAnim("idle");
+        }
+    }
+}
+
 function stopPlayerMovement() {
     if (animationPlayerMove) {
         animationPlayerMove.pause();
@@ -81,12 +123,12 @@ function resumePlayerMovement() {
     }
 }
 
+
 function playerFight() {
     player.value.flip(false);
     player.value.changeAnim("fight");
-
     setTimeout(() => {
-        playerMoveArroundRandom();
+        player.value.changeAnim("idle");
         useAnimationStore().setAnimation(null);
     }, 3000)
 }
@@ -94,7 +136,6 @@ function playerFight() {
 
 
 onMounted(() => {
-    
     setTimeout(playerMoveArroundRandom, 1000);
 })
 
@@ -106,6 +147,7 @@ watch(animation, (value) => {
         background.value.passNight();
         player.value.changeAnim("sleep");
     } else if (value === useAnimations().animations.work) {
+        player.value.positionX = 50;
         stopPlayerMovement();
         background.value.passwork();
         player.value.changeAnim("work");
@@ -134,24 +176,41 @@ watch(gameOver, (value) => {
         }, 1500)
         
     }
-})
-
+});
 </script>
 
 <template>
-    <div class="position-relative playground">
+    <main class="position-relative playground">
         <Background ref="background" />
-        <div class="position-absolute info-level">
+        <div class="info">
             <ObjectifComponent />
-            <InfoLevel />
+            <InfoLevel class="level"/>
         </div>
-        <PlayerAnimation ref="player" class="position-absolute player" :style="{
-            left: positionX + '%',
-            transitionDuration: time + 'ms',
-
-            zIndex: 1000
-        }" />
-        <MonsterImage :monster="animationStore.options.monster" />
+        <PlayerAnimation ref="player" class="position-absolute player" />
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" id="modal">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <MonsterComponent v-if="game.currentAction === useActions().actions.fight" class="activated"/>
+            <EatingChoice v-else-if="game.currentAction === useActions().actions.eat" class="activated"/>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+        </div>
+    </div>
+    </div>
+    <div class="action">
+        <ActionComponent class="action"/>
+    </div>
+    <FoodRain ref="foodRain" />
     </main>
 </template>
 
@@ -177,17 +236,56 @@ watch(gameOver, (value) => {
         width: 100%;
     }
 
-    .info-level {
-        width: 300px;
+    .info{
+        width: 400px;
+        position: absolute;
         top: 3%;
         left: 1%;
-        z-index: 100;
     }
-    @media screen and (max-width: 768px) {
-        .info-level {
+
+    @media (max-width: 768px) {
+        .info{
             width: 100%;
-            top: 0%;
-            left: 0%;
+            top: 0;
+            left: 0;
         }
+        .level {
+            margin-top: 0px;
+        }
+    }
+
+    .action {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .play-component {
+        top: 0;
+        left: 0;
+    }
+
+        /*create animation*/
+    @keyframes up {
+        0% {
+            opacity: 0;
+            transform: translateY(100%);
+        }
+        50% {
+            opacity: 0.1;
+        }
+        75% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0%);
+        }
+    }
+    /*used animation for class activated*/
+    .activated {
+        z-index: 10;
+        animation: up 0.5s ease-in-out;
     }
 </style>

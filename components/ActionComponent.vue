@@ -38,26 +38,43 @@ function clickOnFight() {
 </script>
 
 <template>
-    <div class="row mb-3" style="z-index: 100;">
-        <div class="col-6 col-md">
-            <button type="button" class="d-block w-100 mb-1 btn btn-danger btn-lg" @click="clickOnFight()" :disabled="game.lastAction === 'fight'
+    <div class="row" style="z-index: 100;">
+        <div class="col col-md test">
+            <button type="button" class="d-block  mb-1 btn border-0 m-auto " data-toggle="modal" data-target="#exampleModal" @click="clickOnFight()" :disabled="game.lastAction === 'fight'
                 || game.getMalusLevel?.type === useActions().actions.fight
-                || animation.isAnimating">Combattre</button>
+                || animation.isAnimating"><img src="~/assets/img/icon/epee.png" class="icon-button"></button>
         </div>
-        <div class="col-6 col-md">
-            <button type="button" class="d-block w-100 mb-1 btn btn-dark btn-lg" @click="clickOnSleep()" :disabled="game.lastAction === 'sleep'
+        <div class="col col-md">
+            <button type="button" class="d-block mb-1 btn border-0 m-auto" @click="clickOnSleep()" :disabled="game.lastAction === 'sleep'
                 || game.getMalusLevel?.type === useActions().actions.sleep
-                || animation.isAnimating">Dormir</button>
+                || animation.isAnimating"><img src="~/assets/img/icon/lit.png" class="icon-button"></button>
         </div>
-        <div class="col-6 col-md">
-            <button type="button" class="d-block w-100 mb-1  btn btn-success btn-lg" @click="clickOnEat()" :disabled="game.lastAction === 'eat'
+        <div class="col col-md">
+            <button type="button" class="d-block mb-1 btn border-0 m-auto" data-toggle="modal" data-target="#exampleModal" v-b-modal="modal" @click="clickOnEat()" :disabled="game.lastAction === 'eat'
                 || game.getMalusLevel?.type === useActions().actions.eat
-                || animation.isAnimating">Manger</button>
+                || animation.isAnimating"><img src="~/assets/img/icon/four.png" class="icon-button"></button>
         </div>
-        <div class="col-6 col-md">
-            <button type="button" class="d-block w-100 mb-1 btn btn-warning btn-lg" @click="clickOnWork()" :disabled="game.lastAction === 'work'
+        <div class="col col-md">
+            <button type="button" class="d-block  btn border-0 m-auto" @click="clickOnWork()" :disabled="game.lastAction === 'work'
                 || game.getMalusLevel?.type === useActions().actions.work
-                || animation.isAnimating">Travailler</button>
+                || animation.isAnimating"><img src="~/assets/img/icon/travail.png" class="icon-button"></button>
         </div>
     </div>
 </template>
+
+<style scoped>
+.icon-button {
+    width: 50px;
+    height: 50px;
+    transition: all .2s ease-in-out;
+}
+
+button:hover .icon-button{
+    filter: brightness(0.5);
+    transform: scale(1.5);
+}
+
+.test{
+    text-align: center;
+}
+</style>

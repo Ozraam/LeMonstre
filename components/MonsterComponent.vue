@@ -22,8 +22,13 @@ function click(item) {
 </script>
 
 <template>
+    <div class="card">
+
+
+
+    </div>
     <div class="row mb-3">
-        <div class="col-6 col-md" v-for="item in fighter" :key="fighter.alt">
+        <div class="col-6" v-for="item in fighter" :key="fighter.alt">
             <button class="btn btn-outline-secondary w-100 shadow p-3 mb-1" @click="click(item)">
                 <div>
                     {{ item.alt }}
@@ -41,5 +46,9 @@ function click(item) {
 <style scoped>
 img {
     max-height: 5em;
+}
+
+.monster{
+    width: 100px;
 }
 </style>

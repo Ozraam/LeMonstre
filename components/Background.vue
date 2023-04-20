@@ -115,8 +115,8 @@ defineExpose({
         <img src="~/assets/img/backgroud/layers/rocks_2.png" class="earth img-fluid position-absolute" alt="front rock">
         <img src="~/assets/img/backgroud/layers/clouds_4.png" class="earth img-fluid position-absolute" alt="front cloud">
 
-        <img src="~/assets/img/ordi.png" class="ordi img-fluid position-absolute" alt="ordi" ref="ordinateur">
-        <img src="~/assets/img/bureau.png" class="bureau img-fluid position-absolute" alt="bureau" ref="bureau">
+        <img src="~/assets/img/ordi.png" class="ordi position-absolute" alt="ordi" ref="ordinateur">
+        <img src="~/assets/img/bureau.png" class="bureau position-absolute" alt="bureau" ref="bureau">
 
         <img src="~/assets/img/backgroud/layers/ground.png" class="earth img-fluid position-absolute w-100" alt="ground">
     </div>

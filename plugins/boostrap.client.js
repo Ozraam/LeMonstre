@@ -1,4 +1,5 @@
 import { Collapse } from 'bootstrap'
+import { Modal } from 'bootstrap';
 
 function defineCollapseDirective(nuxtApp) {
     nuxtApp.vueApp.directive('bs-collapse', {
@@ -12,6 +13,20 @@ function defineCollapseDirective(nuxtApp) {
     })
 }
 
+function defineModalDirective(nuxtApp) {
+    nuxtApp.vueApp.directive('bs-modal', {
+        mounted(el) {
+            const modal = new Modal(el)
+            el.modal = modal
+        },
+        unmounted(el) {
+            el.modal.dispose()
+        },
+    })
+}
+
+
 export default defineNuxtPlugin((nuxtApp) => {
-    defineCollapseDirective(nuxtApp)
+    defineCollapseDirective(nuxtApp);
+    defineModalDirective(nuxtApp);
 })
