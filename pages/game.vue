@@ -21,7 +21,6 @@ const game = useGameStore();
         </div>
         <MonsterComponent v-if="game.currentAction === useActions().actions.fight" class="activated"/>
         <EatingChoice v-else-if="game.currentAction === useActions().actions.eat" class="activated"/>
-        <ActionComponent/>
     </main>
 </template>
 

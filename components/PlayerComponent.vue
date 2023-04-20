@@ -61,7 +61,9 @@ watch(animation, (value) => {
         background.value.passNight();
         player.value.changeAnim("sleep");
     } else if(value == useAnimations().animations.work) {
+        positionX.value = 50;
         background.value.passwork();
+        player.value.changeAnim("work");
     }
     else{
         playerMoveArroundRandom();
@@ -80,6 +82,7 @@ watch(animation, (value) => {
         }" />
         <MonsterImage :monster="animationStore.options.monster" />
     </div>
+    <ActionComponent />
 </template>
 
 <style scoped>
