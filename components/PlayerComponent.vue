@@ -3,20 +3,28 @@ import { storeToRefs } from 'pinia';
 import { useAnimationStore } from '~/stores/Animation';
 
 const background = ref(null);
-const positionX = ref(50);
 const player = ref(null);
 const time = ref(500);
+const canMove = ref(true);
 const animationStore = useAnimationStore();
+let animationPlayerMove = null;
+const foodRain = ref(null);
+
+let positionX = 50;
 
 function playerMoveArroundRandom() {
     if (animationStore.isAnimating) return;
 
+    const playerHtml = player.value.$el;
+    console.log(playerHtml.style.left);
+    
     const x = Math.floor(Math.random() * 50) - 25;
-    positionX.value = positionX.value + x;
-    if (positionX.value > 99) {
-        positionX.value = 99;
-    } else if (positionX.value < 1) {
-        positionX.value = 1;
+    let newPositionX = positionX + x;
+
+    if (newPositionX > 99) {
+        newPositionX = 99;
+    } else if (newPositionX < 1) {
+        newPositionX = 1;
     }
 
     const run = Math.floor(Math.random() * 2);
@@ -31,18 +39,45 @@ function playerMoveArroundRandom() {
 
     if (x > 0) {
         player.value.flip(false)
-    } else {
+    } else if (!animationStore.isAnimating) {
         player.value.flip(true)
     }
 
     time.value = Math.abs(x * 300);
-    run ? time.value = time.value / 3 : time.value = time.value;
-    const randomTime = Math.floor(Math.random() * 1000) + 500 + time.value;
+    time.value = run ? time.value / 3 : time.value;
+    const randomTime = Math.floor(Math.random() * 1000) + 500;
 
-    setTimeout(playerMoveArroundRandom, randomTime);
-    setTimeout(() => {
+    console.log(positionX);
+    console.log(newPositionX);
+
+    animationPlayerMove = playerHtml.animate([
+        { left: `${newPositionX}%`, offset: 1}
+    ], {
+        duration: time.value,
+        fill: "forwards",
+
+    })
+
+    positionX = newPositionX;
+    animationPlayerMove.onfinish = () => {
         if (!animationStore.isAnimating) player.value.changeAnim("idle");
-    }, time.value);
+        setTimeout(playerMoveArroundRandom, randomTime);
+    }
+}
+
+function stopPlayerMovement() {
+    if (animationPlayerMove) {
+        animationPlayerMove.pause();
+    }
+}
+
+function resumePlayerMovement() {
+    if (animationPlayerMove) {
+        player.value.changeAnim("run");
+        animationPlayerMove.play();
+    } else {
+        playerMoveArroundRandom();
+    }
 }
 
 function playerFight() {
@@ -58,42 +93,49 @@ function playerFight() {
 
 
 onMounted(() => {
-    playerMoveArroundRandom();
+    
+    setTimeout(playerMoveArroundRandom, 1000);
 })
 
 const { animation, options } = storeToRefs(animationStore);
 
 watch(animation, (value) => {
     if (value === useAnimations().animations.sleep) {
+        stopPlayerMovement();
         background.value.passNight();
         player.value.changeAnim("sleep");
     } else if (value === useAnimations().animations.work) {
+        stopPlayerMovement();
         background.value.passwork();
     } else if (value === useAnimations().animations.fight) {
+        stopPlayerMovement();
         playerFight();
+    } else if (value === useAnimations().animations.food) {
+        stopPlayerMovement();
+        foodRain.value.startRain();
+        player.value.changeAnim("jump")
     } else {
-        playerMoveArroundRandom();
+        resumePlayerMovement();
     }
 })
 </script>
 
 <template>
-    <div class="position-relative">
+    <div class="position-relative playground">
         <Background ref="background" />
-        <PlayerAnimation ref="player" class="position-absolute player" :style="{
-            left: positionX + '%',
-            transitionDuration: time + 'ms',
-
-            zIndex: 1000
-        }" />
-
+        <PlayerAnimation ref="player" class="position-absolute player" />
+        <FoodRain ref="foodRain" />
     </div>
 </template>
 
 <style scoped>
 .player {
     top: 80%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    transition-property: left 0.5s;
+}
+
+.playground {
+    overflow: hidden;
 }
 </style>

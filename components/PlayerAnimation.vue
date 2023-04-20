@@ -14,6 +14,7 @@ import { useAnimationStore } from '~/stores/Animation';
     const walk = ref(null);
     const sleep = ref(null);
     const work = ref(null);
+    const jump = ref(null);
 
     const anims = computed(() => {return {
         idle: idle,
@@ -23,7 +24,8 @@ import { useAnimationStore } from '~/stores/Animation';
         run: run,
         walk: walk,
         sleep: sleep,
-        work: work
+        work: work,
+        jump: jump
     }});
 
     function changeAnim(anim) {
@@ -62,7 +64,9 @@ import { useAnimationStore } from '~/stores/Animation';
         <img src="~/assets/gif/player/run.gif" alt="player" class="d-none" ref="run">
         <img src="~/assets/gif/player/walk.gif" alt="player" class="d-none" ref="walk">
         <img src="~/assets/gif/player/Owlet_Monster.png" alt="player" class="d-none rotate-90" ref="sleep">
-        <MonsterImage  ref="monsterImg" />
+        <img src="~/assets/gif/player/jump.gif" alt="player" class="d-none" ref="jump">
+
+        <MonsterImage class="position-absolute"  ref="monsterImg" />
     </div>
 </template>
 
@@ -74,6 +78,5 @@ import { useAnimationStore } from '~/stores/Animation';
     .rotate-90 {
         transform: rotate(-90deg) translateX(-50%);
     }
-
     
 </style>
