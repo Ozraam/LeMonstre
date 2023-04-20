@@ -11,6 +11,7 @@ function clickOnSleep() {
     monster.sleep()
     game.addHistory("sleep")
     animation.setAnimation(useAnimations().animations.sleep)
+
     game.currentAction = null
 }
 function clickOnWork() {

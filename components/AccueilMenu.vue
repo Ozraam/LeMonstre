@@ -20,7 +20,7 @@ function startGame() {
 
 
 <template>
-    <div class="card ">
+    <div class="card">
         <div class="card-body">
             <AccueilHeader title="Monster Game" />
             <img src="~/assets/gif/player/walk.gif" alt="monster" class=" mx-auto d-block" />

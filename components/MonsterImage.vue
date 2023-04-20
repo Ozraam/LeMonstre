@@ -1,18 +1,14 @@
 <script setup>
-    const props = defineProps({
-        monster: {
-            type: Object,
-            required: true
-        }
-    })
+    import { useAnimationStore } from '~/stores/Animation';
+    
 
     const monsterImg = ref(null)
 
     function takeDamage() {
-        monsterImg.value.classList.add('shake')
+        monsterImg.value.classList.add('hurt')
         setTimeout(() => {
-            monsterImg.value.classList.remove('shake')
-        }, 1000)
+            monsterImg.value.classList.remove('hurt')
+        }, 3000)
     }
 
     defineExpose({
@@ -21,48 +17,53 @@
 </script>
 
 <template>
-    <img :src="props.src" :alt="props.alt" ref="monsterImg">
+    <img :src="useAnimationStore().options.monster?.img" :alt="useAnimationStore().options.monster?.alt" ref="monsterImg" class="monster">
 </template>
 
 <style scoped>
-    .shake {
-        animation: shake 1s;
-        animation-iteration-count: 1;
+    .monster {
+            max-width: 50px;
     }
-    @keyframes shake {
-        0% {
-            transform: translate(1px, 1px) rotate(0deg);
-        }
-        10% {
-            transform: translate(-1px, -2px) rotate(-1deg);
+    .hurt {
+        animation: hurt 3s infinite;
+        
+    }
+
+    @keyframes hurt {
+        from {
+            filter: saturate(100%);
         }
         20% {
-            transform: translate(-3px, 0px) rotate(1deg);
+            filter: saturate(100%);
+        }
+        25% {
+            filter: saturate(500%);
         }
         30% {
-            transform: translate(3px, 2px) rotate(0deg);
+            filter: saturate(100%);
         }
-        40% {
-            transform: translate(1px, -1px) rotate(1deg);
-        }
+
         50% {
-            transform: translate(-1px, 2px) rotate(-1deg);
+            filter: saturate(100%);
+        }
+        55% {
+            filter: saturate(500%);
         }
         60% {
-            transform: translate(-3px, 1px) rotate(0deg);
+            filter:  saturate(100%);
         }
-        70% {
-            transform: translate(3px, 1px) rotate(-1deg);
-        }
+
         80% {
-            transform: translate(-1px, -1px) rotate(1deg);
+            filter: saturate(100%);
+        }
+        85% {
+            filter: saturate(500%);
         }
         90% {
-            transform: translate(1px, 2px) rotate(0deg);
+            filter: saturate(100%);
         }
-        100% {
-            transform: translate(1px, -2px) rotate(-1deg);
-        }
+
+        
     }
 
 </style>
