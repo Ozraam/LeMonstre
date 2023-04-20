@@ -10,7 +10,7 @@ const game = useGameStore();
             <InforComponent />
             <div class="col">
                 <div class="row my-3">
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-4 h-100">
                         <ObjectifComponent/>
                         <InfoLevel/>
                     </div>

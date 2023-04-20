@@ -25,19 +25,15 @@ const game = useGameStore();
                 Niveau
             </button>
         </h2>
-        <div id="collapseLevel" class="accordion-collapse collapse show " aria-labelledby="headingLevel" data-bs-parent="#accordionLevel" v-bs-collapse>
+        <div id="collapseLevel" class="accordion-collapse collapse show accordion-level " aria-labelledby="headingLevel" data-bs-parent="#accordionLevel" v-bs-collapse>
             <div class="accordion-body">
                 <div class="alert alert-success d-flex align-items-center alert-level" role="alert" v-for="item in game.levelsCompleted">
                     <svg class="bi flex-shrink-0 me-2 icons" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                     {{ item.objective.description }}
-                    {{ item.objective.progress }}
-                    {{ item.objective.value }}
                 </div>
                 <div class="alert alert-danger d-flex align-items-center alert-level" role="alert" v-for="item in game.levelsNotCompleted">
-                    <svg class="bi flex-shrink-0 me-2 icons" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <svg class="bi flex-shrink-0 me-2 icons" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
                     {{ item.objective.description }}
-                    {{ item.objective.progress }}
-                    {{ item.objective.value }}
                 </div>
             </div>
         </div>
@@ -52,5 +48,10 @@ const game = useGameStore();
 }
 .alert-level{
     max-height: 30px;
+}
+
+.accordion-level{
+    max-height: 200px;
+    overflow-y: scroll;
 }
 </style>
