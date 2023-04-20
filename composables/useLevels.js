@@ -32,11 +32,13 @@ export function useLevels() {
                     value: 25,
                     progress: 0,
                     description: "Manger 25 fois",
+
                 },
                 malus: {
                     type: malusTypes.food,
                     value: 10,
                     description: malusTypes.food.description,
+
                 }
             },
             {
