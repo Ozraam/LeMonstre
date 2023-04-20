@@ -12,9 +12,9 @@ export const useAnimationStore = defineStore({
         }
     },
     actions: {
-        setAnimation(animation, options = {}) {
+        setAnimation(animation, options = null) {
             this.animation = animation;
-            this.options = options;
+            this.options = options ? options : this.options ;
         }
     }
 });
