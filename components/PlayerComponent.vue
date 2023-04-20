@@ -3,6 +3,9 @@ import { storeToRefs } from 'pinia';
 import { useAnimationStore } from '~/stores/Animation';
 import { useGameStore } from '~/stores/Game';
 
+const game = useGameStore();
+
+
 const background = ref(null);
 const player = ref(null);
 const time = ref(500);
@@ -141,6 +144,8 @@ watch(gameOver, (value) => {
         <PlayerAnimation ref="player" class="position-absolute player" />
         <FoodRain ref="foodRain" />
     </div>
+    <MonsterComponent v-if="game.currentAction === useActions().actions.fight" class="activated"/>
+    <EatingChoice v-else-if="game.currentAction === useActions().actions.eat" class="activated"/>
     <ActionComponent />
 </template>
 
