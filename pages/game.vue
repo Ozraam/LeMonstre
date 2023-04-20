@@ -1,7 +1,9 @@
 <script setup>
+import { storeToRefs } from 'pinia';
 import { useGameStore } from '~/stores/Game';
 
 const game = useGameStore();
+
 </script>
 
 <template>
@@ -15,7 +17,9 @@ const game = useGameStore();
                 <PlayerComponent/>
             </div>
         </div>
+
 </main>
+
 </template>
 
 <style scoped>

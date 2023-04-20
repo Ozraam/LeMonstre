@@ -5,10 +5,10 @@ import { useGameStore } from '~/stores/Game';
 
 const game = useGameStore();
 
+
 const background = ref(null);
 const player = ref(null);
 const time = ref(500);
-const canMove = ref(true);
 const animationStore = useAnimationStore();
 let animationPlayerMove = null;
 const foodRain = ref(null);
@@ -19,7 +19,6 @@ function playerMoveArroundRandom() {
     if (animationStore.isAnimating) return;
 
     const playerHtml = player.value.$el;
-    console.log(playerHtml.style.left);
     
     const x = Math.floor(Math.random() * 50) - 25;
     let newPositionX = positionX + x;
@@ -50,8 +49,7 @@ function playerMoveArroundRandom() {
     time.value = run ? time.value / 3 : time.value;
     const randomTime = Math.floor(Math.random() * 1000) + 500;
 
-    console.log(positionX);
-    console.log(newPositionX);
+    
 
     animationPlayerMove = playerHtml.animate([
         { left: `${newPositionX}%`, offset: 1}
@@ -100,7 +98,7 @@ onMounted(() => {
     setTimeout(playerMoveArroundRandom, 1000);
 })
 
-const { animation, options } = storeToRefs(animationStore);
+const { animation } = storeToRefs(animationStore);
 
 watch(animation, (value) => {
     if (value === useAnimations().animations.sleep) {
@@ -109,7 +107,6 @@ watch(animation, (value) => {
         player.value.changeAnim("sleep");
     } else if (value === useAnimations().animations.work) {
         stopPlayerMovement();
-        positionX.value = 50;
         background.value.passwork();
         player.value.changeAnim("work");
     } else if (value === useAnimations().animations.fight) {
@@ -120,9 +117,25 @@ watch(animation, (value) => {
         foodRain.value.startRain();
         player.value.changeAnim("jump")
     } else {
+        if(useAnimationStore().options.callback) useAnimationStore().options.callback();
         resumePlayerMovement();
     }
 })
+
+const {gameOver} = storeToRefs(useGameStore())
+
+
+watch(gameOver, (value) => {
+    if(gameOver) {
+        player.value.changeAnim(value === useEndGameStates().endGameStates.win ? useAnimations().playerAnimations.jump :  useAnimations().playerAnimations.death)
+        stopPlayerMovement();
+        setTimeout(() => {
+            navigateTo("/game-" + value)
+        }, 1500)
+        
+    }
+})
+
 </script>
 
 <template>
@@ -139,6 +152,12 @@ watch(animation, (value) => {
 <style scoped>
 .player {
     top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.endCard {
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }

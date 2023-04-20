@@ -10,10 +10,10 @@ export const useGameStore = defineStore({
         history: [],
         malus: null,
         difficulty: 0,
-        objectiveIndex: 0,
+        objectiveIndex: useLevels().levels.length - 1,
         levels : useLevels().levels,
         currentAction: null,
-        gameOver: false,
+        gameOver: useEndGameStates().endGameStates.none,
     }),
     getters: {
         getNumberOfDaysLastTimeSleep() {
@@ -33,7 +33,7 @@ export const useGameStore = defineStore({
             return useLevels().levels[this.level - 1].malus;
         },
         objective() {
-            return this.levels[this.objectiveIndex].objective;
+            return this.levels[this.objectiveIndex % this.levels.length].objective;
         },
         levelsCompleted() {
             return this.levels.filter((level) => level.objective.progress >= level.objective.value);
@@ -50,6 +50,16 @@ export const useGameStore = defineStore({
             this.numTurns = 0;
             this.history = [];
             this.objectiveIndex++;
+
+            if(this.objectiveIndex >= useLevels().levels.length) {
+                this.gameOver = useEndGameStates().endGameStates.win;
+                return;
+            }
+
+
+
+
+
             this.setMalus(useLevels().levels[this.level - 1].malus);
         },
         incrementNumTurns() {
@@ -68,7 +78,7 @@ export const useGameStore = defineStore({
         },
         incrementObjectiveProgress(value, type) {
             if(this.objective.type !== type) return false;
-            console.log(this.objective.progress);
+            
             this.objective.progress += value;
             if(this.objective.progress >= this.objective.value) {
                 this.incrementLevel();

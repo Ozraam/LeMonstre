@@ -43,10 +43,10 @@ export function useLevels() {
             },
             {
                 objective: {
-                    type: objectiveTypes.fightRabbits,
+                    type: objectiveTypes.foodPoisson,
                     value: 5,
                     progress: 0,
-                    description: "Combattre 5 lapins",
+                    description: "Manger 5 fois du poisson",
                 },
                 malus: {
                     type: malusTypes.food,
@@ -56,36 +56,10 @@ export function useLevels() {
             },
             {
                 objective: {
-                    type: objectiveTypes.fightWolves,
+                    type: objectiveTypes.foodViande,
                     value: 5,
                     progress: 0,
-                    description: "Combattre 5 loups",
-                },
-                malus: {
-                    type: malusTypes.food,
-                    value: 10,
-                    description: malusTypes.food.description,
-                }
-            },
-            {
-                objective: {
-                    type: objectiveTypes.fightRabbits,
-                    value: 5,
-                    progress: 0,
-                    description: "Combattre 5 lapins",
-                },
-                malus: {
-                    type: malusTypes.food,
-                    value: 10,
-                    description: malusTypes.food.description,
-                }
-            },
-            {
-                objective: {
-                    type: objectiveTypes.fightWolves,
-                    value: 5,
-                    progress: 0,
-                    description: "Combattre 5 loups",
+                    description: "Manger 5 fois de la viande",
                 },
                 malus: {
                     type: malusTypes.food,
@@ -112,6 +86,32 @@ export function useLevels() {
                     value: 5,
                     progress: 0,
                     description: "Combattre 5 loups",
+                },
+                malus: {
+                    type: malusTypes.food,
+                    value: 10,
+                    description: malusTypes.food.description,
+                }
+            },
+            {
+                objective: {
+                    type: objectiveTypes.fightBear,
+                    value: 5,
+                    progress: 0,
+                    description: "Combattre 5 ours",
+                },
+                malus: {
+                    type: malusTypes.food,
+                    value: 10,
+                    description: malusTypes.food.description,
+                }
+            },
+            {
+                objective: {
+                    type: objectiveTypes.fightDragon,
+                    value: 5,
+                    progress: 0,
+                    description: "Combattre 5 dragons",
                 },
                 malus: {
                     type: malusTypes.food,

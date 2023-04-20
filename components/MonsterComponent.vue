@@ -1,6 +1,6 @@
 <script setup>
 
-import { useMonsterStore} from '~/stores/Monster';
+import { useMonsterStore } from '~/stores/Monster';
 import { useGameStore } from '~/stores/Game';
 import { useAnimationStore } from '~/stores/Animation';
 
@@ -8,18 +8,23 @@ const monster = useMonsterStore();
 const game = useGameStore();
 const fighter = useFighters().fighters;
 
-function click(item){
-    monster.fight(item)
+function click(item) {
     game.addHistory("fight")
-    useAnimationStore().setAnimation(useAnimations().animations.fight, {monster: item})
-    game.incrementNumTurns()
+    game.currentAction = null
+    function callback() {
+        monster.fight(useAnimationStore().options.monster)
+        game.incrementNumTurns()
+        useAnimationStore().options = {}
+    }
+    useAnimationStore().setAnimation(useAnimations().animations.fight, { monster: item, callback: callback })
+    
 }
 </script>
 
 <template>
     <div class="row mb-3">
         <div class="col-6 col-md" v-for="item in fighter" :key="fighter.alt">
-                    <button class="btn btn-outline-secondary w-100 shadow p-3 mb-1" @click="click(item)">
+            <button class="btn btn-outline-secondary w-100 shadow p-3 mb-1" @click="click(item)">
                 <div>
                     {{ item.alt }}
                 </div>
@@ -34,7 +39,7 @@ function click(item){
 </template>
 
 <style scoped>
-    img {
-        max-height: 5em;
-    }
+img {
+    max-height: 5em;
+}
 </style>

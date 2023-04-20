@@ -11,20 +11,6 @@ export const useMonsterStore = defineStore({
         P :10,
         F :10
         }),
-    getters: {
-        getName: () => {
-            return this.name;
-        },
-        getPV: () => {
-            return this.PV;
-        },
-        getP: () => {
-            return this.P;
-        },
-        getF: () => {
-            return this.F;
-        }   
-    },
     actions: {
         ChooseDifficulty(){
 
@@ -88,9 +74,11 @@ export const useMonsterStore = defineStore({
             this.F--;
             if(this.F <= 0){
                 this.PV--;
-                if(this.PV <= 0){
-                    useGameStore().setGameOver(true);
-                }
+                
+            }
+
+            if(this.PV <= 0){
+                useGameStore().setGameOver(useEndGameStates().endGameStates.lose);
             }
             useGameStore().incrementObjectiveProgress(1, useObjectiveTypes().objectiveTypes.turn);
         }
