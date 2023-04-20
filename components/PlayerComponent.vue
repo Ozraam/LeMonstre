@@ -141,12 +141,18 @@ watch(gameOver, (value) => {
 <template>
     <div class="position-relative playground">
         <Background ref="background" />
-        <PlayerAnimation ref="player" class="position-absolute player" />
-        <FoodRain ref="foodRain" />
-    </div>
-    <MonsterComponent v-if="game.currentAction === useActions().actions.fight" class="activated"/>
-    <EatingChoice v-else-if="game.currentAction === useActions().actions.eat" class="activated"/>
-    <ActionComponent />
+        <div class="position-absolute info-level">
+            <ObjectifComponent />
+            <InfoLevel />
+        </div>
+        <PlayerAnimation ref="player" class="position-absolute player" :style="{
+            left: positionX + '%',
+            transitionDuration: time + 'ms',
+
+            zIndex: 1000
+        }" />
+        <MonsterImage :monster="animationStore.options.monster" />
+    </main>
 </template>
 
 <style scoped>
@@ -169,5 +175,19 @@ watch(gameOver, (value) => {
     main {
         height: 100vh;
         width: 100%;
+    }
+
+    .info-level {
+        width: 300px;
+        top: 3%;
+        left: 1%;
+        z-index: 100;
+    }
+    @media screen and (max-width: 768px) {
+        .info-level {
+            width: 100%;
+            top: 0%;
+            left: 0%;
+        }
     }
 </style>

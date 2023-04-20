@@ -18,19 +18,19 @@ const game = useGameStore();
     </symbol>
 </svg>
 
-<div class="accordion mt-3 mb-2" id="accordionExample">
+<div class="accordion w-100 objective-accordion" id="accordionExample">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button d-xxl-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <button class="accordion-button d-xl-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     <svg v-if="game.getMalusLevel !== null" class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:" data-toggle=""><use xlink:href="#exclamation-triangle-fill"/></svg>
                 Objectif
             </button>
-            <span class="accordion-button d-none d-xxl-block">
+            <span class="accordion-button d-none d-xl-block">
                 <svg v-if="game.getMalusLevel !== null" class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                 Objectif
             </span>
         </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show d-xxl-block" aria-labelledby="headingOne" data-bs-parent="#accordionExample" v-bs-collapse>
+        <div id="collapseOne" class="accordion-collapse collapse show d-xl-block" aria-labelledby="headingOne" data-bs-parent="#accordionExample" v-bs-collapse>
             <div class="accordion-body">
                 <h6 class="card-subtitle mb-2 text-muted">Objectif pour le niveau : {{game.level}}</h6>
                 <p class="card-text">{{ game.getObjectiveLevel.description}}</p>
@@ -51,3 +51,18 @@ const game = useGameStore();
 </div>
 
 </template>
+
+<style setup>
+
+.collapse .show {
+    z-index: 100;
+}
+
+.objective-accordion{
+    /*mettre au centre*/
+    top: 3%;
+    left: 1%;
+}
+
+
+</style>
