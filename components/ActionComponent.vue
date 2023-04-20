@@ -7,15 +7,18 @@ const game = useGameStore();
 const animation = useAnimationStore();
 
 function clickOnSleep() {
+    game.incrementNumTurns()
     monster.sleep()
     game.addHistory("sleep")
-    game.incrementNumTurns()
     animation.setAnimation(useAnimations().animations.sleep)
+
+    console.log(animation.isAnimating)
     game.currentAction = null
 }
 function clickOnWork() {
     monster.work()
     game.addHistory("work")
+    animation.setAnimation(useAnimations().animations.work)
     game.incrementNumTurns()
     game.currentAction = null
 }

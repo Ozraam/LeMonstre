@@ -10,6 +10,7 @@
     const run = ref(null);
     const walk = ref(null);
     const sleep = ref(null);
+    const work = ref(null);
 
     const anims = computed(() => {return {
         idle: idle,
@@ -18,7 +19,8 @@
         hurt: hurt,
         run: run,
         walk: walk,
-        sleep: sleep
+        sleep: sleep,
+        work: work
     }});
 
     function changeAnim(anim) {

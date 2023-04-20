@@ -47,11 +47,6 @@ function playerMoveArroundRandom() {
 
 
 
-function animateFight() {
-
-}
-
-
 
 
 onMounted(() => {
@@ -65,9 +60,10 @@ watch(animation, (value) => {
     if(value == useAnimations().animations.sleep) {
         background.value.passNight();
         player.value.changeAnim("sleep");
-    } else if(value == useAnimations().animations.fight) {
-        animateFight();
-    } else {
+    } else if(value == useAnimations().animations.work) {
+        background.value.passwork();
+    }
+    else{
         playerMoveArroundRandom();
     }
 })
@@ -78,7 +74,9 @@ watch(animation, (value) => {
         <Background ref="background" />
         <PlayerAnimation ref="player" class="position-absolute player" :style="{
             left: positionX + '%',
-            transitionDuration: time + 'ms'
+            transitionDuration: time + 'ms',
+
+            zIndex: 1000
         }" />
         <MonsterImage :monster="animationStore.options.monster" />
     </div>
