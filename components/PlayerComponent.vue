@@ -106,7 +106,9 @@ watch(animation, (value) => {
         player.value.changeAnim("sleep");
     } else if (value === useAnimations().animations.work) {
         stopPlayerMovement();
+        positionX.value = 50;
         background.value.passwork();
+        player.value.changeAnim("work");
     } else if (value === useAnimations().animations.fight) {
         stopPlayerMovement();
         playerFight();
@@ -126,6 +128,7 @@ watch(animation, (value) => {
         <PlayerAnimation ref="player" class="position-absolute player" />
         <FoodRain ref="foodRain" />
     </div>
+    <ActionComponent />
 </template>
 
 <style scoped>

@@ -14,5 +14,12 @@ const props = defineProps({
 </template>
 
 <style scoped>
-
+@font-face{
+    font-family: 'Valorax';
+    src: local("Valorax"), url('~/assets/font/valorax-font/Valorax-lg25V.otf'), format("opentype");
+}
+h1 {
+    font-family: 'Valorax';
+    font-size: 1.5em;
+}
 </style>

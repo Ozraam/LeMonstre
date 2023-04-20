@@ -10,7 +10,8 @@ export const useGameStore = defineStore({
         history: [],
         malus: null,
         difficulty: 0,
-        objective: useLevels().levels[0].objective,
+        objectiveIndex: 0,
+        levels : useLevels().levels,
         currentAction: null,
         gameOver: false,
     }),
@@ -31,7 +32,15 @@ export const useGameStore = defineStore({
         getMalusLevel() {
             return useLevels().levels[this.level - 1].malus;
         },
-
+        objective() {
+            return this.levels[this.objectiveIndex].objective;
+        },
+        levelsCompleted() {
+            return this.levels.filter((level) => level.objective.progress >= level.objective.value);
+        },
+        levelsNotCompleted() {
+            return this.levels.filter((level) => level.objective.progress < level.objective.value);
+        },
     },
     actions: {
         incrementLevel() {
@@ -40,7 +49,7 @@ export const useGameStore = defineStore({
 
             this.numTurns = 0;
             this.history = [];
-            this.objective = useLevels().levels[this.level - 1].objective;
+            this.objectiveIndex++;
             this.setMalus(useLevels().levels[this.level - 1].malus);
         },
         incrementNumTurns() {
@@ -54,15 +63,12 @@ export const useGameStore = defineStore({
         setMalus(malus) {
             this.malus = malus;
         },
-        setObjective(objective) {
-            this.objective = objective;
-        },
         setDifficulty(difficulty) {
             this.difficulty = difficulty;
         },
         incrementObjectiveProgress(value, type) {
             if(this.objective.type !== type) return false;
-
+            console.log(this.objective.progress);
             this.objective.progress += value;
             if(this.objective.progress >= this.objective.value) {
                 this.incrementLevel();

@@ -32,6 +32,60 @@ export function useLevels() {
                     value: 25,
                     progress: 0,
                     description: "Manger 25 fois",
+
+                },
+                malus: {
+                    type: malusTypes.food,
+                    value: 10,
+                    description: malusTypes.food.description,
+
+                }
+            },
+            {
+                objective: {
+                    type: objectiveTypes.fightRabbits,
+                    value: 5,
+                    progress: 0,
+                    description: "Combattre 5 lapins",
+                },
+                malus: {
+                    type: malusTypes.food,
+                    value: 10,
+                    description: malusTypes.food.description,
+                }
+            },
+            {
+                objective: {
+                    type: objectiveTypes.fightWolves,
+                    value: 5,
+                    progress: 0,
+                    description: "Combattre 5 loups",
+                },
+                malus: {
+                    type: malusTypes.food,
+                    value: 10,
+                    description: malusTypes.food.description,
+                }
+            },
+            {
+                objective: {
+                    type: objectiveTypes.fightRabbits,
+                    value: 5,
+                    progress: 0,
+                    description: "Combattre 5 lapins",
+                },
+                malus: {
+                    type: malusTypes.food,
+                    value: 10,
+                    description: malusTypes.food.description,
+                }
+            },
+            {
+                objective: {
+                    type: objectiveTypes.fightWolves,
+                    value: 5,
+                    progress: 0,
+                    description: "Combattre 5 loups",
                 },
                 malus: {
                     type: malusTypes.food,
