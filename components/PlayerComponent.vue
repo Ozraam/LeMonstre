@@ -75,7 +75,7 @@ watch(animation, (value) => {
 </script>
 
 <template>
-    <div class="position-relative">
+    <main class="position-relative">
         <Background ref="background" />
         <PlayerAnimation ref="player" class="position-absolute player" :style="{
             left: positionX + '%',
@@ -84,16 +84,18 @@ watch(animation, (value) => {
             zIndex: 1000
         }" />
         <MonsterImage :monster="animationStore.options.monster" />
-    </div>
-    <MonsterComponent v-if="game.currentAction === useActions().actions.fight" class="activated"/>
-    <EatingChoice v-else-if="game.currentAction === useActions().actions.eat" class="activated"/>
-    <ActionComponent />
+    </main>
 </template>
 
 <style scoped>
     .player {
-        top: 80%;
-        transform: translate(-50%, -50%);
+        bottom: 12%;
+        transform: translate(-50%, 50%);
         transition-property: left 0.5s;
+    }
+
+    main {
+        height: 100vh;
+        width: 100%;
     }
 </style>
