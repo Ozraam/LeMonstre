@@ -62,7 +62,6 @@ watch(animation, (value) => {
         player.value.changeAnim("sleep");
     } else if(value == useAnimations().animations.work) {
         background.value.passwork();
-        player.value.changeAnim("work");
     }
     else{
         playerMoveArroundRandom();

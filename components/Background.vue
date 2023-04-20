@@ -64,10 +64,10 @@ function passwork(){
 
     useAnimationStore().setAnimation(useAnimations().animations.work);
     document.querySelector(".ordi.active").animate([
-        { 'bottom': '0%' },
-        { 'bottom': '18%' },
-        { 'bottom': '18%' },
-        { 'bottom': '0%'}
+        { 'width': '0%' },
+        { 'width': '5%' },
+        { 'width': '5%' },
+        { 'width': '0%' }
     ], {
         duration: animateTime,
         easing: 'ease-in-out',
@@ -75,10 +75,10 @@ function passwork(){
     
     bureau.value.classList.add("active");
     document.querySelector(".bureau.active").animate([
-        { 'bottom': '0%' },
-        { 'bottom': '15%' },
-        { 'bottom': '15%' },
-        { 'bottom': '0%'}
+        { 'width': '0%' },
+        { 'width': '7%' },
+        { 'width': '7%' },
+        { 'width': '0%' }
     ], {
         duration: animateTime,
         easing: 'ease-in-out'
@@ -86,9 +86,6 @@ function passwork(){
     setTimeout(() => {
         ordinateur.value.classList.remove("active");
         bureau.value.classList.remove("active");
-    }, animateTime);
-
-    setTimeout(() => {
         useAnimationStore().setAnimation(null);
     }, animateTime);
 }
