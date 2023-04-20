@@ -11,8 +11,6 @@ function clickOnSleep() {
     monster.sleep()
     game.addHistory("sleep")
     animation.setAnimation(useAnimations().animations.sleep)
-
-    console.log(animation.isAnimating)
     game.currentAction = null
 }
 function clickOnWork() {
@@ -32,7 +30,7 @@ function clickOnFight() {
 </script>
 
 <template>
-    <div class="row mb-3">
+    <div class="row mb-3" style="z-index: 100;">
         <div class="col-6 col-md">
             <button type="button" class="d-block w-100 mb-1 btn btn-danger btn-lg" @click="clickOnFight()" 
                 :disabled="game.lastAction === 'fight' 

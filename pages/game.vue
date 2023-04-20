@@ -10,8 +10,9 @@ const game = useGameStore();
             <InforComponent />
             <div class="col">
                 <div class="row my-3">
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-4 h-100">
                         <ObjectifComponent/>
+                        <InfoLevel/>
                     </div>
                     <div class="col-12 col-md">
                         <PlayerComponent/>
@@ -21,7 +22,6 @@ const game = useGameStore();
         </div>
         <MonsterComponent v-if="game.currentAction === useActions().actions.fight" class="activated"/>
         <EatingChoice v-else-if="game.currentAction === useActions().actions.eat" class="activated"/>
-        <ActionComponent/>
     </main>
 </template>
 

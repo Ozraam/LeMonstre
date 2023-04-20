@@ -55,7 +55,7 @@
         <img src="~/assets/gif/player/run.gif" alt="player" class="d-none" ref="run">
         <img src="~/assets/gif/player/walk.gif" alt="player" class="d-none" ref="walk">
         <img src="~/assets/gif/player/Owlet_Monster.png" alt="player" class="d-none rotate-90" ref="sleep">
-
+        <img src="~/assets/gif/player/work.gif" alt="player" class="d-none" ref="work">
     </div>
 </template>
 
