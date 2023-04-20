@@ -77,6 +77,10 @@ watch(animation, (value) => {
 <template>
     <main class="position-relative">
         <Background ref="background" />
+        <div class="position-absolute info-level">
+            <ObjectifComponent />
+            <InfoLevel />
+        </div>
         <PlayerAnimation ref="player" class="position-absolute player" :style="{
             left: positionX + '%',
             transitionDuration: time + 'ms',
@@ -97,5 +101,19 @@ watch(animation, (value) => {
     main {
         height: 100vh;
         width: 100%;
+    }
+
+    .info-level {
+        width: 300px;
+        top: 3%;
+        left: 1%;
+        z-index: 100;
+    }
+    @media screen and (max-width: 768px) {
+        .info-level {
+            width: 100%;
+            top: 0%;
+            left: 0%;
+        }
     }
 </style>
