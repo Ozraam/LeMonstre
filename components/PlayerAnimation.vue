@@ -1,9 +1,6 @@
 <script setup>
-import { useAnimationStore } from '~/stores/Animation';
 
-
-
-    const currentAnim = ref("idle");
+    const currentAnim = ref(useAnimations().playerAnimations.idle);
     const monsterImg = ref(null);
 
     const idle = ref(null);
@@ -15,6 +12,7 @@ import { useAnimationStore } from '~/stores/Animation';
     const sleep = ref(null);
     const work = ref(null);
     const jump = ref(null);
+    const dead = ref(null);
 
     const anims = computed(() => {return {
         idle: idle,
@@ -25,7 +23,8 @@ import { useAnimationStore } from '~/stores/Animation';
         walk: walk,
         sleep: sleep,
         work: work,
-        jump: jump
+        jump: jump,
+        dead: dead
     }});
 
     function changeAnim(anim) {
@@ -63,14 +62,12 @@ import { useAnimationStore } from '~/stores/Animation';
         <img src="~/assets/gif/player/hurt.gif" alt="player" class="d-none" ref="hurt">
         <img src="~/assets/gif/player/run.gif" alt="player" class="d-none" ref="run">
         <img src="~/assets/gif/player/walk.gif" alt="player" class="d-none" ref="walk">
-        <img src="~/assets/gif/player/Owlet_Monster.png" alt="player" class="d-none rotate-90" ref="sleep">
+        <img src="~/assets/gif/player/Owlet_Monster.png" alt="player" class="d-none sleep" ref="sleep">
+        <img src="~/assets/gif/player/Owlet_Monster.png" alt="player" class="d-none rotate-90" ref="dead">
 
         <img src="~/assets/gif/player/jump.gif" alt="player" class="d-none" ref="jump">
         <img src="~/assets/gif/player/work.gif" alt="player" class="d-none" ref="work">
         <MonsterImage class="position-absolute"  ref="monsterImg" />
-
-        
-
     </div>
 </template>
 
@@ -80,6 +77,10 @@ import { useAnimationStore } from '~/stores/Animation';
     }
 
     .rotate-90 {
+        transform: rotate(-90deg);
+    }
+
+    .sleep {
         transform: rotate(-90deg) translateX(-50%);
     }
     

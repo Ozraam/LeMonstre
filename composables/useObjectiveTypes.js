@@ -7,7 +7,7 @@ export function useObjectiveTypes() {
             gold: "gold",
             fight: "fight",
             fightRabbits: "fightLapin",
-            fightWolves: "fightloup",
+            fightWolves: "fightLoup",
             fightBear: "fightOurs",
             fightDragon: "fightDragon",
             work: "work",

@@ -1,7 +1,9 @@
 <script setup>
+import { storeToRefs } from 'pinia';
 import { useGameStore } from '~/stores/Game';
 
 const game = useGameStore();
+
 </script>
 
 <template>
@@ -22,6 +24,7 @@ const game = useGameStore();
         </div>
         <MonsterComponent v-if="game.currentAction === useActions().actions.fight" class="activated"/>
         <EatingChoice v-else-if="game.currentAction === useActions().actions.eat" class="activated"/>
+
     </main>
 </template>
 
