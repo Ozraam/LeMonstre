@@ -1,6 +1,9 @@
 <script setup>
 import { storeToRefs } from 'pinia';
 import { useAnimationStore } from '~/stores/Animation';
+import { useGameStore } from '~/stores/Game';
+
+const game = useGameStore();
 
 const background = ref(null);
 const positionX = ref(50);
@@ -82,6 +85,8 @@ watch(animation, (value) => {
         }" />
         <MonsterImage :monster="animationStore.options.monster" />
     </div>
+    <MonsterComponent v-if="game.currentAction === useActions().actions.fight" class="activated"/>
+    <EatingChoice v-else-if="game.currentAction === useActions().actions.eat" class="activated"/>
     <ActionComponent />
 </template>
 
