@@ -98,8 +98,8 @@ defineExpose({
 
 
 <template>
-    <div class="position-relative background">
-        <img src="~/assets/img/backgroud/layers/sky.png" class="img-fluid" alt="sky" ref="sky">
+    <div class="background">
+        <img src="~/assets/img/backgroud/layers/sky.png" class="position-absolute img-fluid" alt="sky" ref="sky">
 
 
         <img src="~/assets/img/moon.png" alt="The moon" class="astre moon position-absolute img-fluid w-50" ref="moon">
@@ -159,7 +159,19 @@ defineExpose({
 }
 
 .background {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    min-width: calc(16 / 9 * 100vh);
+    height: 100vh;
     overflow: hidden;
+}
+
+.background .img-fluid {
+    bottom: 0;
+    width: 100%;
 }
 
 .astre {

@@ -151,7 +151,7 @@ watch(gameOver, (value) => {
 
 <style scoped>
 .player {
-    top: 80%;
+    bottom: 12%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -159,10 +159,15 @@ watch(gameOver, (value) => {
 .endCard {
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 50%);
 }
 
 .playground {
     overflow: hidden;
 }
+
+    main {
+        height: 100vh;
+        width: 100%;
+    }
 </style>
