@@ -13,6 +13,7 @@ function eatMonster(food) {
         monster.eat(food)
         game.incrementNumTurns()
     }})
+    game.currentAction = null
 }
 </script>
 

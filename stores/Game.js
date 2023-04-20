@@ -10,7 +10,7 @@ export const useGameStore = defineStore({
         history: [],
         malus: null,
         difficulty: 0,
-        objectiveIndex: useLevels().levels.length - 1,
+        objectiveIndex: 0,
         levels : useLevels().levels,
         currentAction: null,
         gameOver: useEndGameStates().endGameStates.none,
