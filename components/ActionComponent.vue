@@ -6,6 +6,17 @@ const monster = useMonsterStore();
 const game = useGameStore();
 const animation = useAnimationStore();
 
+const malus = game.getMalusLevel;
+
+
+function actionInMalus(action){
+    for (let i = 0; i < malus.length; i++) {
+        if(malus[i].type === action){
+            return true
+        }
+    }
+    return false
+}
 function clickOnSleep() {
     game.addHistory("sleep")
     animation.setAnimation(useAnimations().animations.sleep, {
@@ -41,22 +52,22 @@ function clickOnFight() {
     <div class="row" style="z-index: 100;">
         <div class="col col-md test">
             <button type="button" class="d-block  mb-1 btn border-0 m-auto " data-bs-toggle="modal" data-bs-target="#exampleModal" @click="clickOnFight()" :disabled="game.lastAction === 'fight'
-                || game.getMalusLevel?.type === useActions().actions.fight
+                || actionInMalus(useActions().actions.fight)
                 || animation.isAnimating"><img src="~/assets/img/icon/epee.png" class="icon-button"></button>
         </div>
         <div class="col col-md">
             <button type="button" class="d-block mb-1 btn border-0 m-auto" @click="clickOnSleep()" :disabled="game.lastAction === 'sleep'
-                || game.getMalusLevel?.type === useActions().actions.sleep
+                || actionInMalus(useActions().actions.sleep)
                 || animation.isAnimating"><img src="~/assets/img/icon/lit.png" class="icon-button"></button>
         </div>
         <div class="col col-md">
             <button type="button" class="d-block mb-1 btn border-0 m-auto" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="clickOnEat()" :disabled="game.lastAction === 'eat'
-                || game.getMalusLevel?.type === useActions().actions.eat
+                || actionInMalus(useActions().actions.eat)
                 || animation.isAnimating"><img src="~/assets/img/icon/four.png" class="icon-button"></button>
         </div>
         <div class="col col-md">
             <button type="button" class="d-block  btn border-0 m-auto" @click="clickOnWork()" :disabled="game.lastAction === 'work'
-                || game.getMalusLevel?.type === useActions().actions.work
+                || actionInMalus(useActions().actions.work)
                 || animation.isAnimating"><img src="~/assets/img/icon/travail.png" class="icon-button"></button>
         </div>
     </div>
