@@ -51,5 +51,6 @@ defineExpose({
     .food {
         max-width: 5em;
         z-index: 1000;
+        top: -20%;
     }
 </style>
