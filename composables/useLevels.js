@@ -23,16 +23,7 @@ export function useLevels() {
                     ]
                 },
 
-                malus:[ {
-                    type: malusTypes.sleep.type,
-                    value: 10,
-                    description: malusTypes.sleep.description,
-                },
-                {
-                    type: malusTypes.work.type,
-                    value: 10,
-                    description: malusTypes.work.description,
-                }],
+                malus: [],
 
             },
             {
@@ -47,7 +38,7 @@ export function useLevels() {
                         }
                     ]
                 },
-                malus:[ {
+                malus: [{
                     type: malusTypes.sleep.type,
                     value: 10,
                     description: malusTypes.sleep.description,
@@ -70,7 +61,7 @@ export function useLevels() {
                         }
                     ]
                 },
-                malus:[ {
+                malus: [{
                     type: malusTypes.food.type,
                     value: 10,
                     description: malusTypes.food.description,
@@ -78,11 +69,23 @@ export function useLevels() {
                 }]
             },
             {
-                objective: {
-                    type: objectiveTypes.turn,
-                    value: 100,
-                    progress: 0,
-                    description: "Jouer 100 tours",
+                objectives: {
+
+                    description: "Jouer 100 tours et combattre 50 dragons",
+                    list: [
+                        {
+                            type: objectiveTypes.turns,
+                            value: 100,
+                            progress: 0,
+                            description: "Jouer 100 tours",
+                        },
+                        {
+                            type: objectiveTypes.fightDragon,
+                            value: 50,
+                            progress: 0,
+                            description: "Combattre 50 dragons",
+                        }
+                    ]
                 },
                 malus: [{
                     type: malusTypes.food.type,
@@ -91,11 +94,17 @@ export function useLevels() {
                 }]
             },
             {
-                objective: {
-                    type: objectiveTypes.fightBear,
-                    value: 5,
-                    progress: 0,
+                objectives: {
+
                     description: "Combattre 5 ours",
+                    list: [
+                        {
+                            type: objectiveTypes.fightBear,
+                            value: 5,
+                            progress: 0,
+                            description: "Combattre 5 ours",
+                        }
+                    ]
                 },
                 malus: [{
                     type: malusTypes.food.type,
@@ -104,11 +113,16 @@ export function useLevels() {
                 }]
             },
             {
-                objective: {
-                    type: objectiveTypes.fightDragon,
-                    value: 5,
-                    progress: 0,
+                objectives: {
                     description: "Combattre 5 dragons",
+                    list: [
+                        {
+                            type: objectiveTypes.fightDragon,
+                            value: 5,
+                            progress: 0,
+                            description: "Combattre 5 dragons",
+                        }
+                    ]
                 },
                 malus: [{
                     type: malusTypes.food.type,
