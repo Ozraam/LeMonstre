@@ -78,9 +78,9 @@ export const useGameStore = defineStore({
             this.difficulty = difficulty;
         },
         incrementObjectiveProgress(value, type) {
-            if(!this.objectives.list.some((o) => o.type == type)) return false;
+            if(!this.objectives.list.some((o) => o.type === type)) return false;
             
-            const o = this.objectives.list.find((o) => o.type == type)
+            const o = this.objectives.list.find((o) => o.type === type)
             o.progress += value;
             if(isLevelCompleted(this.levels[this.objectivesIndex])) {
                 this.incrementLevel();
