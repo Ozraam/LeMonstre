@@ -22,7 +22,18 @@ export function useLevels() {
                         }
                     ]
                 },
-                malus: null,
+
+                malus:[ {
+                    type: malusTypes.sleep.type,
+                    value: 10,
+                    description: malusTypes.sleep.description,
+                },
+                {
+                    type: malusTypes.work.type,
+                    value: 10,
+                    description: malusTypes.work.description,
+                }],
+
             },
             {
                 objectives: {
@@ -36,11 +47,16 @@ export function useLevels() {
                         }
                     ]
                 },
-                malus: {
+                malus:[ {
                     type: malusTypes.sleep.type,
                     value: 10,
                     description: malusTypes.sleep.description,
-                }
+                },
+                {
+                    type: malusTypes.work.type,
+                    value: 10,
+                    description: malusTypes.work.description,
+                }],
             },
             {
                 objectives: {
@@ -54,12 +70,53 @@ export function useLevels() {
                         }
                     ]
                 },
-                malus: {
+                malus:[ {
                     type: malusTypes.food.type,
                     value: 10,
                     description: malusTypes.food.description,
-                }
-            }
+
+                }]
+            },
+            {
+                objective: {
+                    type: objectiveTypes.turn,
+                    value: 100,
+                    progress: 0,
+                    description: "Jouer 100 tours",
+                },
+                malus: [{
+                    type: malusTypes.food.type,
+                    value: 10,
+                    description: malusTypes.food.description,
+                }]
+            },
+            {
+                objective: {
+                    type: objectiveTypes.fightBear,
+                    value: 5,
+                    progress: 0,
+                    description: "Combattre 5 ours",
+                },
+                malus: [{
+                    type: malusTypes.food.type,
+                    value: 10,
+                    description: malusTypes.food.description,
+                }]
+            },
+            {
+                objective: {
+                    type: objectiveTypes.fightDragon,
+                    value: 5,
+                    progress: 0,
+                    description: "Combattre 5 dragons",
+                },
+                malus: [{
+                    type: malusTypes.food.type,
+                    value: 10,
+                    description: malusTypes.food.description,
+                }]
+            },
+
         ]
     }
 }
