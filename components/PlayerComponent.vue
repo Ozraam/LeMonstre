@@ -17,19 +17,31 @@ let positionX = 50;
 
 function playerMoveArroundRandom() {
     if (animationStore.isAnimating) return;
-
-    const playerHtml = player.value.$el;
     
     const x = Math.floor(Math.random() * 50) - 25;
     let newPositionX = positionX + x;
 
-    if (newPositionX > 99) {
-        newPositionX = 99;
-    } else if (newPositionX < 1) {
-        newPositionX = 1;
-    }
-
     const run = Math.floor(Math.random() * 2);
+
+    const randomTime = Math.floor(Math.random() * 1000) + 500;
+
+    movePlayerTo(newPositionX, run, () => {
+        setTimeout(playerMoveArroundRandom, randomTime);
+    });
+    
+}
+
+function movePlayerTo(newPosition, run=false, callback=null, speed=1) {
+
+    const playerHtml = player.value.$el;
+    const x = newPosition - positionX;
+    
+
+    if (newPosition > 99) {
+        newPosition = 99;
+    } else if (newPosition < 1) {
+        newPosition = 1;
+    }
 
     if (x > 0) {
         player.value.flip(false)
@@ -41,93 +53,34 @@ function playerMoveArroundRandom() {
 
     if (x > 0) {
         player.value.flip(false)
-    } else if (!animationStore.isAnimating) {
+    } else {
         player.value.flip(true)
     }
 
     time.value = Math.abs(x * 300);
     time.value = run ? time.value / 3 : time.value;
-    const randomTime = Math.floor(Math.random() * 1000) + 500;
+    time.value = time.value / speed;
 
-    
-
+    positionX = newPosition;
     animationPlayerMove = playerHtml.animate([
-        { left: `${newPositionX}%`, offset: 1}
+        { left: `${newPosition}%`, offset: 1}
     ], {
         duration: time.value,
         fill: "forwards",
 
     })
 
-    positionX = newPositionX;
     animationPlayerMove.onfinish = () => {
         if (!animationStore.isAnimating) player.value.changeAnim("idle");
-        setTimeout(playerMoveArroundRandom, randomTime);
+        if(callback) callback();
     }
 }
 
-function followCursor() {
-    const playerHtml = player.value.$el;
-    if (animationStore.isAnimating) return;
-    document.onmousemove = (e) => {
-        if (player.value.getCurrentAnim() !== "idle") return ;
-        let x = e.clientX;
-        let newpositionX = x / window.innerWidth * 100;
-        if (newpositionX > 99) {
-            newpositionX = 99;
-        } else if (newpositionX < 1) {
-            newpositionX = 1;
-        }
-        if(newpositionX > positionX) {
-            player.value.flip(false)
-        } else if (!animationStore.isAnimating) {
-            player.value.flip(true)
-        }
-        let run = false
-        if(positionX - newpositionX > 15 || positionX - newpositionX < -15) {
-            player.value.changeAnim("run");
-            run = true
-        } else if(positionX - newpositionX > 5 || positionX - newpositionX < -5) {
-            player.value.changeAnim("walk");
-        }
 
-        if(newpositionX > positionX) {
-            player.value.flip(false)
-        } else if (!animationStore.isAnimating) {
-            player.value.flip(true)
-        }
-
-        time.value = 500
-        time.value = run ? time.value / 3 : time.value;
-        const randomTime = Math.floor(Math.random() * 1000) + 500;
-
-        animationPlayerMove = playerHtml.animate([
-            { left: `${newpositionX}%`, offset: 1}
-            
-        ], {
-            duration: time.value,
-            fill: "forwards",
-
-        })
-
-        animationPlayerMove.onfinish = () => {
-            if (!animationStore.isAnimating) player.value.changeAnim("idle");
-        }
-    }
-}
 
 function stopPlayerMovement() {
     if (animationPlayerMove) {
         animationPlayerMove.pause();
-    }
-}
-
-function resumePlayerMovement() {
-    if (animationPlayerMove) {
-        player.value.changeAnim("run");
-        animationPlayerMove.play();
-    } else {
-        playerMoveArroundRandom();
     }
 }
 
@@ -144,7 +97,7 @@ function playerFight() {
 
 
 onMounted(() => {
-    setTimeout(followCursor, 1000);
+    setTimeout(playerMoveArroundRandom, 1000);
 })
 
 const { animation } = storeToRefs(animationStore);
@@ -152,23 +105,35 @@ const { animation } = storeToRefs(animationStore);
 watch(animation, (value) => {
     if (value === useAnimations().animations.sleep) {
         stopPlayerMovement();
-        background.value.passNight();
-        player.value.changeAnim("sleep");
+        
+        movePlayerTo(37.5, true, () => {
+            background.value.passNight();
+            player.value.changeAnim("sleep");
+        }, 1.5)
+
+
     } else if (value === useAnimations().animations.work) {
         player.value.positionX = 50;
         stopPlayerMovement();
-        background.value.passwork();
-        player.value.changeAnim("work");
+        movePlayerTo(87.5, true, () =>{
+            background.value.passwork();
+            player.value.changeAnim("work");
+        }, 1.5)
     } else if (value === useAnimations().animations.fight) {
         stopPlayerMovement();
-        playerFight();
+        movePlayerTo(12.5, true, () => {
+            playerFight();
+        }, 1.5)
     } else if (value === useAnimations().animations.food) {
         stopPlayerMovement();
-        foodRain.value.startRain();
-        player.value.changeAnim("jump")
+        movePlayerTo(62.5, true, () => {
+            foodRain.value.startRain();
+            player.value.changeAnim("jump")
+        }, 1.5)
+        
     } else {
         if(useAnimationStore().options.callback) useAnimationStore().options.callback();
-        resumePlayerMovement();
+        playerMoveArroundRandom();
     }
 })
 

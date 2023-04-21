@@ -1,13 +1,14 @@
 <script setup>
     import { useAnimationStore } from '~/stores/Animation';
     
+    const isTakingDamage = ref(false)
 
-    const monsterImg = ref(null)
+
 
     function takeDamage() {
-        monsterImg.value.classList.add('hurt')
+        isTakingDamage.value = true;
         setTimeout(() => {
-            monsterImg.value.classList.remove('hurt')
+            isTakingDamage.value = false;
         }, 3000)
     }
     defineExpose({
@@ -16,7 +17,7 @@
 </script>
 
 <template>
-    <img :src="useAnimationStore().options.monster?.img" :alt="useAnimationStore().options.monster?.alt" ref="monsterImg" class="monster">
+    <img :src="useAnimationStore().options.monster?.img" :alt="useAnimationStore().options.monster?.alt" ref="monsterImg" :class="{monster: true, hurt: isTakingDamage }">
 </template>
 
 <style scoped>

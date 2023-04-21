@@ -80,7 +80,7 @@
 
             <img src="~/assets/gif/player/jump.gif" alt="player" class="d-none" ref="jump">
             <img src="~/assets/gif/player/work.gif" alt="player" class="d-none" ref="work">
-            <MonsterImage class="position-absolute"  ref="monsterImg" @click="displayInfo()"/>
+            <MonsterImage :class="{'position-absolute': true, 'd-none': currentAnim !== useAnimations().playerAnimations.fight}"  ref="monsterImg" />
         </div>
     </div>
 </template>
