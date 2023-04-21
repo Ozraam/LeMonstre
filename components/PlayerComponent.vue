@@ -181,7 +181,7 @@ watch(gameOver, (value) => {
 
 <style scoped>
 .player {
-    bottom: 12%;
+    bottom: 15.5%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
