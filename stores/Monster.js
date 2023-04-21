@@ -50,6 +50,7 @@ export const useMonsterStore = defineStore({
             this.setPV(this.PV + food.PV);
             this.setP(this.P + food.P);
             this.setF(this.F + food.F);
+            console.log(useGameStore().objectives.list);
             useGameStore().incrementObjectiveProgress(1, useObjectiveTypes().objectiveTypes.food);
             useGameStore().incrementObjectiveProgress(1, useObjectiveTypes().objectiveTypes.food + food.name);
         },

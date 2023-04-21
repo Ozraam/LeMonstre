@@ -29,11 +29,11 @@ const game = useGameStore();
             <div class="accordion-body">
                 <div class="alert alert-success d-flex align-items-center alert-level" role="alert" v-for="item in game.levelsCompleted">
                     <svg class="bi flex-shrink-0 me-2 icons" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-                    {{ item.objective.description }}
+                    {{  item.objectives.description }}
                 </div>
                 <div class="alert alert-danger d-flex align-items-center alert-level" role="alert" v-for="item in game.levelsNotCompleted">
                     <svg class="bi flex-shrink-0 me-2 icons" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                    {{ item.objective.description }}
+                    {{ item.objectives.description }}
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@ const game = useGameStore();
     max-width: 15px;
 }
 .alert-level{
-    max-height: 30px;
+   max-height: 50px;
 }
 
 .accordion-level{

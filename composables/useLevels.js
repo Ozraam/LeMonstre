@@ -5,12 +5,24 @@ export function useLevels() {
     return {
         levels: [
             {
-                objective: {
-                    type: objectiveTypes.gold,
-                    value: 10,
-                    progress: 0,
-                    description: "Collecter 10 pieces d'or",
+                objectives: {
+                    description: "Collecter 10 pieces d'or et manger 5 fois du poisson",
+                    list: [
+                        {
+                            type: objectiveTypes.gold,
+                            value: 10,
+                            progress: 0,
+                            description: "Collecter 10 pieces d'or",
+                        },
+                        {
+                            type: objectiveTypes.foodPoisson,
+                            value: 5,
+                            progress: 0,
+                            description: "Manger 5 fois du poisson",
+                        }
+                    ]
                 },
+
                 malus:[ {
                     type: malusTypes.sleep.type,
                     value: 10,
@@ -21,13 +33,19 @@ export function useLevels() {
                     value: 10,
                     description: malusTypes.work.description,
                 }],
+
             },
             {
-                objective: {
-                    type: objectiveTypes.foodPoisson,
-                    value: 5,
-                    progress: 0,
+                objectives: {
                     description: "Manger 5 fois du poisson",
+                    list: [
+                        {
+                            type: objectiveTypes.foodPoisson,
+                            value: 5,
+                            progress: 0,
+                            description: "Manger 5 fois du poisson",
+                        }
+                    ]
                 },
                 malus:[ {
                     type: malusTypes.sleep.type,
@@ -41,16 +59,22 @@ export function useLevels() {
                 }],
             },
             {
-                objective: {
-                    type: objectiveTypes.fightWolves,
-                    value: 5,
-                    progress: 0,
+                objectives: {
                     description: "Combattre 5 loups",
+                    list: [
+                        {
+                            type: objectiveTypes.fightWolf,
+                            value: 5,
+                            progress: 0,
+                            description: "Combattre 5 loups",
+                        }
+                    ]
                 },
                 malus:[ {
                     type: malusTypes.food.type,
                     value: 10,
                     description: malusTypes.food.description,
+
                 }]
             },
             {
@@ -92,6 +116,7 @@ export function useLevels() {
                     description: malusTypes.food.description,
                 }]
             },
+
         ]
     }
 }

@@ -2,6 +2,9 @@ import { defineStore } from "pinia";
 import { useMonsterStore } from "./Monster";
 import { useAnimationStore } from "./Animation";
 
+function isLevelCompleted(level) {
+    return level.objectives.list.every((objective) => objective.progress >= objective.value);
+}
 
 export const useGameStore = defineStore({
     id: "game",
@@ -11,7 +14,7 @@ export const useGameStore = defineStore({
         history: [],
         malus: null,
         difficulty: 0,
-        objectiveIndex: 0,
+        objectivesIndex: 0,
         levels : useLevels().levels,
         currentAction: null,
         gameOver: useEndGameStates().endGameStates.none,
@@ -27,20 +30,20 @@ export const useGameStore = defineStore({
         lastAction() {
             return this.history[this.history.length - 1]?.action;
         },
-        getObjectiveLevel() {
-            return this.objective;
+        getObjectivesLevel() {
+            return this.objectives;
         },
         getMalusLevel() {
             return useLevels().levels[this.level - 1].malus;
         },
-        objective() {
-            return this.levels[this.objectiveIndex % this.levels.length].objective;
+        objectives() {
+            return this.levels[this.objectivesIndex % this.levels.length].objectives;
         },
         levelsCompleted() {
-            return this.levels.filter((level) => level.objective.progress >= level.objective.value);
+            return this.levels.filter((level) => isLevelCompleted(level));
         },
         levelsNotCompleted() {
-            return this.levels.filter((level) => level.objective.progress < level.objective.value);
+            return this.levels.filter((level) => !isLevelCompleted(level));
         },
     },
     actions: {
@@ -50,9 +53,9 @@ export const useGameStore = defineStore({
 
             this.numTurns = 0;
             this.history = [];
-            this.objectiveIndex++;
+            this.objectivesIndex++;
 
-            if(this.objectiveIndex >= useLevels().levels.length) {
+            if(this.objectivesIndex >= useLevels().levels.length) {
                 this.gameOver = useEndGameStates().endGameStates.win;
                 return;
             }
@@ -75,14 +78,13 @@ export const useGameStore = defineStore({
             this.difficulty = difficulty;
         },
         incrementObjectiveProgress(value, type) {
-            if(this.objective.type !== type) return false;
+            if(!this.objectives.list.some((o) => o.type === type)) return false;
             
-            this.objective.progress += value;
-            if(this.objective.progress >= this.objective.value) {
+            const o = this.objectives.list.find((o) => o.type === type)
+            o.progress += value;
+            if(isLevelCompleted(this.levels[this.objectivesIndex])) {
                 this.incrementLevel();
-                return true;
             }
-            return false;
         },
         setGameOver(value) {
             this.gameOver = value;

@@ -41,13 +41,6 @@
         if(anim === useAnimations().animations.fight) {
             monsterImg.value.takeDamage();
         }
-        if(anim === useAnimations().animations.work) {
-            console.log("work")
-        }
-    }
-
-    function displayInfo(){
-        console.log("displayInfo")
     }
 
     function flip(flip) {
