@@ -50,7 +50,7 @@ function clickOnFight() {
                 || animation.isAnimating"><img src="~/assets/img/icon/lit.png" class="icon-button"></button>
         </div>
         <div class="col col-md">
-            <button type="button" class="d-block mb-1 btn border-0 m-auto" data-toggle="modal" data-target="#exampleModal" v-b-modal="modal" @click="clickOnEat()" :disabled="game.lastAction === 'eat'
+            <button type="button" class="d-block mb-1 btn border-0 m-auto" data-toggle="modal" data-target="#exampleModal" @click="clickOnEat()" :disabled="game.lastAction === 'eat'
                 || game.getMalusLevel?.type === useActions().actions.eat
                 || animation.isAnimating"><img src="~/assets/img/icon/four.png" class="icon-button"></button>
         </div>

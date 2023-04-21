@@ -67,10 +67,10 @@ function playerMoveArroundRandom() {
 }
 
 function followCursor() {
-    if (animationStore.isAnimating) return;
     const playerHtml = player.value.$el;
     if (animationStore.isAnimating) return;
     document.onmousemove = (e) => {
+        if (player.value.getCurrentAnim() !== "idle") return ;
         let x = e.clientX;
         let newpositionX = x / window.innerWidth * 100;
         if (newpositionX > 99) {
@@ -83,24 +83,32 @@ function followCursor() {
         } else if (!animationStore.isAnimating) {
             player.value.flip(true)
         }
-
+        let run = false
         if(positionX - newpositionX > 15 || positionX - newpositionX < -15) {
             player.value.changeAnim("run");
-            console.log("run")
+            run = true
         } else if(positionX - newpositionX > 5 || positionX - newpositionX < -5) {
             player.value.changeAnim("walk");
-            console.log("walk")
-        } else {
-            player.value.changeAnim("idle");
         }
 
-        time.value = Math.abs(x * 300);
+        if(newpositionX > positionX) {
+            player.value.flip(false)
+        } else if (!animationStore.isAnimating) {
+            player.value.flip(true)
+        }
+
+        time.value = 500
         time.value = run ? time.value / 3 : time.value;
         const randomTime = Math.floor(Math.random() * 1000) + 500;
 
         animationPlayerMove = playerHtml.animate([
             { left: `${newpositionX}%`, offset: 1}
-        ])
+            
+        ], {
+            duration: time.value,
+            fill: "forwards",
+
+        })
 
         animationPlayerMove.onfinish = () => {
             if (!animationStore.isAnimating) player.value.changeAnim("idle");
@@ -136,7 +144,7 @@ function playerFight() {
 
 
 onMounted(() => {
-    setTimeout(playerMoveArroundRandom, 1000);
+    setTimeout(followCursor, 1000);
 })
 
 const { animation } = storeToRefs(animationStore);
@@ -181,14 +189,15 @@ watch(gameOver, (value) => {
 
 <template>
     <main class="position-relative playground">
+
         <Background ref="background" />
         <div class="info">
             <ObjectifComponent />
             <InfoLevel class="level"/>
         </div>
         <PlayerAnimation ref="player" class="position-absolute player" />
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document" id="modal" v-bs-modal>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" v-bs-modal>
+    <div class="modal-dialog" role="document" id="modal">
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
@@ -210,6 +219,9 @@ watch(gameOver, (value) => {
     <div class="action">
         <ActionComponent class="action"/>
     </div>
+    <button type="button" class="btn btn-primary position-absolute" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+    </button>
     <FoodRain ref="foodRain" />
     </main>
 </template>

@@ -10,17 +10,8 @@
             monsterImg.value.classList.remove('hurt')
         }, 3000)
     }
-
-    function center(){
-        monsterImg.value.classList.add('center')
-        setTimeout(() => {
-            monsterImg.value.classList.remove('center')
-        }, 3000)
-    }
-
     defineExpose({
-        takeDamage,
-        center
+        takeDamage    
     })
 </script>
 
@@ -35,10 +26,6 @@
     .hurt {
         animation: hurt 3s infinite;
         
-    }
-    .center{
-        left: 50%;
-        transform: translate(-50%);
     }
 
     @keyframes hurt {

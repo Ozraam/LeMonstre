@@ -1,5 +1,4 @@
-import { Collapse } from 'bootstrap'
-import { Modal } from 'bootstrap';
+import { Collapse, Modal } from 'bootstrap'
 
 function defineCollapseDirective(nuxtApp) {
     nuxtApp.vueApp.directive('bs-collapse', {

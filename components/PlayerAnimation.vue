@@ -35,10 +35,6 @@
         if(anim === useAnimations().animations.fight) {
             monsterImg.value.takeDamage();
         }
-        if(anim === useAnimations().animations.work) {
-            console.log("center")
-            monsterImg.value.center();
-        }
     }
 
     function flip(flip) {
@@ -49,9 +45,14 @@
         }
     }
 
+    function getCurrentAnim() {
+        return currentAnim.value;
+    }
+
     defineExpose({
         changeAnim,
-        flip
+        flip,
+        getCurrentAnim
     })
 
 </script>
