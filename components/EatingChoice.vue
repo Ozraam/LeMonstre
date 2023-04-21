@@ -20,8 +20,8 @@ function eatMonster(food) {
 
 <template>
     <div class="row mb-3">
-        <div class="col-6 col-md" v-for="food in foods" :key="food.name">
-                    <button class="btn btn-outline-secondary w-100 shadow p-3 mb-2" @click="eatMonster(food)">
+        <div class="col-6" v-for="food in foods" :key="food.name">
+                    <button class="btn btn-outline-secondary w-100 shadow p-3 mb-1" data-bs-dismiss="modal" @click="eatMonster(food)">
                 <div>
                     {{ food.name }}
                 </div>

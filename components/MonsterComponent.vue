@@ -29,7 +29,7 @@ function click(item) {
     </div>
     <div class="row mb-3">
         <div class="col-6" v-for="item in fighter" :key="fighter.alt">
-            <button class="btn btn-outline-secondary w-100 shadow p-3 mb-1" @click="click(item)">
+            <button class="btn btn-outline-secondary w-100 shadow p-3 mb-1" data-bs-dismiss="modal" @click="click(item)">
                 <div>
                     {{ item.alt }}
                 </div>

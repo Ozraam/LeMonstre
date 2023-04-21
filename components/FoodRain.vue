@@ -15,6 +15,7 @@ function foodRain(index, foods) {
     ], {
         duration: index === 1 ? 1500 : Math.floor(Math.random() * 1000) + 500,
         iterations: 1,
+        fill: "forwards",
     });
 
     foodAnimation.onfinish = () => {

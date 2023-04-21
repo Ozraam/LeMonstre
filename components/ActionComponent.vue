@@ -40,7 +40,7 @@ function clickOnFight() {
 <template>
     <div class="row" style="z-index: 100;">
         <div class="col col-md test">
-            <button type="button" class="d-block  mb-1 btn border-0 m-auto " data-toggle="modal" data-target="#exampleModal" @click="clickOnFight()" :disabled="game.lastAction === 'fight'
+            <button type="button" class="d-block  mb-1 btn border-0 m-auto " data-bs-toggle="modal" data-bs-target="#exampleModal" @click="clickOnFight()" :disabled="game.lastAction === 'fight'
                 || game.getMalusLevel?.type === useActions().actions.fight
                 || animation.isAnimating"><img src="~/assets/img/icon/epee.png" class="icon-button"></button>
         </div>
@@ -50,7 +50,7 @@ function clickOnFight() {
                 || animation.isAnimating"><img src="~/assets/img/icon/lit.png" class="icon-button"></button>
         </div>
         <div class="col col-md">
-            <button type="button" class="d-block mb-1 btn border-0 m-auto" data-toggle="modal" data-target="#exampleModal" @click="clickOnEat()" :disabled="game.lastAction === 'eat'
+            <button type="button" class="d-block mb-1 btn border-0 m-auto" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="clickOnEat()" :disabled="game.lastAction === 'eat'
                 || game.getMalusLevel?.type === useActions().actions.eat
                 || animation.isAnimating"><img src="~/assets/img/icon/four.png" class="icon-button"></button>
         </div>
