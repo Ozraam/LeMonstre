@@ -5,6 +5,7 @@ export function useAnimations() {
             sleep: "sleep",
             food: "food",
             work: "work",
+            levelUp: "levelUp",
         },
         playerAnimations: {
             fight: "fight",

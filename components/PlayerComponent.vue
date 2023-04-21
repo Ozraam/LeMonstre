@@ -132,7 +132,11 @@ watch(animation, (value) => {
             player.value.changeAnim("jump")
         }, 1.5)
         
-    } else {
+    }else if(value == useAnimations().animations.levelUp){
+        stopPlayerMovement();
+        background.value.levelUp();
+    }
+    else {
         if(useAnimationStore().options.callback) useAnimationStore().options.callback();
         playerMoveArroundRandom();
     }
@@ -148,7 +152,6 @@ watch(gameOver, (value) => {
         setTimeout(() => {
             navigateTo("/game-" + value)
         }, 1500)
-        
     }
 });
 </script>
