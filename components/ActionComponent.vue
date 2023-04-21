@@ -64,8 +64,8 @@ function clickOnFight() {
 
 <style scoped>
 .icon-button {
-    width: 50px;
-    height: 50px;
+    width: 100%;
+    max-width: 100px;
     transition: all .2s ease-in-out;
 }
 

@@ -1,4 +1,10 @@
 <script setup>
+    const props = defineProps({
+        verticalInfo: {
+            type: Boolean,
+            default: false
+        }
+    })
 
     const currentAnim = ref(useAnimations().playerAnimations.idle);
     const monsterImg = ref(null);
@@ -66,8 +72,8 @@
 
 
 <template>
-    <div class="vstack">
-        <InforComponent />
+    <div class="position-realtive">
+        <InforComponent class="position-absolute info" :vertical="props.verticalInfo"/>
         <div class="align-self-center">
             <img src="~/assets/gif/player/idle.gif" alt="player" ref="idle">
             <img src="~/assets/gif/player/fight.gif" alt="player" class="d-none" ref="fight">
@@ -96,5 +102,9 @@
 
     .sleep {
         transform: rotate(-90deg) translateX(-50%);
+    }
+
+    .info {
+        transform: translate(-35%, -100%);
     }
 </style>

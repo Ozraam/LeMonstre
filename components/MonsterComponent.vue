@@ -35,7 +35,7 @@ function click(item) {
                 </div>
                 <img :src="item.img" class="img-fluid" :alt="item.alt">
                 <div>
-                    PV : +{{ item.PV }} /
+                    PV : {{ item.PV }} /
                     Gold : {{ item.P }}
                 </div>
             </button>
