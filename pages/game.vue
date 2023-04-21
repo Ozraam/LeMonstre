@@ -10,7 +10,7 @@ const game = useGameStore();
     <main class="container-fluid justify-content-between h-100">
         <div class="row my-3">
             <div class="col-12 col-md-4 h-100">
-                <InforComponent/>
+                <InforComponent class="mb-2"/>
                 <ObjectifComponent/>
                 <InfoLevel/>
             </div>
