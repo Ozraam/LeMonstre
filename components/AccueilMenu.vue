@@ -11,6 +11,8 @@ function startGame() {
         const game = useGameStore()
 
         monster.setName(name.value)
+        game.$reset()
+
         game.setDifficulty(difficulty.value)
         monster.ChooseDifficulty()
         navigateTo('/game')
