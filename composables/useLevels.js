@@ -21,7 +21,7 @@ export function useLevels() {
                     description: "Collecter 25 pieces d'or",
                 },
                 malus:{
-                    type: malusTypes.work,
+                    type: malusTypes.work.type,
                     value: 10,
                     description: malusTypes.work.description,
                 }
@@ -35,7 +35,7 @@ export function useLevels() {
 
                 },
                 malus: {
-                    type: malusTypes.food,
+                    type: malusTypes.food.type,
                     value: 10,
                     description: malusTypes.food.description,
 
@@ -49,7 +49,7 @@ export function useLevels() {
                     description: "Manger 5 fois du poisson",
                 },
                 malus: {
-                    type: malusTypes.food,
+                    type: malusTypes.food.type,
                     value: 10,
                     description: malusTypes.food.description,
                 }
@@ -62,7 +62,7 @@ export function useLevels() {
                     description: "Manger 5 fois de la viande",
                 },
                 malus: {
-                    type: malusTypes.food,
+                    type: malusTypes.food.type,
                     value: 10,
                     description: malusTypes.food.description,
                 }
@@ -75,7 +75,7 @@ export function useLevels() {
                     description: "Combattre 5 lapins",
                 },
                 malus: {
-                    type: malusTypes.food,
+                    type: malusTypes.food.type,
                     value: 10,
                     description: malusTypes.food.description,
                 }
@@ -88,7 +88,7 @@ export function useLevels() {
                     description: "Combattre 5 loups",
                 },
                 malus: {
-                    type: malusTypes.food,
+                    type: malusTypes.food.type,
                     value: 10,
                     description: malusTypes.food.description,
                 }
@@ -101,7 +101,7 @@ export function useLevels() {
                     description: "Combattre 5 ours",
                 },
                 malus: {
-                    type: malusTypes.food,
+                    type: malusTypes.food.type,
                     value: 10,
                     description: malusTypes.food.description,
                 }
@@ -114,7 +114,7 @@ export function useLevels() {
                     description: "Combattre 5 dragons",
                 },
                 malus: {
-                    type: malusTypes.food,
+                    type: malusTypes.food.type,
                     value: 10,
                     description: malusTypes.food.description,
                 }
