@@ -65,10 +65,10 @@ function passwork(){
 
     useAnimationStore().setAnimation(useAnimations().animations.work);
     document.querySelector(".ordi.active").animate([
-        { 'width': '0%' },
-        { 'width': '5%' },
-        { 'width': '5%' },
-        { 'width': '0%' }
+        { 'left': '110%' },
+        { 'left': '87.5%' },
+        { 'left': '87.5%' },
+        { 'left': '110%' }
     ], {
         duration: animateTime,
         easing: 'ease-in-out',
@@ -76,10 +76,10 @@ function passwork(){
     
     bureau.value.classList.add("active");
     document.querySelector(".bureau.active").animate([
-        { 'width': '0%' },
-        { 'width': '7%' },
-        { 'width': '7%' },
-        { 'width': '0%' }
+        { 'left': '110%' },
+        { 'left': '87.5%' },
+        { 'left': '87.5%' },
+        { 'left': '110%' }
     ], {
         duration: animateTime,
         easing: 'ease-in-out'
@@ -139,8 +139,8 @@ defineExpose({
         <img src="~/assets/img/backgroud/layers/rocks_2.png" class="earth img-fluid position-absolute" alt="front rock">
         <img src="~/assets/img/backgroud/layers/clouds_4.png" class="earth img-fluid position-absolute" alt="front cloud">
 
-        <img src="~/assets/img/ordi.png" class="ordi position-absolute" alt="ordi" ref="ordinateur">
-        <img src="~/assets/img/bureau.png" class="bureau position-absolute" alt="bureau" ref="bureau">
+        <img src="~/assets/img/ordi.png" class="ordi position-absolute active" alt="ordi" ref="ordinateur">
+        <img src="~/assets/img/bureau.png" class="bureau position-absolute active" alt="bureau" ref="bureau">
         <img src="~/assets/img/up.png" class="img-fluid position-absolute w-25 level level-up" alt="test" ref="level">
 
         <img src="~/assets/img/backgroud/layers/ground.png" class="earth img-fluid position-absolute w-100" alt="ground">
@@ -154,35 +154,24 @@ defineExpose({
 }
 
 .ordi{
-    display: none;
-    left: 50%;
+    left: 110%;
     transform: translateX(-50%);
-    bottom: 0;
-    width: 5%;
-    transition: all 5s ease-in-out;
-}
-
-.ordi.active{
-    display: block;
     bottom: 18%;
     z-index: 10;
+    width: 2%;
     transition: all 5s ease-in-out;
 }
 
+
 .bureau{
-    display: none;
-    left: 50%;
+    left: 110%;
     transform: translateX(-50%);
-    width: 7%;
+    bottom: 16%;
+    width: 4%;
     z-index: 10;
     transition: all 5s ease-in-out;
 }
 
-.bureau.active{
-    display: block;
-    bottom: 15%;
-    transition: all 5s ease-in-out;
-}
 
 .background {
     position: absolute;

@@ -6,7 +6,7 @@ export function useMalusType() {
                 description : "Vous ne pouvez pas dormir durant ce niveau",
             },
             food: {
-                type: "food",
+                type: "eat",
                 description : "Vous ne pouvez pas manger durant ce niveau",
             },
             work: {
