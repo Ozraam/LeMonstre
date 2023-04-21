@@ -7,6 +7,7 @@ const sun = ref("null");
 const sky = ref("null");
 const ordinateur = ref("null");
 const bureau = ref("null");
+const level = ref("null");
 
 
 function passNight() {
@@ -90,9 +91,31 @@ function passwork(){
     }, animateTime);
 }
 
+
+function levelUp(){
+
+    const animateTime = 5000;
+
+    level.value.classList.add("level-up");
+    document.querySelector(".level").animate([
+        { 'top': '-10%' },
+        { 'top': '50%' },
+        { 'top': '50%' },
+        { 'top': '140%' }
+    ], {
+        duration: animateTime,
+        easing: 'ease-in-out'
+    }).onfinish = () => {
+        useAnimationStore().setAnimation(null);
+    }
+    
+
+}
+
 defineExpose({
     passNight,
-    passwork
+    passwork,
+    levelUp
 })
 </script>
 
@@ -100,6 +123,7 @@ defineExpose({
 <template>
     <div class="background">
         <img src="~/assets/img/backgroud/layers/sky.png" class="position-absolute img-fluid" alt="sky" ref="sky">
+        
 
 
         <img src="~/assets/img/moon.png" alt="The moon" class="astre moon position-absolute img-fluid w-50" ref="moon">
@@ -117,8 +141,10 @@ defineExpose({
 
         <img src="~/assets/img/ordi.png" class="ordi position-absolute" alt="ordi" ref="ordinateur">
         <img src="~/assets/img/bureau.png" class="bureau position-absolute" alt="bureau" ref="bureau">
+        <img src="~/assets/img/up.png" class="img-fluid position-absolute w-25 level level-up" alt="test" ref="level">
 
         <img src="~/assets/img/backgroud/layers/ground.png" class="earth img-fluid position-absolute w-100" alt="ground">
+
     </div>
 </template>
 
@@ -181,4 +207,17 @@ defineExpose({
 .moon {
     top: 100%;
 }
+
+.level {
+    display: none;
+    top: -10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.level-up{
+    display: block;
+}
+
 </style>

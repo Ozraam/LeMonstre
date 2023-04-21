@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { useMonsterStore } from "./Monster";
+import { useAnimationStore } from "./Animation";
 
 
 export const useGameStore = defineStore({
@@ -55,11 +56,8 @@ export const useGameStore = defineStore({
                 this.gameOver = useEndGameStates().endGameStates.win;
                 return;
             }
-
-
-
-
-
+            useAnimationStore().setAnimation(useAnimations().animations.levelUp);
+            
             this.setMalus(useLevels().levels[this.level - 1].malus);
         },
         incrementNumTurns() {

@@ -17,7 +17,6 @@ function click(item) {
         useAnimationStore().options = {}
     }
     useAnimationStore().setAnimation(useAnimations().animations.fight, { monster: item, callback: callback })
-    
 }
 </script>
 
