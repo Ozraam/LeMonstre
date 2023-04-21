@@ -3,6 +3,13 @@
 import { useMonsterStore } from '/stores/Monster';
 import { useGameStore } from '/stores/Game';
 
+const props = defineProps({
+        vertical: {
+            type: Boolean,
+            default: false
+        }
+    })
+
 const  monster  = useMonsterStore();
 const  game  = useGameStore();
 
@@ -10,8 +17,8 @@ const maxPvMonster = monster.PV;
 </script>
 
 <template>
-    <div class="nav_monsterInfo">
-        <div class="nav_monsterInfo_value d-flex flex-row">
+    <div class="nav_monsterInfo text-center">
+        <div :class="{nav_monsterInfo_value: true, 'd-flex': true, 'flex-column': props.vertical }">
             <p class="info-player"><img class="icons-player" src="~/assets/img/coeur.png" alt="gif-coeur">{{ monster.PV }}</p>
             <p class="info-player"><img class="icons-player" src="~/assets/gif/coin.gif">{{ monster.P }}</p>
             <p class="info-player"><img class="icons-player" src="~/assets/img/cuisse.png">{{ monster.F }}</p>
@@ -23,7 +30,6 @@ const maxPvMonster = monster.PV;
 
 .icons-player {
     width: 1.5em;
-    margin-right: 5px;
 }
 
 .nav_monsterInfo {

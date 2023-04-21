@@ -13,13 +13,13 @@ const animationStore = useAnimationStore();
 let animationPlayerMove = null;
 const foodRain = ref(null);
 
-let positionX = 50;
+const positionX = ref(50);
 
 function playerMoveArroundRandom() {
     if (animationStore.isAnimating) return;
     
     const x = Math.floor(Math.random() * 50) - 25;
-    let newPositionX = positionX + x;
+    let newPositionX = positionX.value + x;
 
     const run = Math.floor(Math.random() * 2);
 
@@ -34,13 +34,13 @@ function playerMoveArroundRandom() {
 function movePlayerTo(newPosition, run=false, callback=null, speed=1) {
 
     const playerHtml = player.value.$el;
-    const x = newPosition - positionX;
+    const x = newPosition - positionX.value;
     
 
     if (newPosition > 99) {
         newPosition = 99;
-    } else if (newPosition < 1) {
-        newPosition = 1;
+    } else if (newPosition < 5) {
+        newPosition = 5;
     }
 
     if (x > 0) {
@@ -61,7 +61,7 @@ function movePlayerTo(newPosition, run=false, callback=null, speed=1) {
     time.value = run ? time.value / 3 : time.value;
     time.value = time.value / speed;
 
-    positionX = newPosition;
+    
     animationPlayerMove = playerHtml.animate([
         { left: `${newPosition}%`, offset: 1}
     ], {
@@ -71,6 +71,7 @@ function movePlayerTo(newPosition, run=false, callback=null, speed=1) {
     })
 
     animationPlayerMove.onfinish = () => {
+        positionX.value = newPosition;
         if (!animationStore.isAnimating) player.value.changeAnim("idle");
         if(callback) callback();
     }
@@ -156,7 +157,7 @@ watch(gameOver, (value) => {
     <main class="position-relative playground">
 
         <Background ref="background" />
-        <PlayerAnimation ref="player" class="position-absolute player" />
+        <PlayerAnimation ref="player" class="position-absolute player" :vertical-info="positionX > 87 || positionX < 12"/>
         <div class="info">
             <ObjectifComponent />
             <InfoLevel class="level"/>
