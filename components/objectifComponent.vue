@@ -37,17 +37,19 @@ const game = useGameStore();
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample" v-bs-collapse>
             <div class="accordion-body">
                 <h6 class="card-subtitle mb-2 text-muted">Objectif pour le niveau : {{game.level}}</h6>
-                <p class="card-text">{{ game.getObjectiveLevel.description}}</p>
-                <p class="card-text">Objetif : {{ game.getObjectiveLevel.value}}</p>
-                <p class="card-text">Progrès : {{ game.getObjectiveLevel.progress }}</p>
-                <div class="progress">
-                    <div class="progress-bar bg-primary" role="progressbar" :style="{width: game.getObjectiveLevel.progress/game.getObjectiveLevel.value *100 + '%'}" :aria-valuenow="game.getObjectiveLevel.progress/game.getObjectiveLevel.value*100" aria-valuemin="0" aria-valuemax="100">
-                        <span v-if="game.getObjectiveLevel.progress / game.getObjectiveLevel.value *100 >= 10">
-                            {{ game.getObjectiveLevel.progress / game.getObjectiveLevel.value *100 +"%" }}
-                        </span>
-                    </div>
-                    <div class="progress-value" v-if="game.getObjectiveLevel.progress / game.getObjectiveLevel.value *100 < 10" >{{ game.getObjectiveLevel.progress / game.getObjectiveLevel.value *100 +"%" }}</div>
-                </div>
+                <p class="card-text">{{ game.getObjectivesLevel.description}}</p>
+                <ul class="list-group">
+                    <li class="list-group-item" v-for="objective in game.getObjectivesLevel.list" :key="objective">
+                        {{ objective.description }}
+                        <div class="progress">
+                            <div class="progress-bar bg-primary" role="progressbar" :style="{
+                                width: (objective.progress / objective.value) * 100 + '%'
+                            }"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    
+                    </li>
+                </ul>
                 <MalusComponent />
             </div>
         </div>
