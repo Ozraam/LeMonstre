@@ -156,18 +156,18 @@ watch(gameOver, (value) => {
     <main class="position-relative playground">
 
         <Background ref="background" />
+        <PlayerAnimation ref="player" class="position-absolute player" />
         <div class="info">
             <ObjectifComponent />
             <InfoLevel class="level"/>
         </div>
-        <PlayerAnimation ref="player" class="position-absolute player" />
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-        <MonsterComponent v-if="game.currentAction === useActions().actions.fight" class="activated"/>
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-body">
+            <MonsterComponent v-if="game.currentAction === useActions().actions.fight" class="activated"/>
             <EatingChoice v-else-if="game.currentAction === useActions().actions.eat" class="activated"/>
-      </div>
+        </div>
     </div>
   </div>
 </div>

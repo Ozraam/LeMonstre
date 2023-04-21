@@ -5,56 +5,41 @@ import { useGameStore } from '/stores/Game';
 
 const  monster  = useMonsterStore();
 const  game  = useGameStore();
+
+const maxPvMonster = monster.PV;
 </script>
 
 <template>
-    <div class="nav_monsterInfo card">
-        <div class="nav_monsterInfo_name_title">
-        <h3>{{ monster.name }}</h3>
-        <h3>niv :{{ game.level }}</h3>
-        </div>
-        <div class="nav_monsterInfo_value">
-            <p>PV: {{ monster.PV }}</p>
-            <p>P: {{ monster.P }}</p>
-            <p>F: {{ monster.F }}</p>
+    <div class="nav_monsterInfo">
+        <div class="nav_monsterInfo_value d-flex flex-row">
+            <p class="info-player"><img class="icons-player" src="~/assets/img/coeur.png" alt="gif-coeur">{{ monster.PV }}</p>
+            <p class="info-player"><img class="icons-player" src="~/assets/gif/coin.gif">{{ monster.P }}</p>
+            <p class="info-player"><img class="icons-player" src="~/assets/img/cuisse.png">{{ monster.F }}</p>
         </div>
     </div>
 </template>
 
 <style scoped>
-    .nav_monsterInfo{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-    }
-    .nav_monsterInfo_value {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
-        width: 100%;
-        height: 100%;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-        padding: 1rem;
-    }
-    .nav_monsterInfo_name_title {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        height: 100%;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-        padding: 1rem;
-    }
+
+.icons-player {
+    width: 1.5em;
+    margin-right: 5px;
+}
+
+.nav_monsterInfo {
+    padding: 0.3rem;
+    top: 0;
+    left: 0;
+    background-color: rgba(66, 64, 64, 0.5);
+    border-radius: 1rem;
+    border: 1px solid;
+}
+
+.info-player {
+    margin: 0;
+    color: white;
+    padding: 0.5rem;
+}
+
+
 </style>

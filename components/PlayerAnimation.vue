@@ -35,6 +35,13 @@
         if(anim === useAnimations().animations.fight) {
             monsterImg.value.takeDamage();
         }
+        if(anim === useAnimations().animations.work) {
+            console.log("work")
+        }
+    }
+
+    function displayInfo(){
+        console.log("displayInfo")
     }
 
     function flip(flip) {
@@ -54,25 +61,27 @@
         flip,
         getCurrentAnim
     })
-
 </script>
 
 
 
 <template>
-    <div>
-        <img src="~/assets/gif/player/idle.gif" alt="player" ref="idle">
-        <img src="~/assets/gif/player/fight.gif" alt="player" class="d-none" ref="fight">
-        <img src="~/assets/gif/player/death.gif" alt="player" class="d-none" ref="death">
-        <img src="~/assets/gif/player/hurt.gif" alt="player" class="d-none" ref="hurt">
-        <img src="~/assets/gif/player/run.gif" alt="player" class="d-none" ref="run">
-        <img src="~/assets/gif/player/walk.gif" alt="player" class="d-none" ref="walk">
-        <img src="~/assets/gif/player/Owlet_Monster.png" alt="player" class="d-none sleep" ref="sleep">
-        <img src="~/assets/gif/player/Owlet_Monster.png" alt="player" class="d-none rotate-90" ref="dead">
+    <div class="vstack">
+        <InforComponent />
+        <div class="align-self-center">
+            <img src="~/assets/gif/player/idle.gif" alt="player" ref="idle">
+            <img src="~/assets/gif/player/fight.gif" alt="player" class="d-none" ref="fight">
+            <img src="~/assets/gif/player/death.gif" alt="player" class="d-none" ref="death">
+            <img src="~/assets/gif/player/hurt.gif" alt="player" class="d-none" ref="hurt">
+            <img src="~/assets/gif/player/run.gif" alt="player" class="d-none" ref="run">
+            <img src="~/assets/gif/player/walk.gif" alt="player" class="d-none" ref="walk">
+            <img src="~/assets/gif/player/Owlet_Monster.png" alt="player" class="d-none sleep" ref="sleep">
+            <img src="~/assets/gif/player/Owlet_Monster.png" alt="player" class="d-none rotate-90" ref="dead">
 
-        <img src="~/assets/gif/player/jump.gif" alt="player" class="d-none" ref="jump">
-        <img src="~/assets/gif/player/work.gif" alt="player" class="d-none" ref="work">
-        <MonsterImage :class="{'position-absolute': true, 'd-none': currentAnim !== useAnimations().playerAnimations.fight}"  ref="monsterImg" />
+            <img src="~/assets/gif/player/jump.gif" alt="player" class="d-none" ref="jump">
+            <img src="~/assets/gif/player/work.gif" alt="player" class="d-none" ref="work">
+            <MonsterImage :class="{'position-absolute': true, 'd-none': currentAnim !== useAnimations().playerAnimations.fight}"  ref="monsterImg" />
+        </div>
     </div>
 </template>
 
@@ -88,5 +97,4 @@
     .sleep {
         transform: rotate(-90deg) translateX(-50%);
     }
-    
 </style>
