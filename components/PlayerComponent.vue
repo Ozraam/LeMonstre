@@ -131,15 +131,14 @@ watch(gameOver, (value) => {
         stopPlayerMovement();
         setTimeout(() => {
             navigateTo("/game-" + value)
-        }, 1500)
-        
+        }, 1500)   
     }
 })
 
 </script>
 
 <template>
-    <div class="position-relative playground">
+    <div class="position-relative playground mb-2">
         <Background ref="background" />
         <PlayerAnimation ref="player" class="position-absolute player" />
         <FoodRain ref="foodRain" />
