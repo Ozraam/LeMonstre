@@ -157,7 +157,7 @@ watch(gameOver, (value) => {
     <main class="position-relative playground">
 
         <Background ref="background" />
-        <PlayerAnimation ref="player" class="position-absolute player" :vertical-info="positionX > 87 || positionX < 12"/>
+        <PlayerAnimation ref="player" class="position-absolute player" :vertical-info="positionX > 90 || positionX < 12"/>
         <div class="info">
             <ObjectifComponent />
             <InfoLevel class="level"/>
