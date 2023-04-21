@@ -18,7 +18,7 @@ const game = useGameStore();
     </symbol>
 </svg>
 
-<div class="accordion w-100" id="accordionExample">
+<div class="accordion w-100 objective-accordion" id="accordionExample">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
             <button class="accordion-button d-xl-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -58,6 +58,11 @@ const game = useGameStore();
     z-index: 100;
 }
 
+.objective-accordion{
+    /*mettre au centre*/
+    top: 3%;
+    left: 1%;
+}
 
 
 </style>

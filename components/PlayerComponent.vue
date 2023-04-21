@@ -287,4 +287,23 @@ watch(gameOver, (value) => {
         z-index: 10;
         animation: up 0.5s ease-in-out;
     }
+
+    main {
+        height: 100vh;
+        width: 100%;
+    }
+
+    .info-level {
+        width: 300px;
+        top: 3%;
+        left: 1%;
+        z-index: 100;
+    }
+    @media screen and (max-width: 768px) {
+        .info-level {
+            width: 100%;
+            top: 0%;
+            left: 0%;
+        }
+    }
 </style>
