@@ -133,6 +133,6 @@ defineExpose({
 
 .info {
     --distance-from-side: 0px;
-    transform: translate(calc(-35% + var(--distance-from-side)), -100%);
+    transform: translate(calc(-40% + var(--distance-from-side)), -100%);
 }
 </style>
