@@ -20,6 +20,7 @@ function passNight() {
         { top: '100%' }
     ], {
         duration: animateTime,
+        fill: 'forwards',
     })
 
     sun.value.animate([
@@ -29,7 +30,8 @@ function passNight() {
         { top: '0%' }
     ], {
         duration: animateTime,
-        easing: 'ease-in-out'
+        easing: 'ease-in-out',
+        fill: 'forwards'
     })
 
     sky.value.animate([
@@ -39,7 +41,8 @@ function passNight() {
         { 'filter': "grayscale(0)" }
     ], {
         duration: animateTime,
-        easing: 'ease-in-out'
+        easing: 'ease-in-out',
+        fill: 'forwards'
     })
 
     document.querySelectorAll(".earth").forEach(e => {
@@ -50,7 +53,8 @@ function passNight() {
             { 'filter': "grayscale(0)" }
         ], {
             duration: animateTime,
-            easing: 'ease-in-out'
+            easing: 'ease-in-out',
+            fill: 'forwards'
         })
     })
 

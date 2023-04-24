@@ -9,7 +9,6 @@ function isLevelCompleted(level) {
 export const useGameStore = defineStore({
     id: "game",
     state: () => ({
-        level: 1,
         numTurns: 0,
         history: [],
         malus: null,
@@ -34,10 +33,10 @@ export const useGameStore = defineStore({
             return this.objectives;
         },
         getMalusLevel() {
-            return useLevels().levels[this.level - 1].malus;
+            return useLevels().levels[this.objectivesIndex].malus;
         },
         objectives() {
-            return this.levels[this.objectivesIndex % this.levels.length].objectives;
+            return this.levels[this.objectivesIndex].objectives;
         },
         levelsCompleted() {
             return this.levels.filter((level) => isLevelCompleted(level));
@@ -48,25 +47,30 @@ export const useGameStore = defineStore({
     },
     actions: {
         incrementLevel() {
-            this.level++;
-            if(this.level > useLevels().levels.length) return
+            this.objectivesIndex++;
+            if(this.objectivesIndex >= useLevels().levels.length) return
 
             this.numTurns = 0;
             this.history = [];
-            this.objectivesIndex++;
 
             if(this.objectivesIndex >= useLevels().levels.length) {
                 this.gameOver = useEndGameStates().endGameStates.win;
                 return;
             }
-            useAnimationStore().setAnimation(useAnimations().animations.levelUp);
+            useAnimationStore().setAnimation(useAnimations().animations.levelUp, {});
             
-            this.setMalus(useLevels().levels[this.level - 1].malus);
+            this.setMalus(useLevels().levels[this.objectivesIndex].malus);
+        },
+        checkLevelUp(){
+            if(isLevelCompleted(this.levels[this.objectivesIndex])) {
+                this.incrementLevel();
+            }
         },
         incrementNumTurns() {
             this.numTurns++;
             this.currentAction = null;
             useMonsterStore().newTurn();
+            this.checkLevelUp();
         },
         addHistory(action) {
             this.history.push({action: action, turn: this.numTurns});
@@ -82,9 +86,6 @@ export const useGameStore = defineStore({
             
             const o = this.objectives.list.find((o) => o.type === type)
             o.progress += value;
-            if(isLevelCompleted(this.levels[this.objectivesIndex])) {
-                this.incrementLevel();
-            }
         },
         setGameOver(value) {
             this.gameOver = value;

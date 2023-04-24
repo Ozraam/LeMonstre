@@ -44,7 +44,7 @@ const game = useGameStore();
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                     data-bs-parent="#accordionExample" v-bs-collapse>
                     <div class="accordion-body">
-                        <h3 class="card-subtitle mb-2 text-muted h6">Objectifs pour le niveau : {{ game.level }}</h3>
+                        <h3 class="card-subtitle mb-2 text-muted h6">Objectifs pour le niveau : {{ game.objectivesIndex+1 }}</h3>
                         <p class="card-text">{{ game.getObjectivesLevel.description }}</p>
                         <ul class="list-group">
                             <li class="list-group-item" v-for="objective in  game.getObjectivesLevel.list "

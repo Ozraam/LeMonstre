@@ -3,14 +3,12 @@ import { useGameStore } from '~/stores/Game';
 
 const gameStore = useGameStore();
 
-const malus = gameStore.getMalusLevel;
-
 
 </script>
 
 <template>
     <div>
-        <p v-for="item in malus" class="alert alert-danger d-block my-1" >{{item.description}}</p>
+        <p v-for="item in gameStore.getMalusLevel" class="alert alert-danger d-block my-1" >{{item.description}}</p>
     </div>
 </template>
 

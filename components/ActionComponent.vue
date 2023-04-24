@@ -6,12 +6,11 @@ const monster = useMonsterStore();
 const game = useGameStore();
 const animation = useAnimationStore();
 
-const malus = game.getMalusLevel;
 
 
 function actionInMalus(action){
-    for (let i = 0; i < malus.length; i++) {
-        if(malus[i].type === action){
+    for (let i = 0; i < game.getMalusLevel.length; i++) {
+        if(game.getMalusLevel[i].type === action){
             return true
         }
     }
