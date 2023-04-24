@@ -3,12 +3,6 @@
 import { useMonsterStore } from '/stores/Monster';
 import { useGameStore } from '/stores/Game';
 
-const props = defineProps({
-    vertical: {
-        type: Boolean,
-        default: false
-    }
-})
 
 const PVPopup = ref(null);
 const PPopup = ref(null);
@@ -48,7 +42,7 @@ monster.observer = (value, type) => {
 
 <template>
     <div class="nav_monsterInfo text-center">
-        <div :class="{ nav_monsterInfo_value: true, 'd-flex': true, 'flex-column': props.vertical }">
+        <div :class="{ nav_monsterInfo_value: true, 'd-flex': true }">
             <p class="info-player position-relative hstack">
                 <span class="position-absolute indicator text-success" ref="PVPopup">X</span>
                 <img class="icons-player" src="~/assets/img/coeur.png" alt="gif-coeur">

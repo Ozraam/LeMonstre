@@ -33,10 +33,10 @@ export const useGameStore = defineStore({
             return this.objectives;
         },
         getMalusLevel() {
-            return useLevels().levels[this.objectivesIndex].malus;
+            return this.levels[this.objectivesIndex % this.levels.length].malus;
         },
         objectives() {
-            return this.levels[this.objectivesIndex].objectives;
+            return this.levels[this.objectivesIndex % this.levels.length].objectives;
         },
         levelsCompleted() {
             return this.levels.filter((level) => isLevelCompleted(level));
@@ -48,12 +48,12 @@ export const useGameStore = defineStore({
     actions: {
         incrementLevel() {
             this.objectivesIndex++;
-            if(this.objectivesIndex >= useLevels().levels.length) return
 
             this.numTurns = 0;
             this.history = [];
-
-            if(this.objectivesIndex >= useLevels().levels.length) {
+            console.log(this.objectivesIndex);
+            if(this.objectivesIndex >= this.levels.length) {
+                console.log("You win");
                 this.gameOver = useEndGameStates().endGameStates.win;
                 return;
             }
