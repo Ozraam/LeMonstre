@@ -25,7 +25,7 @@ function startGame() {
     <div class="card">
         <div class="card-body">
             <AccueilHeader title="Monster Game" />
-            <img src="~/assets/gif/player/walk.gif" alt="monster" class=" mx-auto d-block" />
+            <img src="~/public/gif/white/walk.gif" alt="monster" class=" mx-auto d-block" />
             <form class="vstack form menu align-items-center" @submit.prevent="startGame">
                 <div>
                     <label for="name" class="form-labels" >Name :</label>
