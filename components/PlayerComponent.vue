@@ -59,6 +59,7 @@ function movePlayerTo(newPosition, run=false, callback=null, speed=1) {
 
 
     const screenRatioSpeed = window.innerHeight / window.innerWidth + 0.5;
+
     
     speed *= screenRatioSpeed;
 
