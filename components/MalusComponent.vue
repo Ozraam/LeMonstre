@@ -11,7 +11,3 @@ const gameStore = useGameStore();
         <p v-for="item in gameStore.getMalusLevel" class="alert alert-danger d-block my-1" >{{item.description}}</p>
     </div>
 </template>
-
-<style>
-
-</style>

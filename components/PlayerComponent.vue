@@ -204,20 +204,11 @@ watch(gameOver, (value) => {
     transform: translate(-50%, -50%);
 }
 
-.endCard {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 50%);
-}
 
 .playground {
     overflow: hidden;
 }
 
-    main {
-        height: 100vh;
-        width: 100%;
-    }
 
     .info{
         width: 400px;
@@ -243,11 +234,6 @@ watch(gameOver, (value) => {
         bottom: 0;
         left: 0;
         width: 100%;
-    }
-
-    .play-component {
-        top: 0;
-        left: 0;
     }
 
         /*create animation*/
@@ -278,17 +264,5 @@ watch(gameOver, (value) => {
         width: 100%;
     }
 
-    .info-level {
-        width: 300px;
-        top: 3%;
-        left: 1%;
-        z-index: 100;
-    }
-    @media screen and (max-width: 768px) {
-        .info-level {
-            width: 100%;
-            top: 0%;
-            left: 0%;
-        }
-    }
+    
 </style>

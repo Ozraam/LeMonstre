@@ -12,7 +12,7 @@ const props = defineProps({
 
 <template>
     <div>
-        <EndStateCard v-if="props.state === endGameStates.win" text="Vous avez terminé tous les niveaux, bravo !"
+        <EndStateCard v-if="props.state === endGameStates.win" text="Bravo, Vous avez gagné !"
             title="Victoire !" player-animation="jump" />
         <EndStateCard v-else text="Vous etes mort, dommage !" title="Défaite !" player-animation="dead" />
     </div>

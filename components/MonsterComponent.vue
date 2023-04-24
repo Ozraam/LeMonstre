@@ -47,7 +47,4 @@ img {
     max-height: 5em;
 }
 
-.monster{
-    width: 100px;
-}
 </style>
