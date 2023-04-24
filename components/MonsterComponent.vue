@@ -9,7 +9,7 @@ const game = useGameStore();
 const fighter = useFighters().fighters;
 
 function click(item) {
-    game.addHistory("fight")
+    game.addHistory("fight", item.alt)
     game.currentAction = null
     function callback() {
         monster.fight(useAnimationStore().options.monster)

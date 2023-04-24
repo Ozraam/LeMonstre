@@ -27,52 +27,51 @@ const game = useGameStore();
                 </div>
             </div>
         </div>
-        </div>
-        <div class="accordion w-100 objective-accordion" id="accordionExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header position-relative" id="headingOne">
-                    <button class="accordion-button objectif position-relative" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Objectifs
-                    </button>
-                    <button class="alert-button position-absolute" v-if="game.getMalusLevel.length !== 0" data-bs-toggle="modal"
-                        data-bs-target="#modalMalus"><svg class="bi flex-shrink-0 me-2 color-svg" width="24" height="24" role="img"
-                            aria-label="Success:">
-                            <use xlink:href="#exclamation-triangle-fill" />
-                        </svg></button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                    data-bs-parent="#accordionExample" v-bs-collapse>
-                    <div class="accordion-body">
-                        <h3 class="card-subtitle mb-2 text-muted h6">Objectifs pour le niveau : {{ game.objectivesIndex+1 }}</h3>
-                        <p class="card-text">{{ game.getObjectivesLevel.description }}</p>
-                        <ul class="list-group">
-                            <li class="list-group-item" v-for="objective in  game.getObjectivesLevel.list "
-                                :key="objective">
-                                {{ objective.description }}
-                                <div class="progress">
-                                    <div :class="{
-                                        'progress-bar': true,
-                                        'bg-primary': objective.progress < objective.value,
-                                        'bg-success': objective.progress >= objective.value
-                                    }" role="progressbar"
-                                        :style="{ width: (objective.progress / objective.value) * 100 + '%' }"
-                                        :aria-valuenow="(objective.progress / objective.value) * 100" aria-valuemin="0"
-                                        aria-valuemax="100">
-                                        <span v-if="(objective.progress / objective.value) * 100 >= 10" class="ml-2">
-                                            {{ objective.progress }} / {{ objective.value }}
-                                        </span>
-                                    </div>
-                                    <div class="progress-value" v-if="(objective.progress / objective.value) * 100 < 10">
-                                        {{ objective.progress }} / {{ objective.value }}</div>
+    </div>
+    <div class="accordion w-100 objective-accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header position-relative" id="headingOne">
+                <button class="accordion-button objectif position-relative" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Objectifs
+                </button>
+                <button class="alert-button position-absolute" v-if="game.getMalusLevel.length !== 0" data-bs-toggle="modal"
+                    data-bs-target="#modalMalus"><svg class="bi flex-shrink-0 me-2 color-svg" width="24" height="24"
+                        role="img" aria-label="Success:">
+                        <use xlink:href="#exclamation-triangle-fill" />
+                    </svg></button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample" v-bs-collapse>
+                <div class="accordion-body">
+                    <h3 class="card-subtitle mb-2 text-muted h6">Objectifs pour le niveau : {{ game.objectivesIndex + 1 }}
+                    </h3>
+                    <p class="card-text">{{ game.getObjectivesLevel.description }}</p>
+                    <ul class="list-group">
+                        <li class="list-group-item" v-for="objective in  game.getObjectivesLevel.list " :key="objective">
+                            {{ objective.description }}
+                            <div class="progress">
+                                <div :class="{
+                                    'progress-bar': true,
+                                    'bg-primary': objective.progress < objective.value,
+                                    'bg-success': objective.progress >= objective.value
+                                }" role="progressbar"
+                                    :style="{ width: (objective.progress / objective.value) * 100 + '%' }"
+                                    :aria-valuenow="(objective.progress / objective.value) * 100" aria-valuemin="0"
+                                    aria-valuemax="100">
+                                    <span v-if="(objective.progress / objective.value) * 100 >= 10" class="ml-2">
+                                        {{ objective.progress }} / {{ objective.value }}
+                                    </span>
                                 </div>
-                            </li>
-                        </ul>
-                    </div>
+                                <div class="progress-value" v-if="(objective.progress / objective.value) * 100 < 10">
+                                    {{ objective.progress }} / {{ objective.value }}</div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-
+    </div>
 </template>
 
 <style scoped>
@@ -113,12 +112,12 @@ const game = useGameStore();
 }
 
 .list-group::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 100px;
+    background: #f1f1f1;
+    border-radius: 100px;
 }
 
 .list-group::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 100px;
+    background: #888;
+    border-radius: 100px;
 }
 </style>
