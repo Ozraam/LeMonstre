@@ -95,7 +95,16 @@ export function useLevels() {
                     ]
                 },
 
-                malus: [],
+                malus: [{
+                    type: malusTypes.sleep.type,
+                    value: 10,
+                    description: malusTypes.sleep.description,
+                },
+                {
+                    type: malusTypes.work.type,
+                    value: 10,
+                    description: malusTypes.work.description,
+                }],
 
             },
             {
