@@ -6,7 +6,7 @@ export function useLevels() {
         levels: [
             {
                 objectives: {
-                    description: "Manger 5 fois du poisson",
+                    description: "Manger 1 fois du poisson",
                     list: [
                         {
                             type: objectiveTypes.foodPoisson,
@@ -202,7 +202,6 @@ export function useLevels() {
                     description: malusTypes.food.description,
                 }]
             },
-
         ]
     }
 }
