@@ -224,6 +224,7 @@ watch(gameOver, (value) => {
         position: absolute;
         top: 3%;
         left: 1%;
+        z-index: 100;
     }
 
     @media (max-width: 768px) {
