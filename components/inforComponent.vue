@@ -65,7 +65,7 @@ monster.observer = (value, type) => {
                 {{ monster.F }}
             </p>
         </div>
-        <p class="my-0 monster-name">{{ monster.name }} | tour : {{ game.numTurns + 1 }}</p>
+        <p class="my-0 monster-name">{{ monster.name }} <span v-if="game.gameOver === useEndGameStates().endGameStates.none">| tour : {{ game.numTurns + 1 }}</span></p>
     </div>
 </template>
 

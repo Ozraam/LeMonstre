@@ -5,8 +5,6 @@ const gameStore = useGameStore();
 
 const malus = gameStore.getMalusLevel;
 
-console.log(malus[0]);
-
 
 </script>
 
