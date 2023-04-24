@@ -18,7 +18,7 @@ console.log(useGameStore().history[0]);
                 <div class="accordion-body">
                     <ul class="list-group" v-if="useGameStore().history.length !==0">
                         <li class="list-group-item" v-for="history in useGameStore().history">
-                            (tour {{ history.turn }}) -
+                            (tour {{ history.turn + 1 }}) -
                             {{ { "fight": "Combat :", "eat": "Manger :", "sleep": "Dormir", "work": "Travail" }[history.action] }}
                             <span v-if="history.detail">{{ history.detail }}</span>
                         </li>
