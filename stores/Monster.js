@@ -11,6 +11,7 @@ export const useMonsterStore = defineStore({
         P :10,
         F :10,
         observer: null,
+        monsterName: "pink"
         }),
     actions: {
         ChooseDifficulty(){

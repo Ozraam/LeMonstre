@@ -1,5 +1,5 @@
 <script setup>
-
+import { useMonsterStore } from '~/stores/Monster';
 const props = defineProps({
     absoluteInfo: {
         type: Boolean,
@@ -94,23 +94,21 @@ defineExpose({
 })
 </script>
 
-
-
 <template>
     <div class="position-realtive">
         <InforComponent :class="{ 'position-absolute': props.absoluteInfo, info: props.absoluteInfo }" ref="info" />
         <div class="align-self-center">
-            <img src="~/assets/gif/player/idle.gif" alt="player" ref="idle">
-            <img src="~/assets/gif/player/fight.gif" alt="player" class="d-none" ref="fight">
-            <img src="~/assets/gif/player/death.gif" alt="player" class="d-none" ref="death">
-            <img src="~/assets/gif/player/hurt.gif" alt="player" class="d-none" ref="hurt">
-            <img src="~/assets/gif/player/run.gif" alt="player" class="d-none" ref="run">
-            <img src="~/assets/gif/player/walk.gif" alt="player" class="d-none" ref="walk">
-            <img src="~/assets/gif/player/Owlet_Monster.png" alt="player" class="d-none sleep" ref="sleep">
-            <img src="~/assets/gif/player/Owlet_Monster.png" alt="player" class="d-none rotate-90" ref="dead">
+            <img :src="'gif/' + useMonsterStore().monsterName + '/idle.gif'" alt="player" ref="idle">
+            <img :src="'gif/' + useMonsterStore().monsterName + '/fight.gif'" alt="player" class="d-none" ref="fight">
+            <img :src="'gif/' + useMonsterStore().monsterName + '/death.gif'" alt="player" class="d-none" ref="death">
+            <img :src="'gif/' + useMonsterStore().monsterName + '/hurt.gif'" alt="player" class="d-none" ref="hurt">
+            <img :src="'gif/' + useMonsterStore().monsterName + '/run.gif'" alt="player" class="d-none" ref="run">
+            <img :src="'gif/' + useMonsterStore().monsterName + '/walk.gif'" alt="player" class="d-none" ref="walk">
+            <img :src="'gif/' + useMonsterStore().monsterName + '/still.png'" alt="player" class="d-none sleep" ref="sleep">
+            <img :src="'gif/' + useMonsterStore().monsterName + '/still.png'" alt="player" class="d-none rotate-90" ref="dead">
 
-            <img src="~/assets/gif/player/jump.gif" alt="player" class="d-none" ref="jump">
-            <img src="~/assets/gif/player/work.gif" alt="player" class="d-none" ref="work">
+            <img :src="'gif/' + useMonsterStore().monsterName + '/jump.gif'" alt="player" class="d-none" ref="jump">
+            <img :src="'gif/' + useMonsterStore().monsterName + '/work.gif'" alt="player" class="d-none" ref="work">
             <MonsterImage
                 :class="{ 'position-absolute': true, 'd-none': currentAnim !== useAnimations().playerAnimations.fight }"
                 ref="monsterImg" />
