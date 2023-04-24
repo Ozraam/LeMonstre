@@ -8,7 +8,7 @@ const game = useGameStore()
 const foods = useFoods().foods
 
 function eatMonster(food) {
-    game.addHistory("eat")
+    game.addHistory("eat", food.name)
     useAnimationStore().setAnimation(useAnimations().animations.food, {food: food, callback: () => {
         monster.eat(food)
         game.incrementNumTurns()

@@ -72,8 +72,8 @@ export const useGameStore = defineStore({
             useMonsterStore().newTurn();
             this.checkLevelUp();
         },
-        addHistory(action) {
-            this.history.push({action: action, turn: this.numTurns});
+        addHistory(action, detail=null) {
+            this.history.push({action: action, turn: this.numTurns, detail: detail});
         },
         setMalus(malus) {
             this.malus = malus;

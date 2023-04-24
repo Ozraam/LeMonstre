@@ -19,7 +19,7 @@ const positionX = ref(50);
 
 function playerMoveArroundRandom() {
     if (animationStore.isAnimating) return;
-    
+
     const x = Math.floor(Math.random() * 50) - 25;
     let newPositionX = positionX.value + x;
 
@@ -30,14 +30,14 @@ function playerMoveArroundRandom() {
     movePlayerTo(newPositionX, run, () => {
         setTimeout(playerMoveArroundRandom, randomTime);
     });
-    
+
 }
 
-function movePlayerTo(newPosition, run=false, callback=null, speed=1) {
+function movePlayerTo(newPosition, run = false, callback = null, speed = 1) {
 
     const playerHtml = player.value.$el;
     const x = newPosition - positionX.value;
-    
+
 
     if (newPosition > 99) {
         newPosition = 99;
@@ -62,18 +62,18 @@ function movePlayerTo(newPosition, run=false, callback=null, speed=1) {
 
     const screenRatioSpeed = window.innerHeight / window.innerWidth + 0.5;
 
-    
+
     speed *= screenRatioSpeed;
 
-    
+
 
     time.value = Math.abs(x * 300);
     time.value = run ? time.value / 3 : time.value;
     time.value = time.value / speed;
 
-    
+
     animationPlayerMove = playerHtml.animate([
-        { left: `${newPosition}%`, offset: 1}
+        { left: `${newPosition}%`, offset: 1 }
     ], {
         duration: time.value,
         fill: "forwards",
@@ -90,7 +90,7 @@ function movePlayerTo(newPosition, run=false, callback=null, speed=1) {
     animationPlayerMove.onfinish = () => {
         positionX.value = newPosition;
         if (!animationStore.isAnimating) player.value.changeAnim("idle");
-        if(callback) callback();
+        if (callback) callback();
     }
 }
 
@@ -112,7 +112,7 @@ function playerFight() {
     }, 3000)
 }
 
-function passwork(){
+function passwork() {
     const animateTime = 5000;
     ordinateur.value.classList.add("active");
 
@@ -126,7 +126,7 @@ function passwork(){
         duration: animateTime,
         easing: 'ease-in-out',
     })
-    
+
     bureau.value.classList.add("active");
     document.querySelector(".bureau.active").animate([
         { 'left': '110%' },
@@ -156,7 +156,7 @@ const { animation } = storeToRefs(animationStore);
 watch(animation, (value) => {
     if (value === useAnimations().animations.sleep) {
         stopPlayerMovement();
-        
+
         movePlayerTo(37.5, true, () => {
             background.value.passNight();
             player.value.changeAnim("sleep");
@@ -166,7 +166,7 @@ watch(animation, (value) => {
     } else if (value === useAnimations().animations.work) {
         player.value.positionX = 50;
         stopPlayerMovement();
-        movePlayerTo(87.5, true, () =>{
+        movePlayerTo(87.5, true, () => {
             passwork();
             player.value.changeAnim("work");
         }, 1.5)
@@ -181,22 +181,22 @@ watch(animation, (value) => {
             foodRain.value.startRain();
             player.value.changeAnim("jump")
         }, 1.5)
-        
-    }else if(value == useAnimations().animations.levelUp){
+
+    } else if (value == useAnimations().animations.levelUp) {
         stopPlayerMovement();
         background.value.levelUp();
     }
     else {
-        if(useAnimationStore().options.callback) useAnimationStore().options.callback();
+        if (useAnimationStore().options.callback) useAnimationStore().options.callback();
         playerMoveArroundRandom();
     }
 })
 
-const {gameOver} = storeToRefs(useGameStore())
+const { gameOver } = storeToRefs(useGameStore())
 
 watch(gameOver, (value) => {
-    if(gameOver) {
-        player.value.changeAnim(value === useEndGameStates().endGameStates.win ? useAnimations().playerAnimations.jump :  useAnimations().playerAnimations.death)
+    if (gameOver) {
+        player.value.changeAnim(value === useEndGameStates().endGameStates.win ? useAnimations().playerAnimations.jump : useAnimations().playerAnimations.death)
         stopPlayerMovement();
         setTimeout(() => {
             navigateTo("/game-" + value)
@@ -211,25 +211,31 @@ watch(gameOver, (value) => {
         <Background ref="background" />
         <img src="~/assets/img/ordi.png" class="ordi position-absolute active" alt="ordi" ref="ordinateur">
         <img src="~/assets/img/bureau.png" class="bureau position-absolute active" alt="bureau" ref="bureau">
-        <PlayerAnimation ref="player" class="position-absolute player"/>
-        <div class="info">
-            <ObjectifComponent class="activated" />
-            <InfoLevel class="level activated"/>
+
+        <PlayerAnimation ref="player" class="position-absolute player" />
+        <div class="infoHistory">
+            <div class="info">
+                <ObjectifComponent />
+                <InfoLevel class="level" />
+            </div>
+            <div class="history">
+                <History />
+            </div>
         </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-body">
-            <MonsterComponent v-if="game.currentAction === useActions().actions.fight" class="activated"/>
-            <EatingChoice v-else-if="game.currentAction === useActions().actions.eat" class="activated"/>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <MonsterComponent v-if="game.currentAction === useActions().actions.fight" class="activated" />
+                        <EatingChoice v-else-if="game.currentAction === useActions().actions.eat" class="activated" />
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-  </div>
-</div>
-    <div class="action">
-        <ActionComponent class="action"/>
-    </div>
-    <FoodRain ref="foodRain" />
+        <div class="action">
+            <ActionComponent class="action" />
+        </div>
+        <FoodRain ref="foodRain" />
     </main>
 </template>
 
@@ -245,7 +251,7 @@ watch(gameOver, (value) => {
     overflow: hidden;
 }
 
-.ordi{
+.ordi {
     left: 110%;
     transform: translateX(-50%);
     bottom: 17.3%;
@@ -254,7 +260,7 @@ watch(gameOver, (value) => {
 }
 
 
-.bureau{
+.bureau {
     left: 110%;
     transform: translateX(-50%);
     bottom: 16%;
@@ -263,58 +269,80 @@ watch(gameOver, (value) => {
 }
 
 
-    .info{
-        width: 400px;
-        position: absolute;
-        top: 3%;
-        left: 1%;
-    }
+.info {
+    width: 400px;
+    position: absolute;
+    top: 3%;
+    left: 1%;
+    z-index: 100;
+}
 
-    @media (max-width: 768px) {
-        .info{
-            width: 100%;
-            top: 0;
-            left: 0;
-        }
-        .level {
-            margin-top: 0px;
-        }
-    }
 
-    .action {
-        position: absolute;
-        bottom: 0;
+.history {
+    width: 400px;
+    position: absolute;
+    top: 3%;
+    right: 1%;
+    z-index: 100;
+}
+
+@media (max-width: 850px) {
+    .info {
+        width: 100%;
+        top: 0;
         left: 0;
+        position: relative;
+    }
+
+    .history {
         width: 100%;
+        right: 0;
+        top: 0;
+        position: relative;
     }
 
-        /*create animation*/
-    @keyframes up {
-        0% {
-            opacity: 0;
-            transform: translateY(100%);
-        }
-        50% {
-            opacity: 0.1;
-        }
-        75% {
-            opacity: 0.5;
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0%);
-        }
+    .level {
+        margin-top: 0px;
     }
-    /*used animation for class activated*/
-    .activated {
-        z-index: 10000000000;
-        animation: up 0.5s ease-in-out;
+}
+
+.action {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+/*create animation*/
+@keyframes up {
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+
     }
 
-    main {
-        height: 100vh;
-        width: 100%;
+    50% {
+        opacity: 0.1;
     }
 
-    
+    75% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+
+/*used animation for class activated*/
+.activated {
+    z-index: 10;
+    animation: up 0.5s ease-in-out;
+}
+
+main {
+    height: 100vh;
+    width: 100%;
+}
 </style>
