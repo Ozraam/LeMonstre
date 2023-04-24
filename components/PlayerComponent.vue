@@ -39,8 +39,8 @@ function movePlayerTo(newPosition, run=false, callback=null, speed=1) {
 
     if (newPosition > 99) {
         newPosition = 99;
-    } else if (newPosition < 5) {
-        newPosition = 5;
+    } else if (newPosition < 2) {
+        newPosition = 2;
     }
 
     if (x > 0) {
@@ -67,8 +67,15 @@ function movePlayerTo(newPosition, run=false, callback=null, speed=1) {
     ], {
         duration: time.value,
         fill: "forwards",
-
     })
+
+    const calculInfoInterval = setInterval(() => {
+        player.value.calculateInfoOffset();
+    }, 1)
+
+    setTimeout(() => {
+        clearInterval(calculInfoInterval);
+    }, time.value)
 
     animationPlayerMove.onfinish = () => {
         positionX.value = newPosition;
@@ -99,6 +106,7 @@ function playerFight() {
 
 onMounted(() => {
     setTimeout(playerMoveArroundRandom, 1000);
+    // movePlayerTo(99, true, ()=>{movePlayerTo(0, true)}, 2)
 })
 
 const { animation } = storeToRefs(animationStore);
@@ -144,7 +152,6 @@ watch(animation, (value) => {
 
 const {gameOver} = storeToRefs(useGameStore())
 
-
 watch(gameOver, (value) => {
     if(gameOver) {
         player.value.changeAnim(value === useEndGameStates().endGameStates.win ? useAnimations().playerAnimations.jump :  useAnimations().playerAnimations.death)
@@ -160,7 +167,7 @@ watch(gameOver, (value) => {
     <main class="position-relative playground">
 
         <Background ref="background" />
-        <PlayerAnimation ref="player" class="position-absolute player" :vertical-info="positionX > 90 || positionX < 12"/>
+        <PlayerAnimation ref="player" class="position-absolute player"/>
         <div class="info">
             <ObjectifComponent />
             <InfoLevel class="level"/>
