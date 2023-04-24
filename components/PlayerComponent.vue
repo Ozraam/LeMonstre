@@ -211,6 +211,7 @@ watch(gameOver, (value) => {
         <Background ref="background" />
         <img src="~/assets/img/ordi.png" class="ordi position-absolute active" alt="ordi" ref="ordinateur">
         <img src="~/assets/img/bureau.png" class="bureau position-absolute active" alt="bureau" ref="bureau">
+
         <PlayerAnimation ref="player" class="position-absolute player" />
         <div class="infoHistory">
             <div class="info">
@@ -276,6 +277,7 @@ watch(gameOver, (value) => {
     z-index: 100;
 }
 
+
 .history {
     width: 400px;
     position: absolute;
@@ -316,6 +318,7 @@ watch(gameOver, (value) => {
     0% {
         opacity: 0;
         transform: translateY(100%);
+
     }
 
     50% {
