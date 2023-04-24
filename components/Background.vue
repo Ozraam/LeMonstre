@@ -5,8 +5,6 @@ import { useAnimationStore } from '~/stores/Animation';
 const moon = ref("null");
 const sun = ref("null");
 const sky = ref("null");
-const ordinateur = ref("null");
-const bureau = ref("null");
 const level = ref("null");
 
 
@@ -63,39 +61,6 @@ function passNight() {
     }
 }
 
-function passwork(){
-    const animateTime = 5000;
-    ordinateur.value.classList.add("active");
-
-    useAnimationStore().setAnimation(useAnimations().animations.work);
-    document.querySelector(".ordi.active").animate([
-        { 'left': '110%' },
-        { 'left': '87.5%' },
-        { 'left': '87.5%' },
-        { 'left': '110%' }
-    ], {
-        duration: animateTime,
-        easing: 'ease-in-out',
-    })
-    
-    bureau.value.classList.add("active");
-    document.querySelector(".bureau.active").animate([
-        { 'left': '110%' },
-        { 'left': '87.5%' },
-        { 'left': '87.5%' },
-        { 'left': '110%' }
-    ], {
-        duration: animateTime,
-        easing: 'ease-in-out'
-    })
-    setTimeout(() => {
-        ordinateur.value.classList.remove("active");
-        bureau.value.classList.remove("active");
-        useAnimationStore().setAnimation(null);
-    }, animateTime);
-}
-
-
 function levelUp(){
 
     const animateTime = 5000;
@@ -118,7 +83,6 @@ function levelUp(){
 
 defineExpose({
     passNight,
-    passwork,
     levelUp
 })
 </script>
@@ -143,8 +107,6 @@ defineExpose({
         <img src="~/assets/img/backgroud/layers/rocks_2.png" class="earth img-fluid position-absolute" alt="front rock">
         <img src="~/assets/img/backgroud/layers/clouds_4.png" class="earth img-fluid position-absolute" alt="front cloud">
 
-        <img src="~/assets/img/ordi.png" class="ordi position-absolute active" alt="ordi" ref="ordinateur">
-        <img src="~/assets/img/bureau.png" class="bureau position-absolute active" alt="bureau" ref="bureau">
         <img src="~/assets/img/up.png" class="img-fluid position-absolute w-25 level level-up" alt="test" ref="level">
 
         <img src="~/assets/img/backgroud/layers/ground.png" class="earth img-fluid position-absolute w-100" alt="ground">
@@ -155,25 +117,6 @@ defineExpose({
 <style scoped>
 .earth {
     left: 0;
-}
-
-.ordi{
-    left: 110%;
-    transform: translateX(-50%);
-    bottom: 18%;
-    z-index: 10;
-    width: 2%;
-    transition: all 5s ease-in-out;
-}
-
-
-.bureau{
-    left: 110%;
-    transform: translateX(-50%);
-    bottom: 16%;
-    width: 4%;
-    z-index: 10;
-    transition: all 5s ease-in-out;
 }
 
 

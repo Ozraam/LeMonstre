@@ -12,6 +12,8 @@ const time = ref(500);
 const animationStore = useAnimationStore();
 let animationPlayerMove = null;
 const foodRain = ref(null);
+const ordinateur = ref("null");
+const bureau = ref("null");
 
 const positionX = ref(50);
 
@@ -110,6 +112,38 @@ function playerFight() {
     }, 3000)
 }
 
+function passwork(){
+    const animateTime = 5000;
+    ordinateur.value.classList.add("active");
+
+    useAnimationStore().setAnimation(useAnimations().animations.work);
+    document.querySelector(".ordi.active").animate([
+        { 'left': '110%' },
+        { 'left': '87.5%' },
+        { 'left': '87.5%' },
+        { 'left': '110%' }
+    ], {
+        duration: animateTime,
+        easing: 'ease-in-out',
+    })
+    
+    bureau.value.classList.add("active");
+    document.querySelector(".bureau.active").animate([
+        { 'left': '110%' },
+        { 'left': '87.5%' },
+        { 'left': '87.5%' },
+        { 'left': '110%' }
+    ], {
+        duration: animateTime,
+        easing: 'ease-in-out'
+    })
+    setTimeout(() => {
+        ordinateur.value.classList.remove("active");
+        bureau.value.classList.remove("active");
+        useAnimationStore().setAnimation(null);
+    }, animateTime);
+}
+
 
 
 onMounted(() => {
@@ -133,7 +167,7 @@ watch(animation, (value) => {
         player.value.positionX = 50;
         stopPlayerMovement();
         movePlayerTo(87.5, true, () =>{
-            background.value.passwork();
+            passwork();
             player.value.changeAnim("work");
         }, 1.5)
     } else if (value === useAnimations().animations.fight) {
@@ -175,6 +209,8 @@ watch(gameOver, (value) => {
     <main class="position-relative playground">
 
         <Background ref="background" />
+        <img src="~/assets/img/ordi.png" class="ordi position-absolute active" alt="ordi" ref="ordinateur">
+        <img src="~/assets/img/bureau.png" class="bureau position-absolute active" alt="bureau" ref="bureau">
         <PlayerAnimation ref="player" class="position-absolute player"/>
         <div class="info">
             <ObjectifComponent />
@@ -207,6 +243,23 @@ watch(gameOver, (value) => {
 
 .playground {
     overflow: hidden;
+}
+
+.ordi{
+    left: 110%;
+    transform: translateX(-50%);
+    bottom: 17.3%;
+    width: 2%;
+    transition: all 5s ease-in-out;
+}
+
+
+.bureau{
+    left: 110%;
+    transform: translateX(-50%);
+    bottom: 16%;
+    width: 4%;
+    transition: all 5s ease-in-out;
 }
 
 
