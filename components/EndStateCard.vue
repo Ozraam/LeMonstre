@@ -31,7 +31,7 @@ onMounted(() => {
             <h4 class="card-title">{{ props.title }}</h4>
             <PlayerAnimation ref="player" :absolute-info="false" />
             <p class="card-text">{{ props.text }}</p>
-            <a href="/" class="card-link">Retour à l'accueil</a>
+            <a href="/" class="card-link btn btn-lg btn-success">Retour à l'accueil</a>
         </div>
     </div>
 </template>
