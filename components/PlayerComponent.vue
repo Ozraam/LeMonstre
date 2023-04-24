@@ -213,8 +213,8 @@ watch(gameOver, (value) => {
         <img src="~/assets/img/bureau.png" class="bureau position-absolute active" alt="bureau" ref="bureau">
         <PlayerAnimation ref="player" class="position-absolute player"/>
         <div class="info">
-            <ObjectifComponent />
-            <InfoLevel class="level"/>
+            <ObjectifComponent class="activated" />
+            <InfoLevel class="level activated"/>
         </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -268,7 +268,6 @@ watch(gameOver, (value) => {
         position: absolute;
         top: 3%;
         left: 1%;
-        z-index: 100;
     }
 
     @media (max-width: 768px) {
@@ -308,7 +307,7 @@ watch(gameOver, (value) => {
     }
     /*used animation for class activated*/
     .activated {
-        z-index: 10;
+        z-index: 10000000000;
         animation: up 0.5s ease-in-out;
     }
 
