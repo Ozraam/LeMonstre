@@ -1,5 +1,7 @@
 <script setup>
 import { useGameStore } from '~/stores/Game';
+
+console.log(useGameStore().history[0]);
 </script>
 
 <template>
@@ -14,13 +16,14 @@ import { useGameStore } from '~/stores/Game';
             <div id="collapseHistory" class="accordion-collapse collapse show accordion-History"
                 aria-labelledby="headingHistory" data-bs-parent="#accordionHistory" v-bs-collapse>
                 <div class="accordion-body">
-                    <ul class="list-group list-group-numbered">
+                    <ul class="list-group" v-if="useGameStore().history.length !==0">
                         <li class="list-group-item" v-for="history in useGameStore().history">
-                            {{ { "fight": "Combat :", "eat": "Manger :", "sleep": "Dormir", "work": "Travail" }
-                            [history.action] }}
+                            (tour {{ history.turn }}) -
+                            {{ { "fight": "Combat :", "eat": "Manger :", "sleep": "Dormir", "work": "Travail" }[history.action] }}
                             <span v-if="history.detail">{{ history.detail }}</span>
                         </li>
                     </ul>
+                    <p v-else>Aucun historique</p>
                 </div>
             </div>
         </div>
@@ -28,6 +31,11 @@ import { useGameStore } from '~/stores/Game';
 </template>
 
 <style scoped>
+
+
+*{
+    list-style-type: none;
+}
 .list-group {
     max-height: 500px;
     overflow-y: auto;
