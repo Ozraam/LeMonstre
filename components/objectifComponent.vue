@@ -102,4 +102,9 @@ const game = useGameStore();
 .alert-button:hover .color-svg {
     fill: red;
 }
+
+.list-group {
+    max-height: 210px;
+    overflow-y: auto;
+}
 </style>

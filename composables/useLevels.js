@@ -6,20 +6,92 @@ export function useLevels() {
         levels: [
             {
                 objectives: {
-                    description: "Collecter 10 pieces d'or et manger 5 fois du poisson",
+                    description: "Completer tous les objectifs pour passer au niveau suivant",
                     list: [
                         {
-                            type: objectiveTypes.gold,
-                            value: 10,
+                            type: objectiveTypes.sleep,
+                            value: 5,
                             progress: 0,
-                            description: "Collecter 10 pieces d'or",
+                            description: "Dormir 5 fois",
+                        },
+                        {
+                            type: objectiveTypes.turn,
+                            value: 5,
+                            progress: 0,
+                            description: "Jouer 5 tours",
+                        },
+                        {
+                            type: objectiveTypes.food,
+                            value: 5,
+                            progress: 0,
+                            description: "Manger 5 fois",
+                        },
+                        {
+                            type: objectiveTypes.gold,
+                            value: 5,
+                            progress: 0,
+                            description: "Gagner 5 pièces d'or",
+                        },
+                        {
+                            type: objectiveTypes.fight,
+                            value: 5,
+                            progress: 0,
+                            description: "Combattre 5 fois",
+                        },
+                        {
+                            type: objectiveTypes.work,
+                            value: 5,
+                            progress: 0,
+                            description: "Travailler 5 fois",
+                        },
+                        {
+                            type: objectiveTypes.foodPomme,
+                            value: 5,
+                            progress: 0,
+                            description: "Manger 5 fois des pommes",
+                        },
+                        {
+                            type: objectiveTypes.foodChampignon,
+                            value: 5,
+                            progress: 0,
+                            description: "Manger 5 fois des champignons",
+                        },
+                        {
+                            type: objectiveTypes.foodViande,
+                            value: 5,
+                            progress: 0,
+                            description: "Manger 5 fois de la viande",
                         },
                         {
                             type: objectiveTypes.foodPoisson,
                             value: 5,
                             progress: 0,
                             description: "Manger 5 fois du poisson",
-                        }
+                        },
+                        {
+                            type: objectiveTypes.fightRabbits,
+                            value: 5,
+                            progress: 0,
+                            description: "Combattre 5 lapins",
+                        },
+                        {
+                            type: objectiveTypes.fightWolves,
+                            value: 5,
+                            progress: 0,
+                            description: "Combattre 5 loups",
+                        },
+                        {
+                            type: objectiveTypes.fightBear,
+                            value: 5,
+                            progress: 0,
+                            description: "Combattre 5 ours",
+                        },
+                        {
+                            type: objectiveTypes.fightDragon,
+                            value: 5,
+                            progress: 0,
+                            description: "Combattre 5 dragons",
+                        },
                     ]
                 },
 
