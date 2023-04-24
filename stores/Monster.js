@@ -83,6 +83,7 @@ export const useMonsterStore = defineStore({
             }
 
             if(this.PV <= 0){
+                this.PV = 0;
                 useGameStore().setGameOver(useEndGameStates().endGameStates.lose);
             }
             useGameStore().incrementObjectiveProgress(1, useObjectiveTypes().objectiveTypes.turn);

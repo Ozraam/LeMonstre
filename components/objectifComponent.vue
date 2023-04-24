@@ -33,7 +33,7 @@ const game = useGameStore();
                 <h2 class="accordion-header position-relative" id="headingOne">
                     <button class="accordion-button objectif position-relative" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Objectif
+                        Objectifs
                     </button>
                     <button class="alert-button position-absolute" v-if="game.getMalusLevel.length !== 0" data-bs-toggle="modal"
                         data-bs-target="#modalMalus"><svg class="bi flex-shrink-0 me-2 color-svg" width="24" height="24" role="img"
@@ -44,7 +44,7 @@ const game = useGameStore();
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                     data-bs-parent="#accordionExample" v-bs-collapse>
                     <div class="accordion-body">
-                        <h6 class="card-subtitle mb-2 text-muted">Objectif pour le niveau : {{ game.level }}</h6>
+                        <h3 class="card-subtitle mb-2 text-muted h6">Objectifs pour le niveau : {{ game.level }}</h3>
                         <p class="card-text">{{ game.getObjectivesLevel.description }}</p>
                         <ul class="list-group">
                             <li class="list-group-item" v-for="objective in  game.getObjectivesLevel.list "
@@ -106,5 +106,19 @@ const game = useGameStore();
 .list-group {
     max-height: 210px;
     overflow-y: auto;
+}
+
+.list-group::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.list-group::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 100px;
+}
+
+.list-group::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 100px;
 }
 </style>

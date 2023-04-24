@@ -59,8 +59,11 @@ function movePlayerTo(newPosition, run=false, callback=null, speed=1) {
 
 
     const screenRatioSpeed = window.innerHeight / window.innerWidth + 0.5;
+
+    
     speed *= screenRatioSpeed;
 
+    
 
     time.value = Math.abs(x * 300);
     time.value = run ? time.value / 3 : time.value;
@@ -75,7 +78,7 @@ function movePlayerTo(newPosition, run=false, callback=null, speed=1) {
     })
 
     const calculInfoInterval = setInterval(() => {
-        player.value.calculateInfoOffset();
+        player.value?.calculateInfoOffset();
     }, 1)
 
     setTimeout(() => {
