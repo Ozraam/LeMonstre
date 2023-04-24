@@ -44,34 +44,38 @@ monster.observer = (value, type) => {
     }, 2000);
 }
 
-const maxPvMonster = monster.PV;
 </script>
 
 <template>
     <div class="nav_monsterInfo text-center">
         <div :class="{ nav_monsterInfo_value: true, 'd-flex': true, 'flex-column': props.vertical }">
-            <p class="info-player position-relative">
+            <p class="info-player position-relative hstack">
                 <span class="position-absolute indicator text-success" ref="PVPopup">X</span>
                 <img class="icons-player" src="~/assets/img/coeur.png" alt="gif-coeur">
                 {{ monster.PV }}
             </p>
-            <p class="info-player position-relative">
+            <p class="info-player position-relative hstack">
                 <span class="position-absolute indicator text-success" ref="PPopup">X</span>
                 <img class="icons-player" src="~/assets/gif/coin.gif">
                 {{ monster.P }}
             </p>
-            <p class="info-player position-relative">
+            <p class="info-player position-relative hstack">
                 <span class="position-absolute indicator text-success" ref="FPopup">X</span>
                 <img class="icons-player" src="~/assets/img/cuisse.png">
                 {{ monster.F }}
             </p>
         </div>
+        <p class="my-0 monster-name">{{ monster.name }} | tour : {{ game.numTurns + 1 }}</p>
     </div>
 </template>
 
 <style scoped>
 .icons-player {
     width: 1.5em;
+}
+
+.monster-name {
+    color: white;
 }
 
 .nav_monsterInfo {
@@ -85,8 +89,9 @@ const maxPvMonster = monster.PV;
 
 .info-player {
     margin: 0;
-    color: white;
-    padding: 0.5rem;
+        color: white;
+        padding: 0.5rem;
+        padding-bottom: 0;
 }
 
 .popUpward {
