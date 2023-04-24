@@ -3,7 +3,7 @@ export function useMonsters() {
         monsters: {
             pink: "pink",
             blue: "blue",
-            green: "green"
+            white: "white"
         }
     }
 }
